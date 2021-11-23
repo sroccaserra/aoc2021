@@ -8,7 +8,6 @@ copyright:           "2021 Author name here"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -24,25 +23,7 @@ dependencies:
 
 library:
   source-dirs: src
-
-executables:
-  aoc2021-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - aoc2021
-
-tests:
-  aoc2021-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - aoc2021
+  ghc-options:
+  - -W
+  dependencies:
+  - hspec >= 2.7.10 && < 3
