@@ -1,5 +1,9 @@
 # aoc2021
 
+## Learnings
+
+- Python can now pattern match:
+    - Structural Pattern Matching: Tutorial ~ <https://www.python.org/dev/peps/pep-0636/>
 ## How it started
 
 ```shell
