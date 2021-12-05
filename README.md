@@ -13,6 +13,8 @@ See also:
 
 - Python can now pattern match:
     - Structural Pattern Matching: Tutorial ~ <https://www.python.org/dev/peps/pep-0636/>
+- Counters can be useful:
+    - Counter objects ~ <https://docs.python.org/3/library/collections.html#counter-objects>
 
 ## How it started
 
