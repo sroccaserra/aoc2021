@@ -2,8 +2,18 @@
 
 ## Learnings
 
+See also:
+
+- <https://github.com/sroccaserra/aoc2015#learnings>
+- <https://github.com/sroccaserra/aoc2018#learnings>
+- <https://github.com/sroccaserra/aoc2019#learnings>
+- <https://github.com/sroccaserra/aoc2020#learnings>
+
+### Python
+
 - Python can now pattern match:
     - Structural Pattern Matching: Tutorial ~ <https://www.python.org/dev/peps/pep-0636/>
+
 ## How it started
 
 ```shell
