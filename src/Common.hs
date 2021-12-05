@@ -3,6 +3,7 @@ module Common
 
 import Control.Applicative
 import Data.Char
+import Data.List(sort, unfoldr)
 import Data.Map (Map)
 import qualified Data.Map as M
 import Text.ParserCombinators.ReadP
@@ -55,6 +56,24 @@ boundingBox cs = (Coord (minimum xs) (minimum ys), Coord (maximum xs) (maximum y
   where
     xs = map _x cs
     ys = map _y cs
+
+bresenham :: Coord -> Coord -> [Coord]
+bresenham pa@(Coord xa ya) pb@(Coord xb yb) = map maySwitch . unfoldr go $ (x1,y1,0)
+  where
+    steep = abs (yb - ya) > abs (xb - xa)
+    maySwitch = if steep then (\(Coord x y) -> (Coord y x)) else id
+    [(Coord x1 y1), (Coord x2 y2)] = sort [maySwitch pa, maySwitch pb]
+    deltax = x2 - x1
+    deltay = abs (y2 - y1)
+    ystep = if y1 < y2 then 1 else -1
+    go (xTemp, yTemp, error)
+        | xTemp > x2 = Nothing
+        | otherwise  = Just ((Coord xTemp yTemp), (xTemp + 1, newY, newError))
+        where
+          tempError = error + deltay
+          (newY, newError) = if (2*tempError) >= deltax
+                            then (yTemp+ystep,tempError-deltax)
+                            else (yTemp,tempError)
 
 -- `c` is the default char
 -- example of building a `Map Coord Char` from a list of points:
