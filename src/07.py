@@ -2,31 +2,26 @@ import sys
 import fileinput
 
 
-def solve_1(ns):
+def solve(fuel_fn, ns):
     result = 10000000000
-    for n in range(min(ns), max(ns)+1):
-        s = 0
-        for i in ns:
-            s += abs(i-n)
+    for x in range(min(ns), max(ns)+1):
+        s = sum([fuel_fn(x, n) for n in ns])
         if s < result:
             result = s
     return result
 
 
-def solve_2(ns):
-    result = 10000000000
-    for n in range(min(ns), max(ns)+1):
-        s = 0
-        for i in ns:
-            times = abs(i-n)
-            s += (times+1)*times//2
-        if s < result:
-            result = s
-    return result
+def distanceFuel(x, n):
+    return abs(n-x)
+
+
+def incrementingFuel(x, n):
+    steps = abs(n-x)
+    return (steps+1)*steps//2
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
     line = next(fileinput.input()).strip()
     ns = [int(w) for w in line.split(',')]
-    print(solve_1(ns))
-    print(solve_2(ns))
+    print(solve(distanceFuel, ns))
+    print(solve(incrementingFuel, ns))
