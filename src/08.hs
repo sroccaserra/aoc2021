@@ -1,4 +1,3 @@
-import Data.List
 import Data.Char
 import qualified Data.Set as Set
 import Text.ParserCombinators.ReadP
@@ -10,9 +9,7 @@ main = do
   print $ partOne input
   print $ partTwo input
 
-partOne signals = length $ filter ((`elem` wanted) . length) outputs
-  where outputs = concatMap snd signals
-        wanted = [2, 3, 4, 7]
+partOne = length . filter ((`elem` [2, 3, 4, 7]) . length) . concatMap snd
 
 partTwo signals = sum $ map solveSignal signals
 
