@@ -16,6 +16,10 @@ See also:
 - Counters can be useful:
     - Counter objects ~ <https://docs.python.org/3/library/collections.html#counter-objects>
 
+### Haskell
+
+- We can pattern guard on monads with the `<-` operator : `validate xs (y:ys) | Just x <- lookup y brackets = validate (x:xs) ys`
+
 ## How it started
 
 ```shell
