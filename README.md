@@ -15,6 +15,7 @@ See also:
     - Structural Pattern Matching: Tutorial ~ <https://www.python.org/dev/peps/pep-0636/>
 - Counters can be useful:
     - Counter objects ~ <https://docs.python.org/3/library/collections.html#counter-objects>
+- If I mute a matrix m (list of lists) copied with `m.copy()`, there is a good chance that I mute the original matrix also. `[r.copy() for r in m]` should work better.
 
 ### Haskell
 
