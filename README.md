@@ -9,13 +9,18 @@ See also:
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
 
+### Algorithms
+
+- There is a general presentation of backtracking in the Algorithm Design Manual, in section 7.1 p. 231.
+    - Example of usage in Python: <https://leetcode.com/problems/reconstruct-itinerary/discuss/491164/python-backtracking-following-skienas-template>
+    - Backtracking ~ <https://en.wikipedia.org/wiki/Backtracking>
 ### Python
 
 - Python can now pattern match:
     - Structural Pattern Matching: Tutorial ~ <https://www.python.org/dev/peps/pep-0636/>
 - Counters can be useful:
     - Counter objects ~ <https://docs.python.org/3/library/collections.html#counter-objects>
-- If I mute a matrix m (list of lists) copied with `m.copy()`, there is a good chance that I mute the original matrix also. `[r.copy() for r in m]` should work better.
+- If I mute a matrix m (list of lists) copied with `m.copy()`, there is a good chance that I mute the original matrix also. `[r.copy() for r in m]` should work better. See also `copy.deepcopy()`.
 
 ### Haskell
 
