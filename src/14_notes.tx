@@ -1,0 +1,53 @@
+## Remarques
+
+L'exemple se compose de n lettres parmis 4, et il y a 16 règles de tailles 2 (4^2).
+
+L'entrée se compose de n lettres parmis 10, et il y a 100 règles de tailles 2 (100^2).
+
+Les règles se composent par superposition entre lettre de début et lettre de fin.
+
+Si N[C] -> NB[C]
+Et [C]N -> [C]CN
+Alors N[C]N -> NB[C]CN
+
+Si NC[N] -> NBCCN
+Et [N]BC -> [N]BBBC
+Alors NC[N]BC -> NBCC[N]BBBC
+
+Si NCNB -> NBCCNBB
+Et BCHB -> BBCBHCB
+Alors NCNBCHB -> NBCCNB[B]BCBHCB
+
+Il semble que le début se stabilise de plus en plus.
+
+Quelle longueur a la chaîne finale ? l(k+1) = 2*l(k) - 1
+NCOPHKVONVPNSKSHBNPF
+10 itérations : 19,457
+40 itérations : 20,890,720,927,745
+
+/!\ Il faut absolument éviter de générer tout le polymer /!\
+
+On voit qu'une règle comme NC -> NBC enlève une liaison NC et ajoute une liaison NB et une liaison BC.
+
+## Options
+
+On pourrait construire un vocabulaire de règles plus longues (de taille
+nb_letters^n pour n lettres), et essayer d'itérer plus vite avec un stride plus
+grand.
+--> Non car longueur finale trop grande
+
+On pourrait mémoriser des morceaux qu'on a déjà croisés, et rechercher des
+morceaux de taille variable, en composant par dernière lettre et première
+lettre.
+--> Non car longueur finale trop grande
+
+On pourrait garder le compte des liaisons deux par deux, et les mettre à jour à
+chaque génération. Problème : certaines lettres sont comptées plusieurs fois.
+Il faut garder un compte des paires et des lettres séparé ?
+--> Oui, ça a marché :)
+
+## Questions
+
+Est-ce qu'il y a un pattern sur le calcul final ?
+
+Comment définir le problème en fonction d'un sous problème ?
