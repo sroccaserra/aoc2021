@@ -3,7 +3,7 @@ module Common
 
 import Control.Applicative
 import Data.Char
-import Data.List(sort, unfoldr)
+import Data.List(group, sort, unfoldr)
 import Data.Map (Map)
 import qualified Data.Map as M
 import Text.ParserCombinators.ReadP
@@ -38,6 +38,13 @@ signed = option id sign <*> unsigned
   where
     sign :: ReadP (Int -> Int)
     sign = (id <$ char '+') <|> (negate <$ char '-')
+
+
+---
+-- Lists
+
+countByEq :: Eq a => Ord a => [a] -> [(a, Int)]
+countByEq = map (\ps@(p:_) -> (p, length ps)) . group . sort
 
 ---
 -- Coords
