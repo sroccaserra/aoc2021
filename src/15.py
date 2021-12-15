@@ -1,13 +1,13 @@
 import sys
 import fileinput
 from collections import deque
+from heapq import heappush, heappop
 
 
 def solve(grid, scale):
     w = len(grid[0])
     h = len(grid)
-    corner = (w*scale - 1,h*scale - 1)
-    return lowest_risks(grid, w, h, scale, (0,0))[corner]
+    return lowest_risk(grid, w, h, scale, (0,0))
 
 
 def neighbors(w_s, h_s, p):
@@ -17,18 +17,36 @@ def neighbors(w_s, h_s, p):
     return [c for c in cs if 0 <= c[0] < w_s and 0 <= c[1] < h_s]
 
 
-def lowest_risks(grid, w, h, scale, start):
-    q = deque([start])
-    result = {start: 0}
+def lowest_risk(grid, w, h, scale, start):
     w_s, h_s = w*scale, h*scale
+    q = deque([start])
+    risks = {start: 0}
+    dest = (w_s - 1,h_s - 1)
     while q:
         p = q.popleft()
         for n in neighbors(w_s, h_s, p):
-            risk = result[p] + compute_risk(grid, w, h, scale, n)
-            if (n not in result) or risk < result[n]:
+            risk = risks[p] + compute_risk(grid, w, h, scale, n)
+            if (n not in risks) or risk < risks[n]:
                 q.append(n)
-                result[n] = risk
-    return result
+                risks[n] = risk
+    return risks[dest]
+
+
+def lowest_risk_2(grid, w, h, scale, start):
+    w_s, h_s = w*scale, h*scale
+    dest = (w_s - 1,h_s - 1)
+    risks = {}
+    q = [(0, start)]
+    while q:
+        risk, p = heappop(q)
+        risk += compute_risk(grid, w, h, scale, p)
+        if p not in risks or risk < risks[p]:
+            risks[p] = risk
+            if p == dest:
+                break
+            for n in neighbors(w_s, h_s, p):
+                heappush(q, (risks[p], n))
+    return risks[dest] - risks[start]
 
 
 def compute_risk(grid, w, h, scale, p):
