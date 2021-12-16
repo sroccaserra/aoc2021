@@ -7,7 +7,23 @@ from heapq import heappush, heappop
 def solve(grid, scale):
     w = len(grid[0])
     h = len(grid)
-    return lowest_risk(grid, w, h, scale, (0,0))
+    return lowest_risk_ucs(grid, w, h, scale, (0, 0))
+
+
+def lowest_risk_ucs(grid, w, h, scale, src):
+    w_s, h_s = w*scale, h*scale
+    # starting risk is not counted, we set it to 0
+    risks = {src: 0}
+    q = [(0, src)]
+    while q:
+        risk, p = heappop(q)
+        for n in neighbors(w_s, h_s, p):
+            new_risk = risk + compute_risk(grid, w, h, scale, n)
+            if n not in risks or new_risk < risks[n]:
+                risks[n] = new_risk
+                heappush(q, (new_risk, n))
+    dst = (w_s - 1, h_s - 1)
+    return risks[dst]
 
 
 def neighbors(w_s, h_s, p):
@@ -17,11 +33,18 @@ def neighbors(w_s, h_s, p):
     return [c for c in cs if 0 <= c[0] < w_s and 0 <= c[1] < h_s]
 
 
-def lowest_risk(grid, w, h, scale, start):
+def compute_risk(grid, w, h, scale, p):
+    x, y = p
+    # assert (0 <= x < w*scale and 0 <= y < h*scale)
+    bonus = x//w + y//h
+    res = grid[y%h][x%w] + bonus
+    return (res - 1)%9 + 1
+
+
+def lowest_risk_first_try(grid, w, h, scale, start):
     w_s, h_s = w*scale, h*scale
     q = deque([start])
     risks = {start: 0}
-    dest = (w_s - 1,h_s - 1)
     while q:
         p = q.popleft()
         for n in neighbors(w_s, h_s, p):
@@ -29,12 +52,13 @@ def lowest_risk(grid, w, h, scale, start):
             if (n not in risks) or risk < risks[n]:
                 q.append(n)
                 risks[n] = risk
+    dest = (w_s - 1, h_s - 1)
     return risks[dest]
 
 
 def lowest_risk_2(grid, w, h, scale, start):
     w_s, h_s = w*scale, h*scale
-    dest = (w_s - 1,h_s - 1)
+    dest = (w_s - 1, h_s - 1)
     risks = {}
     q = [(0, start)]
     while q:
@@ -47,14 +71,6 @@ def lowest_risk_2(grid, w, h, scale, start):
             for n in neighbors(w_s, h_s, p):
                 heappush(q, (risks[p], n))
     return risks[dest] - risks[start]
-
-
-def compute_risk(grid, w, h, scale, p):
-    x, y = p
-    # assert (0 <= x < w*scale and 0 <= y < h*scale)
-    bonus = x//w + y//h
-    res = grid[y%h][x%w] + bonus
-    return (res - 1)%9 + 1
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
