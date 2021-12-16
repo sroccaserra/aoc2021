@@ -1,22 +1,26 @@
 import sys
 import fileinput
 from collections import deque
-from heapq import heappush, heappop
+from heapq import heappush, heappop, heapify
 
 
 def solve(grid, scale):
     w = len(grid[0])
     h = len(grid)
+#     return lowest_risk_ucs_aima(grid, w, h, scale, (0, 0))
     return lowest_risk_ucs(grid, w, h, scale, (0, 0))
 
 
 def lowest_risk_ucs(grid, w, h, scale, src):
     w_s, h_s = w*scale, h*scale
+#     dst = (w_s - 1, h_s - 1)
     # starting risk is not counted, we set it to 0
     risks = {src: 0}
     q = [(0, src)]
     while q:
         risk, p = heappop(q)
+#         if p == dst:
+#             return risk
         for n in neighbors(w_s, h_s, p):
             new_risk = risk + compute_risk(grid, w, h, scale, n)
             if n not in risks or new_risk < risks[n]:
@@ -24,6 +28,51 @@ def lowest_risk_ucs(grid, w, h, scale, src):
                 heappush(q, (new_risk, n))
     dst = (w_s - 1, h_s - 1)
     return risks[dst]
+
+
+def lowest_risk_ucs_aima(grid, w, h, scale, src):
+    """
+    See: https://github.com/aimacode/aima-python/blob/master/search.py
+    """
+    w_s, h_s = w*scale, h*scale
+    dst = (w_s - 1, h_s - 1)
+    node = (0, src)
+    frontier = []
+    heappush(frontier, node)
+    explored = set()
+    while frontier:
+        cost, p = heappop(frontier)
+        if p == dst:
+            return cost
+        explored.add(p)
+        for n in neighbors(w_s, h_s, p):
+            n_cost = cost + compute_risk(grid, w, h, scale, n)
+            if n not in explored and not contains(frontier, n):
+                heappush(frontier, (n_cost, n))
+            elif contains(frontier, n):
+                if n_cost < getvalue(frontier, n):
+                    delitem(frontier, n)
+                    heappush(frontier, (n_cost, n))
+    return None
+
+
+def contains(q, key):
+    return any([item == key for _, item in q])
+
+
+def getvalue(q, key):
+    for value, item in q:
+        if item == key:
+            return value
+    raise KeyError(str(key) + ' is not in the priority queue')
+
+
+def delitem(q, key):
+    try:
+        del q[[item == key for _, item in q].index(True)]
+    except ValueError:
+        raise KeyError(str(key) + ' is not in the priority queue')
+    heapify(q)
 
 
 def neighbors(w_s, h_s, p):

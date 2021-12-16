@@ -54,6 +54,10 @@ See also:
     - Example of usage in Python: <https://leetcode.com/problems/reconstruct-itinerary/discuss/491164/python-backtracking-following-skienas-template>
     - <https://en.wikipedia.org/wiki/Backtracking>
 
+### Linux
+
+- On Linux, `/usr/bin/time -v ...` gives the memory usage (see `Maximum resident set size`).
+
 ### Python
 
 - Python can now pattern match:
