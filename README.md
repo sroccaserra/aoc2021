@@ -13,38 +13,46 @@ See also:
 
 - Breadth-First Search
     - Introduction to Algorithms, Third Edition, 22.2, p. 594
-    - Artificial Intelligence, a Modern Approach, 3.4.1, p. 81
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.4.1, p. 81
+    - The Algorithm Design Manual, 5.6, p. 162
     - <https://en.wikipedia.org/wiki/Breadth-first_search>
 
 - Depth-First Search
     - Introduction to Algorithms, Third Edition, 22.3, p. 603
-    - Artificial Intelligence, a Modern Approach, 3.4.3, p. 85
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.4.3, p. 85
+    - The Algorithm Design Manual, 5.8, p. 169
+    - <https://en.wikipedia.org/wiki/Depth-first_search>
 
 - Topological Sort
     - Introduction to Algorithms, Third Edition, 22.4, p. 612
         - Of a DAG, using DFS
+    - <https://en.wikipedia.org/wiki/Topological_sorting>
 
 - Uniform Cost Search
-    - Artificial Intelligence, a Modern Approach, 3.4.2, p. 83
-    - <https://en.wikipedia.org/wiki/Dtra%27s_algorithm#Practical_optimizations_and_infinite_graphs>
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.4.2, p. 83
+    - <https://ojs.aaai.org/index.php/SOCS/article/view/18191>
+    - <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Practical_optimizations_and_infinite_graphs>
 
 - Dijkstra's Algorithm
     - Introduction to Algorithms, Third Edition, 24.3, p. 658
-    - <https://en.wikipedia.org/wiki/Dtra%27s_algorithm>
+    - The Algorithm Design Manual, 6.3.1, p. 206
+    - <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>
 
 - Greedy Best-First Search
-    - Artificial Intelligence, a Modern Approach, 3.5.1, p. 92
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.5.1, p. 92
     - <https://en.wikipedia.org/wiki/Best-first_search>
 
 - A-star Search
-    - Artificial Intelligence, a Modern Approach, 3.5.2, p. 93
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.5.2, p. 93
+    - <https://en.wikipedia.org/wiki/A*_search_algorithm>
 
 - Summary
-    - Artificial Intelligence, a Modern Approach, 3.7, p. 108
+    - Artificial Intelligence: a Modern Approach, Third Edition 3.7, p. 108
 
-- There is a general presentation of backtracking in the Algorithm Design Manual, in section 7.1 p. 231.
+- Backtracking
+    - Algorithm Design Manual, 7.1, p. 231.
     - Example of usage in Python: <https://leetcode.com/problems/reconstruct-itinerary/discuss/491164/python-backtracking-following-skienas-template>
-    - Backtracking ~ <https://en.wikipedia.org/wiki/Backtracking>
+    - <https://en.wikipedia.org/wiki/Backtracking>
 
 ### Python
 
