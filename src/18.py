@@ -1,52 +1,45 @@
 import sys
 import fileinput
-from collections import deque
+from itertools import combinations
+from copy import deepcopy
+
 
 L = 0
 R = 1
 
-ID = 0
-DEPTH = 1
-VALUE = 2
 
 def solve_1(snail_numbers):
-    # sn = [[1,2],3]
-    # sn = [[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]
-    # sn = [[1,2],[[3,4],5]]
-    # sn = [[[[[9,8],1],2],3],4]
-    # sn = [7,[6,[5,[4,[3,2]]]]]
-    # sn = [[6,[5,[4,[3,2]]]],1]
-    # sn = [[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]
-    # sn = [[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]
-
-# [[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]],
-# [[[[2,4],7],[6,[0,5]]],[[[6,8],[2,8]],[[2,1],[4,5]]]],
-# [7,[5,[[3,8],[1,4]]]],
-# [[2,[2,2]],[8,[8,1]]],
-# [2,9],
-# [1,[[[9,3],9],[[9,0],[0,7]]]],
-# [[[5,[7,4]],7],1],
-# [[[[4,2],2],6],[8,7]]
-#  ]
-    sn = snail_numbers[0]
+    sn = deepcopy(snail_numbers[0])
     reduce(sn)
     for i in range(1, len(snail_numbers)):
-        sn = add(sn, snail_numbers[i])
+        next_sn = deepcopy(snail_numbers[i])
+        sn = [sn, next_sn]
         reduce(sn)
-        print(sn)
     return magnitude(sn)
+
+
+def solve_2(snail_numbers):
+    res = 0
+    for a, b in combinations(snail_numbers, 2):
+        s = deepcopy([a, b])
+        reduce(s)
+        mag = magnitude(s)
+        if mag > res:
+            res = mag
+        s = deepcopy([b, a])
+        reduce(s)
+        mag = magnitude(s)
+        if mag > res:
+            res = mag
+    return res
+
 
 def reduce(sn):
     while True:
-        print('------------------')
-        print(sn)
         annotate_tree(sn)
         op = find_operation(sn)
-        print(op)
         apply_operation(sn, op)
         strip_tree(sn)
-        print(sn)
-        # input('pause...')
         if op is None:
             break
 
@@ -80,6 +73,8 @@ def apply_operation(sn, op):
 
 
 def find_operation(sn):
+    explode = None
+    split = None
     stack = [sn]
     while stack:
         node = stack.pop()
@@ -88,7 +83,15 @@ def find_operation(sn):
             stack.append(node[L])
         else:
             if node['depth'] > 4:
-                return {'name': 'explode', 'id': node['id']}
+                explode = {'name': 'explode', 'id': node['id']}
+                break
+            elif split is None and node['value'] >= 10:
+                split = {'name': 'split', 'id': node['id']}
+    return explode or split
+
+
+def create_index_map(sn):
+    result = []
     stack = [sn]
     while stack:
         node = stack.pop()
@@ -96,25 +99,8 @@ def find_operation(sn):
             stack.append(node[R])
             stack.append(node[L])
         else:
-            if node['value'] >= 10:
-                return {'name': 'split', 'id': node['id']}
-
-
-def add(sn1, sn2):
-    return [sn1, sn2]
-
-
-def create_index_map(sn):
-    ns = []
-    stack = [(sn, 0)]
-    while stack:
-        node, d = stack.pop()
-        if type(node) == list:
-            stack.append((node[R], d+1))
-            stack.append((node[L], d+1))
-        else:
-            ns.append(node)
-    return ns
+            result.append(node)
+    return result
 
 
 def annotate_tree(sn):
@@ -148,14 +134,10 @@ def magnitude(tree):
     if list == type(tree):
         return 3*magnitude(tree[L]) + 2*magnitude(tree[R])
     else:
-        if dict == type(tree):
-            return tree['value']
-        else:
-            return tree
+        return tree
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
-    # line = next(fileinput.input()).strip()
-    # ns = [int(w) for w in line.split()]
-    lines = [eval(line.strip()) for line in fileinput.input()]
-    print(solve_1(lines))
+    snail_numbers = [eval(line.strip()) for line in fileinput.input()]
+    print(solve_1(snail_numbers))
+    print(solve_2(snail_numbers))
