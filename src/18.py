@@ -1,6 +1,6 @@
 import sys
 import fileinput
-from itertools import combinations
+from itertools import product
 from copy import deepcopy
 
 
@@ -20,13 +20,8 @@ def solve_1(snail_numbers):
 
 def solve_2(snail_numbers):
     res = 0
-    for a, b in combinations(snail_numbers, 2):
-        s = deepcopy([a, b])
-        reduce(s)
-        mag = magnitude(s)
-        if mag > res:
-            res = mag
-        s = deepcopy([b, a])
+    for a, b in product(snail_numbers, repeat=2):
+        s = [deepcopy(a), deepcopy(b)]
         reduce(s)
         mag = magnitude(s)
         if mag > res:
@@ -59,10 +54,8 @@ def apply_operation(sn, op):
         right_id = right['id']
         if left_id > 0:
             index_map[left_id-1]['value'] += left['value']
-            pass
         if right_id + 1 < len(index_map):
             index_map[right_id+1]['value'] += right['value']
-            pass
         parent.pop()
         parent.pop()
     else:
@@ -111,7 +104,7 @@ def annotate_tree(sn):
             go(sn[L], depth+1, sn, L)
             go(sn[R], depth+1, sn, R)
         else:
-            parent[side] = {'id': i, 'depth': depth, 'value': sn, 'parent': parent, 'side': side, 'todo': None}
+            parent[side] = {'id': i, 'depth': depth, 'value': sn, 'parent': parent, 'side': side}
             i += 1
     go(sn, 0, None, None)
 
