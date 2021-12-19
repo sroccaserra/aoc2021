@@ -6,24 +6,24 @@ from itertools import combinations
 
 def solve(scanners):
     nb_scanners = len(scanners)
-    is_aligned = [False]*nb_scanners
+    is_assembled = [False]*nb_scanners
     to_visit = [scanners[0]]
-    is_aligned[0] = True
-    aligned = [scanners[0]]
+    is_assembled[0] = True
+    assembled = [scanners[0]]
     distances = []
-    while not all(is_aligned):
+    while not all(is_assembled):
         scanner = to_visit.pop()
         for i, other in enumerate(scanners):
-            if is_aligned[i]:
+            if is_assembled[i]:
                 continue
             matching, distance = find_matching(scanner, other)
             if matching is not None:
                 distances.append(distance)
-                aligned.append(matching)
-                is_aligned[i] = True
+                assembled.append(matching)
+                is_assembled[i] = True
                 to_visit.append(matching)
 
-    print(len(set().union(*aligned)))
+    print(len(set().union(*assembled)))
     print(max_distance(distances))
 
 
