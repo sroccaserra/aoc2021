@@ -1,30 +1,42 @@
 import sys
 import fileinput
 from collections import Counter
+from itertools import combinations
 
 
-def solve_1(scanners):
+def solve(scanners):
     nb_scanners = len(scanners)
     is_aligned = [False]*nb_scanners
     to_visit = [scanners[0]]
     is_aligned[0] = True
     aligned = [scanners[0]]
     memo = {}
+    distances = []
     while not all(is_aligned):
         scanner = to_visit.pop()
         for i, other in enumerate(scanners):
             if is_aligned[i]:
-                print('aligned', i)
                 continue
-            print(i)
-            matching = find_matching(memo, scanner, other)
+            matching, distance = find_matching(memo, scanner, other)
             if matching is not None:
-                print('matching', i)
+                distances.append(distance)
                 aligned.append(matching)
                 is_aligned[i] = True
                 to_visit.append(matching)
-    return len(set().union(*aligned))
 
+    print(len(set().union(*aligned)))
+    print(max_distance(distances))
+
+
+def max_distance(distances):
+    result = 0
+    for d1, d2 in combinations(distances, 2):
+        (x1, y1, z1) = d1
+        (x2, y2, z2) = d2
+        d = abs(x2-x1)+abs(y2- y1)+abs(z2-z1)
+        if d > result:
+            result = d
+    return result
 
 def find_matching(memo, scanner, other):
     for i, t in enumerate(TRANSFOS):
@@ -36,8 +48,8 @@ def find_matching(memo, scanner, other):
         (most_common_distance, n) = distances.most_common(1)[0]
         if n >= 12:
             dx, dy, dz = most_common_distance
-            return set([(tx + dx, ty + dy, tz + dz) for (tx, ty, tz) in transformed])
-    return None
+            return set([(tx + dx, ty + dy, tz + dz) for (tx, ty, tz) in transformed]), (dx,dy,dz)
+    return None, None
 
 
 def transform(memo, i, p):
@@ -97,5 +109,4 @@ if __name__ == '__main__' and not sys.flags.interactive:
             scanners.append(scanner)
         else:
             scanner.add(tuple([int(w) for w in line.split(',')]))
-
-    print(solve_1(scanners))
+    solve(scanners)
