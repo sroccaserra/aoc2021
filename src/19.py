@@ -28,20 +28,20 @@ def solve(scanners):
 
 
 def find_matching(scanner, other):
-    for t in TRANSFOS:
-        transformed = [multiply(t, p) for p in other]
+    for rotation in ROTATIONS:
+        rotated = [multiply(rotation, p) for p in other]
         distances = Counter()
-        for (tx, ty, tz) in transformed:
+        for (rx, ry, rz) in rotated:
             for (x, y, z) in scanner:
-                distances[(x-tx, y-ty, z-tz)] += 1
+                distances[(x-rx, y-ry, z-rz)] += 1
         (most_common_distance, n) = distances.most_common(1)[0]
         if n >= 12:
             dx, dy, dz = most_common_distance
-            return set([(tx + dx, ty + dy, tz + dz) for (tx, ty, tz) in transformed]), (dx,dy,dz)
+            return set([(rx + dx, ry + dy, rz + dz) for (rx, ry, rz) in rotated]), (dx,dy,dz)
     return None, None
 
 
-TRANSFOS = [
+ROTATIONS = [
         [[1, 0, 0],[0, 1, 0], [0, 0, 1]],
         [[1, 0, 0],[0, -1, 0], [0, 0, -1]],
         [[1, 0, 0],[0, 0, -1], [0, 1, 0]],
