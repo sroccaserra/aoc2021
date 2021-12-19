@@ -27,17 +27,6 @@ def solve(scanners):
     print(max_distance(distances))
 
 
-def max_distance(distances):
-    result = 0
-    for d1, d2 in combinations(distances, 2):
-        (x1, y1, z1) = d1
-        (x2, y2, z2) = d2
-        d = abs(x2-x1)+abs(y2- y1)+abs(z2-z1)
-        if d > result:
-            result = d
-    return result
-
-
 def find_matching(scanner, other):
     for t in TRANSFOS:
         transformed = [multiply(t, p) for p in other]
@@ -89,6 +78,17 @@ def multiply(m, p):
         for j in range(3):
             result[i] += r[j]*p[j]
     return tuple(result)
+
+
+def max_distance(distances):
+    result = 0
+    for d1, d2 in combinations(distances, 2):
+        (x1, y1, z1) = d1
+        (x2, y2, z2) = d2
+        d = abs(x2-x1)+abs(y2- y1)+abs(z2-z1)
+        if d > result:
+            result = d
+    return result
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
