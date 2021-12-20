@@ -1,6 +1,7 @@
 import sys
 import fileinput
 from collections import defaultdict
+from itertools import chain
 
 
 def solve(algo, grid, times):
@@ -8,12 +9,7 @@ def solve(algo, grid, times):
     image = grid
     for i in range(times):
         image = enhance(algo, defaults[i%2], image)
-    n = 0
-    for l in image:
-        for c in l:
-            if c == '#':
-                n += 1
-    return n
+    return sum(map(lambda c: c == '#', chain.from_iterable(image)))
 
 
 def enhance(algo, default, grid):
