@@ -22,8 +22,6 @@ enhance algo (n, lines) = (succ n, lines')
         coords = [Coord x y | y <- [0..h-1], x <- [0..w-1]]
         d = if 0 == n `mod` 2 then '.' else (head algo)
 
-index algo d m (Coord x y) = fromInteger $ toDec $ toInts <$> map (\c -> Map.findWithDefault d c m) points
-  where points =  [Coord (x-1) (y-1), Coord x (y-1), Coord (x+1) (y-1),
-                   Coord (x-1) y, Coord x y, Coord (x+1) y,
-                   Coord (x-1) (y+1), Coord x (y+1), Coord (x+1) (y+1)]
-        toInts c = if c == '#' then 1 else 0
+index algo d m (Coord x y) = fromInteger $ toDec $ toBit <$> map (\c -> Map.findWithDefault d c m) points
+  where points = flip Coord <$> [y-1..y+1] <*> [x-1..x+1]
+        toBit c = if c == '#' then 1 else 0
