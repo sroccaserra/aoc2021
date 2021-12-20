@@ -8,14 +8,16 @@ main = do
   input <- getDayLines 20
   let algo = head input
   let lines = (tail.tail) input
-  print $ partOne algo lines
+  print $ solve 2 algo lines
+  print $ solve 50 algo lines
 
-partOne algo lines =  countLit . enhance 1 algo $ enhance 0 algo lines
-  where countLit = fromJust . lookup '#' . countByEq . (foldl1 (++))
+solve n algo lines =  countLit (last . take (succ n) $ iterate (enhance algo) (0, lines))
+  where countLit (_, lines) = fromJust . lookup '#' . countByEq $ foldl1 (++) lines
 
-enhance n algo lines = [[algo !! (index algo d m (Coord x y)) | x <- [-1..w]] | y <- [-1..h]]
+enhance algo (n, lines) = (succ n, lines')
   where w = length $ head lines
         h = length lines
+        lines' = [[algo !! (index algo d m (Coord x y)) | x <- [-1..w]] | y <- [-1..h]]
         m = Map.fromList (zipWith (,) coords (foldl1 (++) lines))
         coords = [Coord x y | y <- [0..h-1], x <- [0..w-1]]
         d = if 0 == n `mod` 2 then '.' else (head algo)
