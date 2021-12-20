@@ -72,6 +72,28 @@ See also:
 - We can pattern guard on monads with the `<-` operator : `validate xs (y:ys) | Just x <- lookup y brackets = validate (x:xs) ys`
 - Beware, if you want to update a count with -n `Map.insertWith (-)` will probably reverse the arguments. Use `flip (-)` or `(+) k (-n)`.
 
+
+## How to run
+
+To run Python solutions:
+
+```
+$ python3 src/01.{py,txt}
+```
+
+To run Haskell solutions (two ways):
+
+```
+$ stack runhaskell src/01.hs
+$ stack runhaskell src/01.{hs,txt}
+```
+
+To run Lua solutions:
+
+```
+$ lua src/01.lua <src/01.txt
+```
+
 ## How it started
 
 ```shell

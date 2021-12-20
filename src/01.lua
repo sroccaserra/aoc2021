@@ -1,7 +1,11 @@
-function solve(numbers)
-  previous = 99999
-  result = 0
-  for _, n in ipairs(numbers) do
+require 'src.common'
+
+very_big = 99999
+
+function solve_1(numbers)
+  local previous = very_big
+  local result = 0
+  for n in all(numbers) do
     if n > previous then
       result = result + 1
     end
@@ -10,18 +14,20 @@ function solve(numbers)
   return result
 end
 
-function parse()
-  numbers = {}
-  while true do
-    line = io.read("*line")
-    if not line then
-      break
+function solve_2(numbers)
+  local p1, p2, p3 = very_big, very_big, very_big
+  local result = 0
+  for n in all(numbers) do
+    if n + p1 + p2 > p1 + p2 + p3 then
+      result = result + 1
     end
-    n = tonumber(line)
-    table.insert(numbers, n)
+    p1, p2, p3 = n, p1, p2
   end
-  return numbers
+  return result
 end
 
-numbers = parse()
-print(solve(numbers))
+lines = readlines()
+numbers = map(tonumber, lines)
+
+print(solve_1(numbers))
+print(solve_2(numbers))
