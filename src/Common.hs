@@ -2,10 +2,10 @@ module Common
   where
 
 import Control.Applicative
-import Data.Char
-import Data.List(group, sort, unfoldr)
+import Data.Char (isDigit)
+import Data.List(foldl1', group, sort, unfoldr)
 import Data.Map (Map)
-import qualified Data.Map as M
+import qualified Data.Map as Map
 import Text.ParserCombinators.ReadP
 import System.Environment
 import Text.Printf
@@ -47,6 +47,11 @@ countByEq :: Eq a => Ord a => [a] -> [(a, Int)]
 countByEq = map (\ps@(p:_) -> (p, length ps)) . group . sort
 
 ---
+-- Misc
+
+toDec = foldl1' $ (+) . (*2)
+
+---
 -- Coords
 
 data Coord = Coord !Int !Int
@@ -84,10 +89,10 @@ bresenham pa@(Coord xa ya) pb@(Coord xb yb) = map maySwitch . unfoldr go $ (x1,y
 
 -- `c` is the default char
 -- example of building a `Map Coord Char` from a list of points:
--- m = M.fromList $ zip points (range ('a', 'z') ++ range ('A', 'Z'))
+-- m = Map.fromList $ zip points (range ('a', 'z') ++ range ('A', 'Z'))
 showAsciiGrid :: Char -> Map Coord Char -> String
 showAsciiGrid c m = unlines $ do
     y <- [minY..maxY]
-    return [M.findWithDefault c (Coord x y) m | x <- [minX..maxX]]
+    return [Map.findWithDefault c (Coord x y) m | x <- [minX..maxX]]
   where
-    (Coord minX minY, Coord maxX maxY) = boundingBox $ M.keys m
+    (Coord minX minY, Coord maxX maxY) = boundingBox $ Map.keys m
