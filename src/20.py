@@ -15,28 +15,25 @@ def solve(algo, grid, times):
 def enhance(algo, default, grid):
     w = len(grid[0])
     h = len(grid)
-    floor = defaultdict(lambda:default)
+    infinite = defaultdict(lambda:default)
     for y in range(h):
         for x in range(w):
-            floor[(x, y)] = grid[y][x]
-
+            infinite[(x, y)] = grid[y][x]
     result = []
-    d = 2
-    for y in range(-d, h+d):
+    for y in range(-2, h+2):
         row = ''
-        for x in range(-d, w+d):
-            i = index(floor, x, y)
+        for x in range(-2, w+2):
+            i = index(infinite, x, y)
             row += algo[i]
         result.append(row)
-
     return result
 
 
-def index(floor, x, y):
+def index(infinite, x, y):
     s = ''
     for dx, dy in [(-1, -1), (0, -1), (1, -1),(-1, 0), (0, 0), (1, 0),(-1, 1), (0, 1), (1, 1)]:
         p = (x+dx, y+dy)
-        c = floor[p]
+        c = infinite[p]
         if c == '#':
             s += '1'
         else:
