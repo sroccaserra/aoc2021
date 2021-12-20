@@ -5,7 +5,7 @@ from itertools import chain
 
 
 def solve(algo, grid, times):
-    defaults = ['.', '#']
+    defaults = ['.', algo[0]]
     image = grid
     for i in range(times):
         image = enhance(algo, defaults[i%2], image)
@@ -20,9 +20,10 @@ def enhance(algo, default, grid):
         for x in range(w):
             infinite[(x, y)] = grid[y][x]
     result = []
-    for y in range(-2, h+2):
+    d = 1
+    for y in range(-d, h+d):
         row = ''
-        for x in range(-2, w+2):
+        for x in range(-d, w+d):
             i = index(infinite, x, y)
             row += algo[i]
         result.append(row)
