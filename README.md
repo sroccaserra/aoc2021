@@ -54,6 +54,9 @@ See also:
     - Example of usage in Python: <https://leetcode.com/problems/reconstruct-itinerary/discuss/491164/python-backtracking-following-skienas-template>
     - <https://en.wikipedia.org/wiki/Backtracking>
 
+- Dynamic programming: to solve a DP problem with two players, we can swap
+  arguments in the recursive call, see day 21 part two (Lua).
+
 ### Linux
 
 - On Linux, `/usr/bin/time -v ...` gives the memory usage (see `Maximum resident set size`).
