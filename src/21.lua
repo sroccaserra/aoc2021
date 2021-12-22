@@ -5,10 +5,8 @@ PLAYER_2_START = 7
 
 function solve_1(p1_start, p2_start)
   local roll_dice = create_dice()
-  local p1_pos = p1_start
-  local p1_score = 0
-  local p2_pos = p2_start
-  local p2_score = 0
+  local positions = {p1_start, p2_start}
+  local scores = {0, 0}
   local nb_rolls = 0
 
   function roll_3_times()
@@ -20,23 +18,20 @@ function solve_1(p1_start, p2_start)
     return result
   end
 
-  while true do
-    local rolls = roll_3_times()
-    p1_pos = (p1_pos + rolls -1)%10 + 1
-    p1_score = p1_score + p1_pos
-    if p1_score >= 1000 then
-      break
-    end
-
-    local rolls = roll_3_times()
-    p2_pos = (p2_pos + rolls -1)%10 + 1
-    p2_score = p2_score + p2_pos
-    if p2_score >= 1000 then
-      break
+  done = false
+  while not done do
+    for player=1,2 do
+      local rolls = roll_3_times()
+      positions[player] = (positions[player] + rolls - 1)%10 + 1
+      scores[player] = scores[player] + positions[player]
+      if scores[player] >= 1000 then
+        done = true
+        break
+      end
     end
   end
 
-  return nb_rolls*math.min(p1_score, p2_score)
+  return nb_rolls*math.min(scores[1], scores[2])
 end
 
 function solve_2(p1_start, p2_start)
