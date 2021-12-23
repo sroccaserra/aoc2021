@@ -25,6 +25,7 @@ def solve_1(filled_maze):
 
 def find_minimum_cost_queue(maze, start_state):
     key = tuple(sorted(start_state))
+    stop_searching = 15500
     costs = {}
     costs[key] = 0
     h = [(0, start_state)]
@@ -42,6 +43,8 @@ def find_minimum_cost_queue(maze, start_state):
                 new_state = apply_move(state, move)
                 new_key = tuple(sorted(new_state))
                 new_cost = cost + energy_for(move)
+                if new_cost > stop_searching:
+                    continue
                 if new_key not in costs or new_cost < costs[new_key]:
                     costs[new_key] = new_cost
                     heappush(h, (new_cost, new_state))
