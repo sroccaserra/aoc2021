@@ -1,6 +1,7 @@
 import sys
 import fileinput
 import re
+from collections import deque
 
 
 ENERGY_FOR = {'A': 1, 'B': 10, 'C': 100, 'D': 1000}
@@ -10,16 +11,43 @@ MIDDLE = 2
 BOTTOM = 3
 
 DEST_FOR = {'A': 3, 'B': 5, 'C': 7, 'D': 9}
+END_STATE=(('A',(3,2)),('A',(3,3)),('B',(5,2)),('B',(5,3)),('C',(7,2)),('C',(7,3)),('D',(9,2)),('D',(9,3)))
 
 
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
-    state = find_starting_positions(filled_maze)
+    start_state = find_starting_positions(filled_maze)
     maze = empty_maze(filled_maze)
     dp = {}
     seen = set()
-    return find_minimum_cost(dp, seen, maze, state)
+    return find_minimum_cost_stack(maze, start_state)
+
+
+def find_minimum_cost_stack(maze, start_state):
+    key = tuple(sorted(start_state))
+    dp = {}
+    dp[key] = 0
+    stack = [start_state]
+    q = deque([start_state])
+    n = 0
+    while q:
+        n += 1
+        state = q.popleft()
+        moveable_amphipods = find_moveable_amphipods(state)
+        key = tuple(sorted(state))
+        cost = dp[key]
+        if len(moveable_amphipods) == 0:
+            return cost
+        for a in moveable_amphipods:
+            possible_moves = find_possible_moves(maze, state, a)
+            for move in possible_moves:
+                new_state = apply_move(state, move)
+                new_key = tuple(sorted(new_state))
+                new_cost = cost + energy_for(move)
+                if new_key not in dp or new_cost < dp[new_key]:
+                    dp[new_key] = new_cost
+                    q.append(new_state)
 
 
 def find_minimum_cost(dp, seen, maze, state):
@@ -36,18 +64,19 @@ def find_minimum_cost(dp, seen, maze, state):
         return 0
     possible_results = []
     at_least_one_move = False
+    print(moveable_amphipods)
     for a in moveable_amphipods:
         possible_moves = find_possible_moves(maze, state, a)
         if (len(possible_moves)) > 0:
             at_least_one_move = True
-            print(possible_moves)
+            #print(possible_moves)
         for move in possible_moves:
             new_state = apply_move(state, move)
             new_key = tuple(sorted(new_state))
             if new_key in seen:
                 continue
             possible_results.append(energy_for(move)+find_minimum_cost(dp, seen, maze, new_state))
-    assert(at_least_one_move)
+    assert possible_results, len(possible_results)
     result = min(possible_results)
     dp[key] = result
     return result
