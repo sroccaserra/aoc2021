@@ -2,6 +2,7 @@ import sys
 import fileinput
 import re
 from collections import deque
+from heapq import heappush, heappop, heapify
 
 
 ENERGY_FOR = {'A': 1, 'B': 10, 'C': 100, 'D': 1000}
@@ -19,35 +20,32 @@ def solve_1(filled_maze):
         print(r)
     start_state = find_starting_positions(filled_maze)
     maze = empty_maze(filled_maze)
-    dp = {}
-    seen = set()
-    return find_minimum_cost_stack(maze, start_state)
+    return find_minimum_cost_queue(maze, start_state)
 
 
-def find_minimum_cost_stack(maze, start_state):
+def find_minimum_cost_queue(maze, start_state):
     key = tuple(sorted(start_state))
-    dp = {}
-    dp[key] = 0
-    stack = [start_state]
-    q = deque([start_state])
-    n = 0
-    while q:
-        n += 1
-        state = q.popleft()
+    costs = {}
+    costs[key] = 0
+    h = [(0, start_state)]
+    while h:
+        cost, state = heappop(h)
         moveable_amphipods = find_moveable_amphipods(state)
         key = tuple(sorted(state))
-        cost = dp[key]
-        if len(moveable_amphipods) == 0:
+        if key == END_STATE:
             return cost
+        if len(moveable_amphipods) == 0:
+            continue
         for a in moveable_amphipods:
             possible_moves = find_possible_moves(maze, state, a)
             for move in possible_moves:
                 new_state = apply_move(state, move)
                 new_key = tuple(sorted(new_state))
                 new_cost = cost + energy_for(move)
-                if new_key not in dp or new_cost < dp[new_key]:
-                    dp[new_key] = new_cost
-                    q.append(new_state)
+                if new_key not in costs or new_cost < costs[new_key]:
+                    costs[new_key] = new_cost
+                    heappush(h, (new_cost, new_state))
+    return costs[END_STATE]
 
 
 def find_minimum_cost(dp, seen, maze, state):
