@@ -18,14 +18,16 @@ def solve_1(filled_maze):
     state = find_starting_positions(filled_maze)
     maze = empty_maze(filled_maze)
     dp = {}
-    return find_minimum_cost(dp, maze, state)
+    seen = set()
+    return find_minimum_cost(dp, seen, maze, state)
 
 
-def find_minimum_cost(dp, maze, state):
+def find_minimum_cost(dp, seen, maze, state):
     key = tuple(sorted(state))
+    seen.add(key)
     if key in dp:
         return dp[key]
-    if len(dp)+1 % 100 == 0:
+    if (len(dp)+1) % 100 == 0:
         print(len(dp))
     moveable_amphipods = find_moveable_amphipods(state)
     if len(moveable_amphipods) == 0:
@@ -33,13 +35,19 @@ def find_minimum_cost(dp, maze, state):
         print('hey!')
         return 0
     possible_results = []
+    at_least_one_move = False
     for a in moveable_amphipods:
         possible_moves = find_possible_moves(maze, state, a)
         if (len(possible_moves)) > 0:
+            at_least_one_move = True
             print(possible_moves)
         for move in possible_moves:
             new_state = apply_move(state, move)
-            possible_results.append(energy_for(move)+find_minimum_cost(dp, maze, new_state))
+            new_key = tuple(sorted(new_state))
+            if new_key in seen:
+                continue
+            possible_results.append(energy_for(move)+find_minimum_cost(dp, seen, maze, new_state))
+    assert(at_least_one_move)
     result = min(possible_results)
     dp[key] = result
     return result
