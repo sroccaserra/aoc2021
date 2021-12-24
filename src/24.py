@@ -10,9 +10,7 @@ REG_INDEX_FOR = {'w': 0, 'x': 1, 'y': 2, 'z': 3}
 
 def solve_1(program):
     inps = deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
-    state_1 = apply_reved_program(inps)
-    state_2 = apply_program(program, inps)
-    return state_1, state_2
+    return apply_reved_program(inps)
 
 def apply_program(program, inps):
     state = [0, 0, 0, 0]
@@ -96,14 +94,11 @@ def eql(state, a_index, b):
 
 
 def apply_reved_program(inps):
-    state = [0, 0, 0, 0]
+    result = 0
     for i in range(len(inps)):
         a, b, c = REVED_PROGRAM[i]
-        print(inps[i], (a,b,c))
-        reved(state, inps[i], a, b, c)
-        result = state[3]
-        print(result)
-    return state
+        result = reved(result, inps[i], a, b, c)
+    return result
 
 REVED_PROGRAM = [
         (1, 12, 7),
@@ -121,47 +116,13 @@ REVED_PROGRAM = [
         (26, -6, 8),
         (26, -11, 5)]
 
-def reved(state, inp, a, b, c):
-    # if inp == state[3]%26 + b:
-    #     return 26*state[3]//a
-    # else:
-    #     return state[3]//a + inp + c
-    w = inp
-    x = state[1]
-    y = state[2]
-    z = state[3]
-    print('start', w, z)
-    x = 0
-    x = z       # 1 et 2 : on copie z dans x
-    print(3, x, y, z)
-    x = x%26    # donc on calcule le modulo de z0 par 26
-    print(4, x, y, z)
-    z = z // a   # noop, pas encore utilisé pour le moment.
-    print(5, x, y, z)
-    x += b      # on ajoute 12, on est à x = (z0%26) + 12
-    print(6, x, y, z)
-    x = 1 if x == w else 0  # x = 1 si l'input est égal à (z0%26) + 12
-    print(7, x, y, z)
-    x = 0 if x == 1 else 1  # not x   # x = 1 si l'input est différent de z0%26 + 12
-    y = 0
-    y = 25      # on ajoute 25 à y, en pratique on a mis 25 dans y
-    print(10, x, y, z)
-    y = y * x   # on met y à zéro si w est différent de z0%26+12
-    print(11, x, y, z)
-    y += 1      # on incrémente y (qui devient 1 ou 26)
-    print(12, x, y, z)
-    z = z * y   # z = (w == z0%26 + 12) ? z * 26 : z)
-    y = 0
-    print(14, x, y, z)
-    y = w
-    print(15, x, y, z)
-    y = w + c
-    print(16, x, y, z)
-    y = y * x   # y = (w == z0%26+12) ? 0 : w + 7
-    print(17, x, y, z)
-    z = z + y   # result += (w == z0%26+12) ? 0 : w + 7
-    print('end', z)
-    state[3] = z
+def reved(previous, inp, a, b, c):
+    z0 = previous
+    if (z0%26+b) == inp:
+        result = z0 // a
+    else:
+        result = (z0//a) * 26 + inp + c
+    return result
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
