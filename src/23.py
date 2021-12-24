@@ -33,6 +33,7 @@ def find_minimum_cost_queue(maze, start_state):
     h = [(0, start_state)]
     while h:
         cost, state = heappop(h)
+        print('state', state)
         pos, current, locked = state
         if pos == END_POS:
             return cost
@@ -55,7 +56,7 @@ def find_minimum_cost_queue(maze, start_state):
                 if new_pos not in costs or new_cost < costs[new_pos]:
                     costs[new_pos] = new_cost
                     heappush(h, (new_cost, new_state))
-    return costs
+    return costs[END_POS]
 
 def key_for(state):
     pos, current, locked = state
@@ -95,11 +96,11 @@ def find_minimum_cost(dp, seen, maze, state):
 
 
 def find_moveable_amphipods(state):
-    pos, _, locked = state
+    positions, _, locked = state
     result = []
-    for a in pos:
+    for a in positions:
         letter, (x, y) = a
-        if letter in locked:
+        if letter in locked and not is_column_free(positions, letter):
             continue
         if x in [3, 5, 7, 9] and y == TOP:
             # a's move is not finished, it is the only one that can continue
@@ -112,13 +113,22 @@ def find_moveable_amphipods(state):
             continue
         if y == BOTTOM:
             continue
-        other_pos = other_same_pos(pos, a)
+        other_pos = other_same_pos(positions, a)
         if other_pos == (x, BOTTOM):
             continue
         result.append(a)
 
     return result
 
+
+def is_column_free(positions, letter):
+    column = DEST_FOR[letter]
+    for other_letter, (x, y) in positions:
+        if y == TOP:
+            continue
+        if x == column and letter != other_letter:
+            return False
+    return True
 
 def find_possible_moves(maze, state, amphipod):
     letter, (xa, ya) = amphipod
@@ -131,7 +141,7 @@ def find_possible_moves(maze, state, amphipod):
 def apply_move(state, move):
     pos, current, locked = state
     letter, src, dst = move
-    assert (letter not in locked), (letter, move, locked)
+    # assert (letter not in locked), (letter, move, locked)
     new_pos = [a for a in pos if a != (letter, src)]
     new_pos.append((letter, dst))
     new_locked = locked.copy()
