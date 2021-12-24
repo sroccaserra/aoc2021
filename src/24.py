@@ -9,8 +9,36 @@ REG_INDEX_FOR = {'w': 0, 'x': 1, 'y': 2, 'z': 3}
 
 
 def solve_1(program):
-    inps = deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
-    return apply_reved_program(inps)
+    test_inputs = [
+            deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
+            deque([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]),
+            deque([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]),
+            deque([3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]),
+            deque([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]),
+            deque([5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]),
+            deque([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]),
+            deque([7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]),
+            deque([8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]),
+            deque([9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]),
+            deque([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]),
+            deque([11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11]),
+            deque([12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12]),
+            deque([13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13]),
+            deque([14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14]),
+            deque([14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
+            ]
+    test(program, test_inputs[12])
+    return
+    for inps in test_inputs:
+        print(inps[0])
+        test(program, inps)
+
+def test(program, inps):
+    state = apply_program(program, inps.copy())
+    ref = state[3]
+    result = apply_reved_program(ref, inps)
+    assert ref == result, (ref, result)
+    print(ref, result)
 
 def apply_program(program, inps):
     state = [0, 0, 0, 0]
@@ -20,7 +48,7 @@ def apply_program(program, inps):
         instruction = program[pc]
         if instruction[0] == 'inp':
             n = 0
-        print(n, pc, instruction, state)
+        # print(n, pc, instruction, state)
         n = n + 1
         apply_instruction(state, inps, instruction)
     return state
@@ -93,7 +121,7 @@ def eql(state, a_index, b):
         state[a_index] = 0
 
 
-def apply_reved_program(inps):
+def apply_reved_program(ref, inps):
     result = 0
     for i in range(len(inps)):
         a, b, c = REVED_PROGRAM[i]
@@ -117,12 +145,10 @@ REVED_PROGRAM = [
         (26, -11, 5)]
 
 def reved(previous, inp, a, b, c):
-    z0 = previous
-    if (z0%26+b) == inp:
-        result = z0 // a
+    if previous % 26 == inp - b: # 1 - b <= input -b <= 9 - b
+        return previous // a + 1
     else:
-        result = (z0//a) * 26 + inp + c
-    return result
+        return (previous//a) * 26 + inp + c
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
