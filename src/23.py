@@ -12,43 +12,54 @@ MIDDLE = 2
 BOTTOM = 3
 
 DEST_FOR = {'A': 3, 'B': 5, 'C': 7, 'D': 9}
-END_STATE=(('A',(3,2)),('A',(3,3)),('B',(5,2)),('B',(5,3)),('C',(7,2)),('C',(7,3)),('D',(9,2)),('D',(9,3)))
+END_POS=(('A',(3,2)),('A',(3,3)),('B',(5,2)),('B',(5,3)),('C',(7,2)),('C',(7,3)),('D',(9,2)),('D',(9,3)))
 
 
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
-    start_state = find_starting_positions(filled_maze)
+    start_pos = tuple(sorted(find_starting_positions(filled_maze)))
+    start_state = (start_pos, None, [])
     maze = empty_maze(filled_maze)
     return find_minimum_cost_queue(maze, start_state)
 
 
 def find_minimum_cost_queue(maze, start_state):
-    key = tuple(sorted(start_state))
+    pos, current, locked = start_state
+    key = (pos, current, tuple(sorted(locked)))
     stop_searching = 15500
     costs = {}
-    costs[key] = 0
+    costs[pos] = 0
     h = [(0, start_state)]
     while h:
         cost, state = heappop(h)
-        moveable_amphipods = find_moveable_amphipods(state)
-        key = tuple(sorted(state))
-        if key == END_STATE:
+        pos, current, locked = state
+        if pos == END_POS:
             return cost
+        key = (pos, current, tuple(sorted(locked)))
+        moveable_amphipods = find_moveable_amphipods(state)
+        print('moveable', moveable_amphipods)
         if len(moveable_amphipods) == 0:
             continue
         for a in moveable_amphipods:
             possible_moves = find_possible_moves(maze, state, a)
+            print('possible moves', a, possible_moves)
             for move in possible_moves:
                 new_state = apply_move(state, move)
-                new_key = tuple(sorted(new_state))
+                new_pos = new_state[0]
+                new_key = key_for(new_state)
                 new_cost = cost + energy_for(move)
                 if new_cost > stop_searching:
                     continue
-                if new_key not in costs or new_cost < costs[new_key]:
-                    costs[new_key] = new_cost
+                print(new_key)
+                if new_pos not in costs or new_cost < costs[new_pos]:
+                    costs[new_pos] = new_cost
                     heappush(h, (new_cost, new_state))
-    return costs[END_STATE]
+    return costs
+
+def key_for(state):
+    pos, current, locked = state
+    return (pos, current, tuple(sorted(locked)))
 
 
 def find_minimum_cost(dp, seen, maze, state):
@@ -84,9 +95,12 @@ def find_minimum_cost(dp, seen, maze, state):
 
 
 def find_moveable_amphipods(state):
+    pos, _, locked = state
     result = []
-    for a in state:
+    for a in pos:
         letter, (x, y) = a
+        if letter in locked:
+            continue
         if x in [3, 5, 7, 9] and y == TOP:
             # a's move is not finished, it is the only one that can continue
             return [a]
@@ -98,7 +112,7 @@ def find_moveable_amphipods(state):
             continue
         if y == BOTTOM:
             continue
-        other_pos = other_same_pos(state, a)
+        other_pos = other_same_pos(pos, a)
         if other_pos == (x, BOTTOM):
             continue
         result.append(a)
@@ -108,25 +122,31 @@ def find_moveable_amphipods(state):
 
 def find_possible_moves(maze, state, amphipod):
     letter, (xa, ya) = amphipod
+    pos, _, _ = state
     neighbors = [(xa+1, ya), (xa-1, ya), (xa, ya+1), (xa, ya-1)]
     non_walls = [(xn, yn) for xn, yn in neighbors if '.' == maze[yn][xn]]
-    return [(letter, (xa, ya), (xn, yn)) for xn, yn in non_walls if not is_occupied(state, (xn, yn))]
+    return [(letter, (xa, ya), (xn, yn)) for xn, yn in non_walls if not is_occupied(pos, (xn, yn))]
 
 
 def apply_move(state, move):
+    pos, current, locked = state
     letter, src, dst = move
-    result = [a for a in state if a != (letter, src)]
-    result.append((letter, dst))
-    return result
+    assert (letter not in locked), (letter, move, locked)
+    new_pos = [a for a in pos if a != (letter, src)]
+    new_pos.append((letter, dst))
+    new_locked = locked.copy()
+    if letter != current:
+        new_locked.append(letter)
+    return (tuple(sorted(new_pos)), letter, new_locked)
 
 
 def energy_for(move):
     letter = move[0]
     return ENERGY_FOR[letter]
 
-def other_same_pos(state, amphipod):
+def other_same_pos(positions, amphipod):
     (letter, pos) = amphipod
-    for other_letter, other_pos in state:
+    for other_letter, other_pos in positions:
         if other_letter == letter and other_pos != pos:
             return other_pos
 
