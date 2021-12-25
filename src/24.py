@@ -159,17 +159,50 @@ def solve_1(program):
     # for inps in test_inputs:
     #     test(program, inps)
     # search_big(program)
-    search_random(program)
-    test(program, deque([9, 7, 9, 1, 9, 1, 9, 7, 2, 9, 1, 4, 9, 5])) # 0 <-- zero!
+    # search_random_for_max(program)
+    search_random_for_min(program)
+    test(program, deque([1, 1, 1, 1, 9, 1, 3, 1, 1, 8, 1, 4, 9, 5])) # 0 <-- zero!
     # Nombres forcés:                ^        ^     ^  ^  ^  ^  ^
     #                    0  1  2  3  4  5  6  7  8  9  0  1  2  3
 
+# 91619131181135 (too high
+# 54619153291161
+# 51619153181131
+# 51619131181131 <-- Ok.
 
-def search_big(program):
-    inps = [9]*14
-    # TODO
+def search_random_for_min(program):
+    min_res = 999999999999999999999999999999999999
+    min_res_inp = 0
+    # for _ in range(100000):
+    while True:
+        rands = []
+        for _ in range(14):
+            rands.append(randint(1, 9))
+        # rands[0] = randint(1, 5)
+        rands[0] = 5
+        rands[1] = 1
+        # rands[2] = randint(1, 6)
+        rands[2] = 6
+        rands[3] = 1
+        rands[4] = 9
+        rands[5] = 1
+        #rands[6] = 3
+        # rands[7] = 1
+        # rands[8] = 1
+        # rands[9] = 8
+        rands[9] = randint(8,9)
+        rands[8] = 2 if rands[9] == 9 else 1
+        # rands[11] = 1
+        # rands[12] = 3
+        # rands[13] = 5
+        inps = deque(rands)
+        state = apply_program(program, inps)
+        if state[3] == 0 or state[3] <= min_res:
+            min_res = state[3]
+            min_res_inp = rands
+            print(min_res_inp, min_res, '<------ min')
 
-def search_random(program):
+def search_random_for_max(program):
     min_res = 999999999999999999999999999999999999
     min_res_inp = 0
     # for _ in range(100000):
