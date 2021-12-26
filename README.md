@@ -59,7 +59,47 @@ See also:
 
 ### Linux
 
-- On Linux, `/usr/bin/time -v ...` gives the memory usage (see `Maximum resident set size`).
+- On Linux, `/usr/bin/time -v ...` gives the memory usage (see `Maximum
+  resident set size`).
+
+### Lua
+
+Lua is a simple and very small language, which is a nice feature because it is
+one of the rare languages where you can read the entire doc in a reasonable
+time.
+
+The downside is that the standard library is limited, there is no tuples, no
+sets, no class. We have to use what is provided in a creative way to emulate
+those.
+
+So in a way, it can be fun to try and be creative to "use what we have" and "do
+what we can".
+
+What we have is a very versatile "table" data structure, that can either be
+used as a 1-based array or as a hash table, and functions. And while Lua also
+provides "metatables", that can be used to emulate prototype-based inheritance,
+I found it not really useful for Advent of Code puzzles, maybe I didn't look
+hard enough.
+
+Another problem is that not unlike JavaScript, Lua does not check function
+arity, nil value bugs can sneak in very easily deep into a program. So we have
+to be extra careful.
+
+- Lua has no set of tuples and no set, but it can be faked with tables, for
+  exemple:
+
+```lua
+t = {}
+function add(t,x,y) if not t[y] then t[y] = {} end t[y][x] = true end
+function has(t,x,y) if not t[y] then t[y] = {} end return t[y][x] end
+```
+
+- Lua cannot use tables or tuples as keys, but you can usually easily generate
+  a key with `string.format()`, for example:
+
+```lua
+local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
+```
 
 ### Python
 
