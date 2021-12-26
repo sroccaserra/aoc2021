@@ -14,6 +14,7 @@ See also:
 - Breadth-First Search
     - Introduction to Algorithms, Third Edition, 22.2, p. 594
     - Algorithm Design, 3.3, p. 90
+    - Algorithms, 4.2, p. 116
     - Artificial Intelligence: a Modern Approach, Third Edition 3.4.1, p. 81
     - The Algorithm Design Manual, 5.6, p. 162
     - <https://en.wikipedia.org/wiki/Breadth-first_search>
@@ -21,6 +22,7 @@ See also:
 - Depth-First Search
     - Introduction to Algorithms, Third Edition, 22.3, p. 603
     - Algorithm Design, 3.3, p. 92
+    - Algorithms, 3.2, p. 93
     - Artificial Intelligence: a Modern Approach, Third Edition 3.4.3, p. 85
     - The Algorithm Design Manual, 5.8, p. 169
     - <https://en.wikipedia.org/wiki/Depth-first_search>
@@ -38,7 +40,8 @@ See also:
 
 - Dijkstra's Algorithm
     - Introduction to Algorithms, Third Edition, 24.3, p. 658
-    - Algorithm Design, 4.4, p. p. 137
+    - Algorithm Design, 4.4, p. 137
+    - Algorithms, 4.4, p. 119
     - The Algorithm Design Manual, 6.3.1, p. 206
     - <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>
 
