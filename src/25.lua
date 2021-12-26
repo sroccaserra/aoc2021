@@ -88,14 +88,14 @@ function south_of(h, y)
   if y == h then return 1 else return y + 1 end
 end
 
-function set(t,x,y)
+function set(t, x, y)
   if not t[y] then
     t[y] = {}
   end
   t[y][x] = true
 end
 
-function get(t,x, y)
+function get(t, x, y)
   return t[y] and t[y][x]
 end
 
