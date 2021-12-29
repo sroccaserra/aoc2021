@@ -11,6 +11,17 @@ See also:
 
 ### Algorithms
 
+- Heaps & Priority Queues
+    - Introduction to Algorithms, Third Edition, 6.1, p. 151
+    - Algorithm Design, 2.5, p. 57
+    - Algorithms, 4.5, p. 125-126
+    - The Algorithm Design Manual, 4.3.1, p. 109
+
+- Dynamic programming: to solve a DP problem with two players, we can swap
+  arguments in the recursive call, see day 21 part two (Lua).
+
+#### Search
+
 - Breadth-First Search
     - Introduction to Algorithms, Third Edition, 22.2, p. 594
     - Algorithm Design, 3.3, p. 90
@@ -60,9 +71,6 @@ See also:
     - Algorithm Design Manual, 7.1, p. 231.
     - Example of usage in Python: <https://leetcode.com/problems/reconstruct-itinerary/discuss/491164/python-backtracking-following-skienas-template>
     - <https://en.wikipedia.org/wiki/Backtracking>
-
-- Dynamic programming: to solve a DP problem with two players, we can swap
-  arguments in the recursive call, see day 21 part two (Lua).
 
 ### Linux
 
