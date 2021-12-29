@@ -108,6 +108,14 @@ function has(t,x,y) if not t[y] then t[y] = {} end return t[y][x] end
 local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 ```
 
+- Use `t[y][x] = {}` to store data based on coordinates, like adjacency lists.
+
+- Use `table.insert(t, x)` and `table.remove(t)` to implement an array-based
+  stack with tables.
+
+- Use `table.insert(t, 1, x)` and `table.remove(t, 1)` for small queues (up to
+  some hundred elements).
+
 ### Python
 
 - Python can now pattern match:
