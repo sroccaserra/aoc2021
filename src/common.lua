@@ -11,16 +11,14 @@ function map(f, t)
   return result
 end
 
-function setxy(m, xy, v)
-  local x, y = xy[1], xy[2]
+function setxy(m, x, y, v)
   if m[y] == nil then
     m[y] = {}
   end
   m[y][x] = v
 end
 
-function getxy(m, xy)
-  local x, y = xy[1], xy[2]
+function getxy(m, x, y)
   if m[y] == nil then
     return nil
   end
