@@ -160,6 +160,12 @@ To run Lua solutions:
 $ lua src/01.lua <src/01.txt
 ```
 
+To run Lua tests (requires busted, `luarocks install --local busted`):
+```
+$ busted -o TAP src
+```
+
+
 ## How it started
 
 ```shell

@@ -4,17 +4,33 @@ function all(t)
 end
 
 function map(f, t)
-  result = {}
+  local result = {}
   for i, v in ipairs(t) do
     result[i] = f(v)
   end
   return result
 end
 
+function dump(o)
+  if type(o) == 'table' then
+    local s = '{ '
+    for k,v in pairs(o) do
+      if type(k) ~= 'number' then k = '"'..k..'"' end
+      s = s .. '['..k..'] = ' .. dump(v) .. ','
+    end
+    return s .. '} '
+  else
+    return tostring(o)
+  end
+end
+
+---
+-- IO
+
 function readlines()
-  result = {}
+  local result = {}
   while true do
-    line = io.read("*line")
+    local line = io.read("*line")
     if not line then
       break
     end
