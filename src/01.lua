@@ -1,9 +1,9 @@
 require 'src.common'
 
-very_big = 99999
+local huge = math.huge
 
 function solve_1(numbers)
-  local previous = very_big
+  local previous = huge
   local result = 0
   for n in all(numbers) do
     if n > previous then
@@ -15,7 +15,7 @@ function solve_1(numbers)
 end
 
 function solve_2(numbers)
-  local p1, p2, p3 = very_big, very_big, very_big
+  local p1, p2, p3 = huge, huge, huge
   local result = 0
   for n in all(numbers) do
     if n + p1 + p2 > p1 + p2 + p3 then
@@ -26,8 +26,7 @@ function solve_2(numbers)
   return result
 end
 
-lines = readlines()
-numbers = map(tonumber, lines)
+numbers = readlines('n')
 
 print(solve_1(numbers))
 print(solve_2(numbers))

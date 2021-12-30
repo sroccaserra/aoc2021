@@ -41,9 +41,10 @@ end
 ---
 -- IO
 
-function readlines()
+function readlines(options)
+  options = options or 'l'
   local result = {}
-  for line in io.input(arg[1]):lines() do
+  for line in io.input(arg[1]):lines(options) do
     table.insert(result, line)
   end
   return result
