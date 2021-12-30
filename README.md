@@ -157,7 +157,7 @@ $ stack runhaskell src/01.{hs,txt}
 To run Lua solutions:
 
 ```
-$ lua src/01.lua <src/01.txt
+$ lua src/01.{lua,txt}
 ```
 
 To run Lua tests (requires busted, `luarocks install --local busted`):

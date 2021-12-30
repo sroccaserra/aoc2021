@@ -43,11 +43,7 @@ end
 
 function readlines()
   local result = {}
-  while true do
-    local line = io.read("*line")
-    if not line then
-      break
-    end
+  for line in io.input(arg[1]):lines() do
     table.insert(result, line)
   end
   return result
