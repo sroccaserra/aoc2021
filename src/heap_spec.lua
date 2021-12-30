@@ -47,6 +47,13 @@ describe('Heap', function()
     assert.equals('a', heap.pop_min(h))
   end)
 
+  it('works with nodes with a metatable', function()
+    local h = heap.create({node('x', 2), node('y', 1), node('z', 3)})
+    min = heap.pop_min(h)
+
+    assert.equals('y', min.value)
+  end)
+
   it('fails to pop from empty heap', function()
     local h = heap.create({1})
     heap.pop_min(h)
@@ -56,3 +63,11 @@ describe('Heap', function()
     end)
   end)
 end)
+
+local mt = {__lt = function(a, b) return a.cost < b.cost end}
+
+function node(v, c)
+  local result = {value=v, cost=c}
+  setmetatable(result, mt)
+  return result
+end

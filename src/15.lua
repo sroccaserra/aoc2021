@@ -16,21 +16,29 @@ function lowest_risk_ucs(grid, w, h, scale)
 
   local risks = {}
   setxy(risks, x0, y0, 0)
-  local pq = heap.create({encode(0, x0, y0)})
+  local pq = heap.create({node(0, x0, y0)})
   while #pq > 0 do
-    local risk, x, y = decode(pop_min(pq))
+    local risk, x, y = table.unpack(pop_min(pq))
     for n in all(neighbors(w_s, h_s, x, y)) do
       local xn, yn = n[1], n[2]
       local old_risk = getxy(risks, xn, yn)
       local new_risk = risk + compute_risk(grid, w, h, scale, xn, yn)
       if nil == old_risk or new_risk < old_risk then
         setxy(risks, xn, yn, new_risk)
-        insert(pq, encode(new_risk, xn, yn))
+        insert(pq, node(new_risk, xn, yn))
       end
     end
   end
 
   return getxy(risks, w_s, h_s)
+end
+
+local node_mt = {__lt = function(a, b) return a[1] < b[1] end}
+
+function node(cost, x, y)
+  local result = {cost, x, y}
+  setmetatable(result, node_mt)
+  return result
 end
 
 function neighbors(w_s, h_s, x, y)
@@ -49,15 +57,6 @@ function compute_risk(grid, w, h, scale, x, y)
   local bonus = math.floor((x-1)/w) + math.floor((y-1)/h)
   local res = grid[(y-1)%h+1][(x-1)%w+1] + bonus
   return (res - 1)%9 + 1
-end
-
-function encode(d, x, y)
-  return string.format("%09d %d,%d", d, x, y)
-end
-
-function decode(s)
-  local it = string.gmatch(s, "%d+")
-  return tonumber(it()), tonumber(it()), tonumber(it())
 end
 
 lines = readlines()
