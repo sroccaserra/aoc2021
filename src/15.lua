@@ -1,5 +1,8 @@
 require 'src/common'
-local heap = require 'src/heap'
+heap = require 'src/heap'
+
+local insert = heap.insert
+local pop_min = heap.pop_min
 
 function solve(grid, scale)
   local w = #grid[1]
@@ -13,16 +16,16 @@ function lowest_risk_ucs(grid, w, h, scale)
 
   local risks = {}
   setxy(risks, x0, y0, 0)
-  local pq = {encode(0, x0, y0)}
+  local pq = heap.create({encode(0, x0, y0)})
   while #pq > 0 do
-    local risk, x, y = decode(heap.pop(pq))
+    local risk, x, y = decode(pop_min(pq))
     for n in all(neighbors(w_s, h_s, x, y)) do
       local xn, yn = n[1], n[2]
-      local new_risk = risk + compute_risk(grid, w, h, scale, xn, yn)
       local old_risk = getxy(risks, xn, yn)
+      local new_risk = risk + compute_risk(grid, w, h, scale, xn, yn)
       if nil == old_risk or new_risk < old_risk then
         setxy(risks, xn, yn, new_risk)
-        heap.push(pq, encode(new_risk, xn, yn))
+        insert(pq, encode(new_risk, xn, yn))
       end
     end
   end

@@ -51,27 +51,27 @@ end
 ---
 -- Public interface
 
-function M.make(ns)
+function M.create(ns)
   ns = ns or {}
   local result = {}
 
   for _,n in ipairs(ns) do
-    M.push(result, n)
+    M.insert(result, n)
   end
 
   return result
 end
 
-function M.push(h, x)
+function M.insert(h, x)
   table.insert(h, x)
   _bubble_up(h, #h)
 end
 
-function M.pop(h)
+function M.pop_min(h)
   local n = #h
 
   if n == 0 then
-    error('Error: popping from empty heap.')
+    error('Error: trying to pop from empty heap.')
   end
 
   local result = h[1]
