@@ -5,10 +5,26 @@ end
 
 function map(f, t)
   local result = {}
-  for i, v in ipairs(t) do
-    result[i] = f(v)
+  for _, v in ipairs(t) do
+    table.insert(result, f(v))
   end
   return result
+end
+
+function setxy(m, xy, v)
+  local x, y = xy[1], xy[2]
+  if m[y] == nil then
+    m[y] = {}
+  end
+  m[y][x] = v
+end
+
+function getxy(m, xy)
+  local x, y = xy[1], xy[2]
+  if m[y] == nil then
+    return nil
+  end
+  return m[y][x]
 end
 
 function dump(o)

@@ -4,12 +4,13 @@ local M = {}
 -- Simple heap, from the Algorithm Design Manual, 4.3.1, p. 109
 
 local NONE = -1
+local floor = math.floor
 
 local function _parent(n)
   if n == 1 then
     return NONE
   end
-  return math.floor(n/2)
+  return floor(n/2)
 end
 
 local function _young_child(n)
