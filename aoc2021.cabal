@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dfabdb35c9dc40810c6175b9f1c8c4deac78d9d303cb09e345324d61e5529054
+-- hash: bbbe9de8d4b81b4e1d87fbe814cd669ae3213febbd04f3bded454d8ce685f5ad
 
 name:           aoc2021
 version:        0.1.0.0
@@ -35,5 +35,7 @@ library
   build-depends:
       base >=4.7 && <5
     , containers
+    , hashable
     , hspec >=2.7.10 && <3
+    , unordered-containers
   default-language: Haskell2010

@@ -6,6 +6,7 @@ import Data.Char (isDigit)
 import Data.List(foldl1', group, sort, unfoldr)
 import Data.Map (Map)
 import qualified Data.Map as Map
+import Data.Hashable
 import Text.ParserCombinators.ReadP
 import System.Environment
 import Text.Printf
@@ -56,6 +57,10 @@ toDec = foldl1' $ (+) . (*2)
 
 data Coord = Coord !Int !Int
            deriving (Show, Eq, Ord)
+
+instance Hashable Coord where
+  hash (Coord x y) = hash (x, y)
+  hashWithSalt n (Coord x y) = hashWithSalt n (x, y)
 
 _x :: Coord -> Int
 _x (Coord x _) = x

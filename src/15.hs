@@ -1,7 +1,7 @@
 import Data.Set (Set)
 import qualified Data.Set as Set
-import Data.Map.Strict (Map, (!))
-import qualified Data.Map.Strict as Map
+import Data.HashMap.Strict (HashMap, (!), (!?))
+import qualified Data.HashMap.Strict as HashMap
 import Text.ParserCombinators.ReadP
 
 import Common (getParsedLines, Coord(..))
@@ -38,22 +38,22 @@ computeRisk grid w h scale (Coord x y) = (res - 1) `mod` 9 + 1
   where bonus = div x w + div y h
         res = grid !! (mod y h) !! (mod x w) + bonus
 
-data PriorityQueue = Pq (Set (Int, Coord)) (Map Coord Int)
+data PriorityQueue = Pq (Set (Int, Coord)) (HashMap Coord Int)
 
-emptyPq = Pq Set.empty Map.empty
+emptyPq = Pq Set.empty HashMap.empty
 
 updatePq :: PriorityQueue -> Coord -> Int -> PriorityQueue
 updatePq (Pq h m) state newPriority
-  | (not $ Map.member state m) || (newPriority < (m ! state))
-    = Pq (Set.insert (newPriority, state) h) (Map.insert state newPriority m)
+  | (not $ HashMap.member state m) || (newPriority < (m ! state))
+    = Pq (Set.insert (newPriority, state) h) (HashMap.insert state newPriority m)
 updatePq pq _ _ = pq
 
 done = -100000
 
 removeMinPq :: PriorityQueue -> ((Coord, Int), PriorityQueue)
-removeMinPq (Pq h m) = if Just done == Map.lookup point m
+removeMinPq (Pq h m) = if Just done == m !? point
                                       then removeMinPq (Pq h' m)
-                                      else ((point, priority), Pq h' (Map.insert point done m))
+                                      else ((point, priority), Pq h' (HashMap.insert point done m))
   where ((priority, point), h') = Set.deleteFindMin h
 
 parser :: ReadP [Int]
