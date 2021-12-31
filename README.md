@@ -136,9 +136,12 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 
 ### Haskell
 
-- `flip (,) <$> [y-1..y+1] <*> [x-1..x+1]` generates `[(x-1, y-1), (x, y-1), (x+1, y-1) ...]`
-- We can pattern guard on monads with the `<-` operator : `validate xs (y:ys) | Just x <- lookup y brackets = validate (x:xs) ys`
-- Beware, if you want to update a count with -n `Map.insertWith (-)` will probably reverse the arguments. Use `flip (-)` or `(+) k (-n)`.
+- `Data.Set` can be used as a priority queue (`insert` and `deleteFindMin` are
+  O(log n)) (see day 15).
+- `flip (,) <$> [y-1..y+1] <*> [x-1..x+1]` generates `[(x-1, y-1), (x, y-1), (x+1, y-1) ...]`.
+- We can pattern guard on monads with the `<-` operator : `validate xs (y:ys) | Just x <- lookup y brackets = validate (x:xs) ys`.
+- Beware, if you want to update a count with -n `Map.insertWith (-)` will
+  probably reverse the arguments. Use `flip (-)` or `(+) k (-n)`.
 
 
 ## How to run
