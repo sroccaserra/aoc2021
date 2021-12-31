@@ -2,32 +2,28 @@ import sys
 import fileinput
 from collections import deque
 from heapq import heappush, heappop, heapify
+from priority_queue import PriorityQueue
 
 
 def solve(grid, scale):
     w = len(grid[0])
     h = len(grid)
-#     return lowest_risk_ucs_aima(grid, w, h, scale, (0, 0))
     return lowest_risk_ucs(grid, w, h, scale, (0, 0))
 
 
+# Note: see file history for other versions
 def lowest_risk_ucs(grid, w, h, scale, src):
     w_s, h_s = w*scale, h*scale
-#     dst = (w_s - 1, h_s - 1)
-    # starting risk is not counted, we set it to 0
-    risks = {src: 0}
-    q = [(0, src)]
-    while q:
-        risk, p = heappop(q)
-#         if p == dst:
-#             return risk
-        for n in neighbors(w_s, h_s, p):
-            new_risk = risk + compute_risk(grid, w, h, scale, n)
-            if n not in risks or new_risk < risks[n]:
-                risks[n] = new_risk
-                heappush(q, (new_risk, n))
     dst = (w_s - 1, h_s - 1)
-    return risks[dst]
+    frontier = PriorityQueue()
+    frontier.update(src, 0)
+    while True:
+        state, past_cost = frontier.removeMin()
+        if state == dst:
+            return past_cost
+        for n in neighbors(w_s, h_s, state):
+            cost = compute_risk(grid, w, h, scale, n)
+            frontier.update(n, past_cost + cost)
 
 
 def lowest_risk_ucs_aima(grid, w, h, scale, src):
