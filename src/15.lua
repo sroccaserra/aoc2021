@@ -10,33 +10,63 @@ function solve(grid, scale)
   return lowest_risk_ucs(grid, w, h, scale)
 end
 
+-- Note: version inspired by:
+-- * https://stanford-cs221.github.io/autumn2019/live/search1/
+-- Note: lookup past versions of this file to see alternative implementations
 function lowest_risk_ucs(grid, w, h, scale)
   local w_s, h_s = w*scale, h*scale
   local x0, y0 = 1, 1
 
-  local risks = {}
-  setxy(risks, x0, y0, 0)
-  local pq = heap.create({node(0, x0, y0)})
-  while #pq > 0 do
-    local risk, x, y = table.unpack(pop_min(pq))
+  local frontier = create_pq()
+  update_pq(frontier, x0, y0, 0)
+  while true do
+    x, y, past_cost = remove_min_pq(frontier)
+    if x == w_s and y == h_s then
+      return past_cost
+    end
     for n in all(neighbors(w_s, h_s, x, y)) do
-      local xn, yn = n[1], n[2]
-      local old_risk = getxy(risks, xn, yn)
-      local new_risk = risk + compute_risk(grid, w, h, scale, xn, yn)
-      if nil == old_risk or new_risk < old_risk then
-        setxy(risks, xn, yn, new_risk)
-        insert(pq, node(new_risk, xn, yn))
-      end
+      local xn, yn = table.unpack(n)
+      local cost = compute_risk(grid, w, h, scale, xn, yn)
+      update_pq(frontier, xn, yn, past_cost + cost)
     end
   end
-
-  return getxy(risks, w_s, h_s)
+  error('Error: not found')
 end
 
-local node_mt = {__lt = function(a, b) return a[1] < b[1] end}
+function create_pq()
+  return {
+    heap = heap.create(),
+    priorities = {},
+    DONE = -100000
+  }
+end
 
-function node(cost, x, y)
-  local result = {cost, x, y}
+function update_pq(pq, x, y, new_priority)
+  local old_priority = getxy(pq.priorities, x, y)
+  if nil == old_priority or new_priority < old_priority then
+    setxy(pq.priorities, x, y, new_priority)
+    insert(pq.heap, node(x, y, new_priority))
+    return true
+  end
+  return false
+end
+
+function remove_min_pq(pq)
+  while #pq.heap > 0 do
+    local x, y, priority = table.unpack(pop_min(pq.heap))
+    if getxy(pq.priorities, x, y) ~= pq.DONE then
+      setxy(pq.priorities, x, y, pq.DONE)
+      return x, y, priority
+    end
+  end
+  error('Error: trying to pop an empty priority queue.')
+end
+
+local COST = 3
+local node_mt = {__lt = function(a, b) return a[COST] < b[COST] end}
+
+function node(x, y, cost)
+  local result = {x, y, cost}
   setmetatable(result, node_mt)
   return result
 end

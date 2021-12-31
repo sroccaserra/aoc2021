@@ -16,6 +16,8 @@ See also:
     - Algorithm Design, 2.5, p. 57
     - Algorithms, 4.5, p. 125-126
     - The Algorithm Design Manual, 4.3.1, p. 109
+    - https://stanford-cs221.github.io/autumn2019/live/search1/
+    - https://www.youtube.com/watch?v=aIsgJJYrlXk
 
 - Dynamic programming: to solve a DP problem with two players, we can swap
   arguments in the recursive call, see day 21 part two (Lua).
