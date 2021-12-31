@@ -67,6 +67,19 @@ function M.insert(h, x)
   _bubble_up(h, #h)
 end
 
+function M.replace(h, i, x)
+  h[i] = x
+  _bubble_up(h, i)
+end
+
+function M.find(h, x)
+  for i, v in ipairs(h) do
+    if v == x then
+      return i, v
+    end
+  end
+end
+
 function M.pop_min(h)
   local n = #h
 
