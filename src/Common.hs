@@ -3,12 +3,16 @@ module Common
 
 import Control.Applicative
 import Data.Char (isDigit)
+import Data.Hashable
+import Data.HashMap.Strict (HashMap, (!), (!?))
+import qualified Data.HashMap.Strict as HashMap
 import Data.List(foldl1', group, sort, unfoldr)
 import Data.Map (Map)
 import qualified Data.Map as Map
-import Data.Hashable
-import Text.ParserCombinators.ReadP
+import Data.Set (Set)
+import qualified Data.Set as Set
 import System.Environment
+import Text.ParserCombinators.ReadP
 import Text.Printf
 
 getDayRawInput :: Int -> IO String
@@ -101,3 +105,24 @@ showAsciiGrid c m = unlines $ do
     return [Map.findWithDefault c (Coord x y) m | x <- [minX..maxX]]
   where
     (Coord minX minY, Coord maxX maxY) = boundingBox $ Map.keys m
+
+---
+-- Priority Queue
+
+data PriorityQueue n v = Pq (Set (n, v)) (HashMap v n)
+
+-- The set plays the role of a heap, and the map keeps track of visited values
+emptyPq = Pq Set.empty HashMap.empty
+
+updatePq :: (Ord n, Ord v, Eq v, Hashable v) => PriorityQueue n v -> (n, v) -> PriorityQueue n v
+updatePq (Pq h m) (newPriority, value)
+  | (not $ HashMap.member value m) || (newPriority < (m ! value))
+    = Pq (Set.insert (newPriority, value) h) (HashMap.insert value newPriority m)
+updatePq pq _ = pq
+
+-- Visited values have their priority set to minBound in the map
+removeMinPq :: (Bounded n, Ord n, Eq v, Hashable v) => PriorityQueue n v -> ((n, v), PriorityQueue n v)
+removeMinPq (Pq h m) = if Just minBound == m !? value
+                                      then removeMinPq (Pq h' m)
+                                      else ((priority, value), Pq h' (HashMap.insert value minBound m))
+  where ((priority, value), h') = Set.deleteFindMin h
