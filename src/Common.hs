@@ -78,6 +78,10 @@ boundingBox cs = (Coord (minimum xs) (minimum ys), Coord (maximum xs) (maximum y
     xs = map _x cs
     ys = map _y cs
 
+neighbors w h (Coord x y) = filter (isInBound w h) $ candidates
+  where candidates = [Coord (x-1) y, Coord (x+1) y, Coord x (y-1), Coord x (y+1)]
+        isInBound w h (Coord x y) = (0 <= x) && (x < w) && (0 <= y) && (y < h)
+
 bresenham :: Coord -> Coord -> [Coord]
 bresenham pa@(Coord xa ya) pb@(Coord xb yb) = map maySwitch . unfoldr go $ (x1,y1,0)
   where
