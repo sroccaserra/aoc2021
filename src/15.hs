@@ -19,12 +19,11 @@ lowestRiskUcs grid w h scale = fst . fst $ until isDone visit ((0, src), emptyPq
         isDone = (== dst) . snd . fst
         visit ((cost, point), frontier) = removeMinPq frontier'
           where ns = neighbors w_s h_s point
-                frontier' = foldl' (processNeighbor grid w h cost) frontier ns
+                frontier' = foldl' (processNeighbor cost) frontier ns
+        processNeighbor pastCost pq n = updatePq pq (pastCost + cost, n)
+          where cost = computeCost grid w h n
 
-processNeighbor grid w h pastCost pq n = updatePq pq (pastCost + cost, n)
-  where cost = computeRisk grid w h n
-
-computeRisk grid w h (Point x y) = succ (mod (pred value) 9)
+computeCost grid w h (Point x y) = succ (mod (pred value) 9)
   where bonus = div x w + div y h
         value = grid !! (mod y h) !! (mod x w) + bonus
 
