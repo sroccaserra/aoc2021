@@ -8,12 +8,13 @@ from priority_queue import PriorityQueue
 def solve(grid, scale):
     w = len(grid[0])
     h = len(grid)
-    return lowest_risk_ucs(grid, w, h, scale, (0, 0))
+    return lowest_risk_ucs(grid, w, h, scale)
 
 
 # Note: see file history for other versions
-def lowest_risk_ucs(grid, w, h, scale, src):
+def lowest_risk_ucs(grid, w, h, scale):
     w_s, h_s = w*scale, h*scale
+    src = (0, 0)
     dst = (w_s - 1, h_s - 1)
     frontier = PriorityQueue()
     frontier.update(src, 0)

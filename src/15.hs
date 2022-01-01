@@ -12,17 +12,14 @@ solve grid scale = lowestRiskUcs grid w h scale
   where w = length . head $ grid
         h = length grid
 
-lowestRiskUcs grid w h scale = go frontier
+lowestRiskUcs grid w h scale = fst . fst $ until isDone visit ((0, src), emptyPq)
   where (w_s, h_s) = (w*scale, h*scale)
         src = Point 0 0
         dst = Point (pred w_s) (pred h_s)
-        frontier = updatePq emptyPq (0, src)
-        go pq = if point == dst
-                   then pastCost
-                   else go pq''
-          where ((pastCost, point), pq') = removeMinPq pq
-                ns = neighbors w_s h_s point
-                pq'' = foldl' (processNeighbor grid w h pastCost) pq' ns
+        isDone = (== dst) . snd . fst
+        visit ((cost, point), frontier) = removeMinPq frontier'
+          where ns = neighbors w_s h_s point
+                frontier' = foldl' (processNeighbor grid w h cost) frontier ns
 
 processNeighbor grid w h pastCost pq n = updatePq pq (pastCost + cost, n)
   where cost = computeRisk grid w h n
