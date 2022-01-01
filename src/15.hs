@@ -22,16 +22,16 @@ lowestRiskUcs grid w h scale = go frontier
                    else go pq''
           where ((pastCost, point), pq') = removeMinPq pq
                 ns = neighbors w_s h_s point
-                pq'' = foldl' (processNeighbor grid w h scale pastCost) pq' ns
+                pq'' = foldl' (processNeighbor grid w h pastCost) pq' ns
 
-processNeighbor grid w h scale pastCost pq n = updatePq pq (pastCost + cost, n)
-  where cost = computeRisk grid w h scale n
+processNeighbor grid w h pastCost pq n = updatePq pq (pastCost + cost, n)
+  where cost = computeRisk grid w h n
 
 neighbors w_s h_s (Coord x y) = filter (isInBound w_s h_s) $ candidates
   where candidates = [Coord (x-1) y, Coord (x+1) y, Coord x (y-1), Coord x (y+1)]
         isInBound w h (Coord x y) = (0 <= x) && (x < w) && (0 <= y) && (y < h)
 
-computeRisk grid w h scale (Coord x y) = (res - 1) `mod` 9 + 1
+computeRisk grid w h (Coord x y) = (res - 1) `mod` 9 + 1
   where bonus = div x w + div y h
         res = grid !! (mod y h) !! (mod x w) + bonus
 
