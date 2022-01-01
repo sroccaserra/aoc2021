@@ -25,11 +25,11 @@ step w h (easts, souths) = (easts', souths')
         trySouth e = southOfTheMoon h e
         souths' = Set.map trySouth souths
 
-asString w h (easts, souths) = [[asChar (x, y) | x <- [0..w-1]] | y <- [0..h-1]]
-  where asChar p = if Set.member p easts then '>' else (if Set.member p souths then 'v' else '.')
+-- asString w h (easts, souths) = [[asChar (x, y) | x <- [0..w-1]] | y <- [0..h-1]]
+--   where asChar p = if Set.member p easts then '>' else (if Set.member p souths then 'v' else '.')
 
 eastOfTheSun w (x, y) | x == w-1 = (0, y)
-eastOfTheSun w (x, y) = (x + 1, y)
+eastOfTheSun _ (x, y) = (x + 1, y)
 
 southOfTheMoon h (x, y) | y == h-1 = (x, 0)
-southOfTheMoon h (x, y) = (x, y + 1)
+southOfTheMoon _ (x, y) = (x, y + 1)

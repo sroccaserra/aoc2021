@@ -1,5 +1,4 @@
 import Data.List (sort)
-import Text.ParserCombinators.ReadP
 
 import Common (getDayLines)
 

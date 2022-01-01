@@ -1,4 +1,4 @@
-import Data.Map.Strict (Map, (!))
+import Data.Map.Strict ((!))
 import qualified Data.Map as Map
 import Text.ParserCombinators.ReadP
 

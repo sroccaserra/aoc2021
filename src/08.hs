@@ -1,8 +1,7 @@
-import Data.Char
 import qualified Data.Set as Set
 import Text.ParserCombinators.ReadP
 
-import Common (getParsedLines, unsigned)
+import Common (getParsedLines)
 
 main = do
   input <- getParsedLines 8 parser
@@ -14,7 +13,7 @@ partOne = length . filter ((`elem` [2, 3, 4, 7]) . length) . concatMap snd
 partTwo signals = sum $ map solveSignal signals
 
 solveSignal (patterns, output) = 1000*m + 100*c + 10*d + n
-  where [p_1, p_4, p_7] = map (knownPattern patterns) [2, 4, 3]
+  where [_, p_4, p_7] = map (knownPattern patterns) [2, 4, 3]
         digitFor p | length p == 2 = 1
         digitFor p | length p == 4 = 4
         digitFor p | length p == 3 = 7
@@ -24,7 +23,7 @@ solveSignal (patterns, output) = 1000*m + 100*c + 10*d + n
         digitFor p | length p == 6 = 6
         digitFor p | p == Set.union p_7 p = 3
         digitFor p | 2 == length (Set.intersection p_4 p) = 2
-        digitFor p = 5
+        digitFor _ = 5
         [m, c, d, n] = map digitFor output
 
 knownPattern patterns n = head $ filter ((== n) . length) patterns
