@@ -15,7 +15,7 @@ solve grid scale = lowestRiskUcs grid w h scale
 lowestRiskUcs grid w h scale = go frontier
   where (w_s, h_s) = (w*scale, h*scale)
         src = Point 0 0
-        dst = Point (w_s -1) (h_s -1)
+        dst = Point (pred w_s) (pred h_s)
         frontier = updatePq emptyPq (0, src)
         go pq = if point == dst
                    then pastCost
@@ -27,9 +27,9 @@ lowestRiskUcs grid w h scale = go frontier
 processNeighbor grid w h pastCost pq n = updatePq pq (pastCost + cost, n)
   where cost = computeRisk grid w h n
 
-computeRisk grid w h (Point x y) = (res - 1) `mod` 9 + 1
+computeRisk grid w h (Point x y) = succ (mod (pred value) 9)
   where bonus = div x w + div y h
-        res = grid !! (mod y h) !! (mod x w) + bonus
+        value = grid !! (mod y h) !! (mod x w) + bonus
 
 parser :: ReadP [Int]
 parser = many1 $ read . (:[]) <$> get
