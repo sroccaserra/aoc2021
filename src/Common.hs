@@ -6,7 +6,7 @@ import Data.Char (isDigit)
 import Data.Hashable
 import Data.HashMap.Strict (HashMap, (!), (!?))
 import qualified Data.HashMap.Strict as HashMap
-import Data.List(foldl1', group, sort, unfoldr)
+import Data.List(foldl', foldl1', group, sort, unfoldr)
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Set (Set)
@@ -111,7 +111,15 @@ showAsciiGrid c m = unlines $ do
     (Point minX minY, Point maxX maxY) = boundingBox $ Map.keys m
 
 ---
--- Priority Queue
+-- Search & Priority Queue
+
+-- Uniform Cost Search
+ucs adjs computeCost src dst = fst . fst $ until isDone visit ((0, src), emptyPq)
+  where isDone = (== dst) . snd . fst
+        visit ((cost, vertex), frontier) = removeMinPq frontier'
+          where ns = adjs vertex
+                frontier' = foldl' (processNeighbor cost) frontier ns
+        processNeighbor pastCost pq n = updatePq pq (pastCost + computeCost n, n)
 
 data PriorityQueue n v = Pq (Set (n, v)) (HashMap v n)
 
