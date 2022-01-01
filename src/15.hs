@@ -1,6 +1,6 @@
 import Text.ParserCombinators.ReadP
 
-import Common (getParsedLines, Point(..), neighbors, ucs)
+import Common (getParsedLines, neighbors, ucs)
 
 main = do
   input <- getParsedLines 15 parser
@@ -13,12 +13,12 @@ solve grid scale = lowestRisk grid w h scale
 
 lowestRisk grid w h scale = ucs adjs computeCost src dst
   where (w_s, h_s) = (w*scale, h*scale)
-        src = Point 0 0
-        dst = Point (pred w_s) (pred h_s)
+        src = (0, 0)
+        dst = (pred w_s, pred h_s)
         adjs = neighbors w_s h_s
         computeCost = computeRisk grid w h
 
-computeRisk grid w h (Point x y) = succ (mod (pred value) 9)
+computeRisk grid w h (x, y) = succ (mod (pred value) 9)
   where bonus = div x w + div y h
         value = grid !! (mod y h) !! (mod x w) + bonus
 

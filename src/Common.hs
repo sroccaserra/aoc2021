@@ -56,6 +56,10 @@ countByEq = map (\ps@(p:_) -> (p, length ps)) . group . sort
 
 toDec = foldl1' $ (+) . (*2)
 
+neighbors w h (x, y) = filter (isInBound w h) $ candidates
+  where candidates = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
+        isInBound w h (x, y) = (0 <= x) && (x < w) && (0 <= y) && (y < h)
+
 ---
 -- Points
 
@@ -78,7 +82,7 @@ boundingBox cs = (Point (minimum xs) (minimum ys), Point (maximum xs) (maximum y
     xs = map _x cs
     ys = map _y cs
 
-neighbors w h (Point x y) = filter (isInBound w h) $ candidates
+neighborPoints w h (Point x y) = filter (isInBound w h) $ candidates
   where candidates = [Point (x-1) y, Point (x+1) y, Point x (y-1), Point x (y+1)]
         isInBound w h (Point x y) = (0 <= x) && (x < w) && (0 <= y) && (y < h)
 
@@ -135,6 +139,6 @@ updatePq pq _ = pq
 -- Visited values have their priority set to minBound in the map
 removeMinPq :: (Bounded n, Ord n, Eq v, Hashable v) => PriorityQueue n v -> ((n, v), PriorityQueue n v)
 removeMinPq (Pq h m) = if Just minBound == m !? value
-                                      then removeMinPq (Pq h' m)
-                                      else ((priority, value), Pq h' (HashMap.insert value minBound m))
+                          then removeMinPq (Pq h' m)
+                          else ((priority, value), Pq h' (HashMap.insert value minBound m))
   where ((priority, value), h') = Set.deleteFindMin h
