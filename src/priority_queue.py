@@ -4,10 +4,12 @@ from heapq import heappush, heappop
 # Taken from:
 # - https://stanford-cs221.github.io/autumn2019/live/search1/
 class PriorityQueue:
-    def  __init__(self):
+    def  __init__(self, values=[]):
         self.DONE = -100000
         self.heap = []
         self.priorities = {}  # Map from state to priority
+        for state, priority in values:
+            self.update(state, priority)
 
     def update(self, state, newPriority):
         oldPriority = self.priorities.get(state)

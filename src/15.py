@@ -16,14 +16,13 @@ def lowest_risk_ucs(grid, w, h, scale):
     w_s, h_s = w*scale, h*scale
     src = (0, 0)
     dst = (w_s - 1, h_s - 1)
-    frontier = PriorityQueue()
-    frontier.update(src, 0)
+    frontier = PriorityQueue([(src, 0)])
     while True:
         state, past_cost = frontier.removeMin()
         if state == dst:
             return past_cost
         for n in neighbors(w_s, h_s, state):
-            cost = compute_risk(grid, w, h, scale, n)
+            cost = compute_risk(grid, w, h, n)
             frontier.update(n, past_cost + cost)
 
 
@@ -43,7 +42,7 @@ def lowest_risk_ucs_aima(grid, w, h, scale, src):
             return cost
         explored.add(p)
         for n in neighbors(w_s, h_s, p):
-            n_cost = cost + compute_risk(grid, w, h, scale, n)
+            n_cost = cost + compute_risk(grid, w, h, n)
             if n not in explored and not contains(frontier, n):
                 heappush(frontier, (n_cost, n))
             elif contains(frontier, n):
@@ -79,9 +78,8 @@ def neighbors(w_s, h_s, p):
     return [c for c in cs if 0 <= c[0] < w_s and 0 <= c[1] < h_s]
 
 
-def compute_risk(grid, w, h, scale, p):
+def compute_risk(grid, w, h, p):
     x, y = p
-    # assert (0 <= x < w*scale and 0 <= y < h*scale)
     bonus = x//w + y//h
     res = grid[y%h][x%w] + bonus
     return (res - 1)%9 + 1
@@ -94,7 +92,7 @@ def lowest_risk_first_try(grid, w, h, scale, start):
     while q:
         p = q.popleft()
         for n in neighbors(w_s, h_s, p):
-            risk = risks[p] + compute_risk(grid, w, h, scale, n)
+            risk = risks[p] + compute_risk(grid, w, h, n)
             if (n not in risks) or risk < risks[n]:
                 q.append(n)
                 risks[n] = risk
@@ -109,7 +107,7 @@ def lowest_risk_2(grid, w, h, scale, start):
     q = [(0, start)]
     while q:
         risk, p = heappop(q)
-        risk += compute_risk(grid, w, h, scale, p)
+        risk += compute_risk(grid, w, h, p)
         if p not in risks or risk < risks[p]:
             risks[p] = risk
             if p == dest:
