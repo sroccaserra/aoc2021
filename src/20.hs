@@ -2,7 +2,7 @@ import Data.Maybe (fromJust)
 import Data.Map (Map)
 import qualified Data.Map as Map
 
-import Common (getDayLines, countByEq, toDec, Coord(..))
+import Common (getDayLines, countByEq, toDec, Point(..))
 
 main = do
   input <- getDayLines 20
@@ -17,11 +17,11 @@ solve n algo lines =  countLit (last . take (succ n) $ iterate (enhance algo) (0
 enhance algo (n, lines) = (succ n, lines')
   where w = length $ head lines
         h = length lines
-        lines' = [[algo !! (index algo d m (Coord x y)) | x <- [-1..w]] | y <- [-1..h]]
+        lines' = [[algo !! (index algo d m (Point x y)) | x <- [-1..w]] | y <- [-1..h]]
         m = Map.fromList (zipWith (,) coords (foldl1 (++) lines))
-        coords = [Coord x y | y <- [0..h-1], x <- [0..w-1]]
+        coords = [Point x y | y <- [0..h-1], x <- [0..w-1]]
         d = if 0 == n `mod` 2 then '.' else (head algo)
 
-index algo d m (Coord x y) = fromInteger $ toDec $ toBit <$> map (\c -> Map.findWithDefault d c m) points
-  where points = flip Coord <$> [y-1..y+1] <*> [x-1..x+1]
+index algo d m (Point x y) = fromInteger $ toDec $ toBit <$> map (\c -> Map.findWithDefault d c m) points
+  where points = flip Point <$> [y-1..y+1] <*> [x-1..x+1]
         toBit c = if c == '#' then 1 else 0
