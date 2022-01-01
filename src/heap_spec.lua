@@ -14,7 +14,7 @@ describe('Heap', function()
   it('extracts the minimum', function()
     local h = heap.create({3, 10, 1, 1000, 2000})
 
-    local min = heap.pop_min(h)
+    local min = heap.remove_min(h)
 
     assert.equals(1, min)
     assert.equals(4, #h)
@@ -25,7 +25,7 @@ describe('Heap', function()
 
     heap.insert(h, 1)
     assert.equals(5, #h)
-    local min = heap.pop_min(h)
+    local min = heap.remove_min(h)
 
     assert.equals(1, min)
     assert.equals(4, #h)
@@ -35,7 +35,7 @@ describe('Heap', function()
     local h = heap.create({9, 7, 8, 6, 1, 5, 3, 2, 4})
 
     for i=1,9 do
-      n = heap.pop_min(h)
+      n = heap.remove_min(h)
       assert.equals(i, n)
     end
     assert.equals(0, #h)
@@ -44,22 +44,22 @@ describe('Heap', function()
   it('works with strings', function()
     local h = heap.create({'c', 'd', 'b', 'a'})
 
-    assert.equals('a', heap.pop_min(h))
+    assert.equals('a', heap.remove_min(h))
   end)
 
   it('works with nodes with a metatable', function()
     local h = heap.create({node('x', 2), node('y', 1), node('z', 3)})
-    min = heap.pop_min(h)
+    min = heap.remove_min(h)
 
     assert.equals('y', min.value)
   end)
 
   it('fails to pop from empty heap', function()
     local h = heap.create({1})
-    heap.pop_min(h)
+    heap.remove_min(h)
 
     assert.has_error(function()
-      heap.pop_min(h)
+      heap.remove_min(h)
     end)
   end)
 end)

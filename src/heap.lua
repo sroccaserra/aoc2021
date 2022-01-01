@@ -67,7 +67,7 @@ function M.insert(h, x)
   _bubble_up(h, #h)
 end
 
-function M.pop_min(h)
+function M.remove_min(h)
   local n = #h
 
   if n == 0 then

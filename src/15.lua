@@ -2,7 +2,7 @@ require 'src/common'
 heap = require 'src/heap'
 
 local insert = heap.insert
-local pop_min = heap.pop_min
+local remove_min = heap.remove_min
 
 function solve(grid, scale)
   local w = #grid[1]
@@ -53,7 +53,7 @@ end
 
 function remove_min_pq(pq)
   while #pq.heap > 0 do
-    local x, y, priority = table.unpack(pop_min(pq.heap))
+    local x, y, priority = table.unpack(remove_min(pq.heap))
     if getxy(pq.priorities, x, y) ~= pq.DONE then
       setxy(pq.priorities, x, y, pq.DONE)
       return x, y, priority
