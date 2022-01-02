@@ -170,6 +170,11 @@ To run Lua tests (requires busted, `luarocks install --local busted`):
 $ busted -o TAP src
 ```
 
+To run Scheme solutions:
+
+```
+$ scheme --script src/01.{ss,txt}
+```
 
 ## How it started
 
