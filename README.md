@@ -79,6 +79,25 @@ See also:
 - On Linux, `/usr/bin/time -v ...` gives the memory usage (see `Maximum
   resident set size`).
 
+### Scheme
+
+- Scheme is even smaller that Lua it seems, there is no regex utilities in the
+  standard library for instance.
+- Named `let` is useful for looping:
+    - <http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-14.html#node_sec_11.16>
+- The `do` special form looks powerful:
+    - <http://www.r6rs.org/final/html/r6rs-lib/r6rs-lib-Z-H-6.html>
+
+References:
+
+- <http://www.r6rs.org/>
+- <http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-2.html>
+- <http://www.r6rs.org/final/html/r6rs-lib/r6rs-lib-Z-H-1.html>
+- <https://cisco.github.io/ChezScheme>
+- <https://www.scheme.com/tspl4/>
+- <https://cisco.github.io/ChezScheme/csug9.5/csug.html>
+- <https://schemers.org/Documents/>
+
 ### Lua
 
 Lua is a simple and very small language, which is a nice feature because it is
