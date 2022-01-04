@@ -97,6 +97,8 @@ References:
 - <https://www.scheme.com/tspl4/>
 - <https://cisco.github.io/ChezScheme/csug9.5/csug.html>
 - <https://schemers.org/Documents/>
+- <https://srfi.schemers.org/?statuses=final>
+- <https://akkuscm.org/packages/chez-srfi/>
 
 ### Lua
 
