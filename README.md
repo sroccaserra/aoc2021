@@ -168,20 +168,20 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 To run Python solutions:
 
 ```
-$ python3 src/01.{py,txt}
+$ python3 src/01.{py,in}
 ```
 
 To run Haskell solutions (two ways):
 
 ```
 $ stack runhaskell src/01.hs
-$ stack runhaskell src/01.{hs,txt}
+$ stack runhaskell src/01.{hs,in}
 ```
 
 To run Lua solutions:
 
 ```
-$ lua src/01.{lua,txt}
+$ lua src/01.{lua,in}
 ```
 
 To run Lua tests (requires busted, `luarocks install --local busted`):
@@ -192,7 +192,7 @@ $ busted -o TAP src
 To run Scheme solutions:
 
 ```
-$ scheme --script src/01.{ss,txt}
+$ scheme --script src/01.{ss,in}
 ```
 
 ## How it started
