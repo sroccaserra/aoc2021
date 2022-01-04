@@ -1,4 +1,4 @@
-(include "src/common.ss")
+(import (only (common) readlines))
 
 (define huge 1000000000)
 

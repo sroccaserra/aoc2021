@@ -99,6 +99,7 @@ References:
 - <https://schemers.org/Documents/>
 - <https://srfi.schemers.org/?statuses=final>
 - <https://akkuscm.org/packages/chez-srfi/>
+- <https://wiki.c2.com/?SchemeUnit>
 
 ### Lua
 
@@ -194,7 +195,7 @@ $ busted -o TAP src
 To run Scheme solutions:
 
 ```
-$ scheme --script src/01.{ss,in}
+$ scheme --libdirs src --script src/01.{ss,in}
 ```
 
 ## How it started
