@@ -7,180 +7,29 @@ from heapq import heappush, heappop, heapify
 
 ENERGY_FOR = {'A': 1, 'B': 10, 'C': 100, 'D': 1000}
 
-TOP = 1
-MIDDLE = 2
-BOTTOM = 3
-
-DEST_FOR = {'A': 3, 'B': 5, 'C': 7, 'D': 9}
-END_POS=(('A',(3,2)),('A',(3,3)),('B',(5,2)),('B',(5,3)),('C',(7,2)),('C',(7,3)),('D',(9,2)),('D',(9,3)))
-
-
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
-    start_pos = tuple(sorted(find_starting_positions(filled_maze)))
-    start_state = (start_pos, None, [])
-    maze = empty_maze(filled_maze)
-    return find_minimum_cost_queue(maze, start_state)
+    return start_cost_and_room_stacks(filled_maze)
 
-
-def find_minimum_cost_queue(maze, start_state):
-    pos, current, locked = start_state
-    key = (pos, current, tuple(sorted(locked)))
-    stop_searching = 15500
-    costs = {}
-    costs[pos] = 0
-    h = [(0, start_state)]
-    while h:
-        cost, state = heappop(h)
-        print('state', state)
-        pos, current, locked = state
-        if pos == END_POS:
-            return cost
-        key = (pos, current, tuple(sorted(locked)))
-        moveable_amphipods = find_moveable_amphipods(state)
-        print('moveable', moveable_amphipods)
-        if len(moveable_amphipods) == 0:
-            continue
-        for a in moveable_amphipods:
-            possible_moves = find_possible_moves(maze, state, a)
-            print('possible moves', a, possible_moves)
-            for move in possible_moves:
-                new_state = apply_move(state, move)
-                new_pos = new_state[0]
-                new_key = key_for(new_state)
-                new_cost = cost + energy_for(move)
-                if new_cost > stop_searching:
-                    continue
-                print(new_key)
-                if new_pos not in costs or new_cost < costs[new_pos]:
-                    costs[new_pos] = new_cost
-                    heappush(h, (new_cost, new_state))
-    return costs[END_POS]
-
-def key_for(state):
-    pos, current, locked = state
-    return (pos, current, tuple(sorted(locked)))
-
-
-def find_minimum_cost(dp, seen, maze, state):
-    key = tuple(sorted(state))
-    seen.add(key)
-    if key in dp:
-        return dp[key]
-    if (len(dp)+1) % 100 == 0:
-        print(len(dp))
-    moveable_amphipods = find_moveable_amphipods(state)
-    if len(moveable_amphipods) == 0:
-        dp[key] = 0
-        print('hey!')
-        return 0
-    possible_results = []
-    at_least_one_move = False
-    print(moveable_amphipods)
-    for a in moveable_amphipods:
-        possible_moves = find_possible_moves(maze, state, a)
-        if (len(possible_moves)) > 0:
-            at_least_one_move = True
-            #print(possible_moves)
-        for move in possible_moves:
-            new_state = apply_move(state, move)
-            new_key = tuple(sorted(new_state))
-            if new_key in seen:
+def start_cost_and_room_stacks(filled_maze):
+    rooms = []
+    cost = 0
+    max_depth = 2
+    for j, expected in [(3, 'A'), (5, 'B'), (7, 'C'), (9, 'D')]:
+        room = []
+        rooms.append(room)
+        is_at_destination = True
+        depth = max_depth + 1
+        for i in reversed(range(2, 2+max_depth)):
+            c = filled_maze[i][j]
+            depth -= 1
+            if is_at_destination and c == expected:
                 continue
-            possible_results.append(energy_for(move)+find_minimum_cost(dp, seen, maze, new_state))
-    assert possible_results, len(possible_results)
-    result = min(possible_results)
-    dp[key] = result
-    return result
-
-
-def find_moveable_amphipods(state):
-    positions, _, locked = state
-    result = []
-    for a in positions:
-        letter, (x, y) = a
-        if letter in locked and not is_column_free(positions, letter):
-            continue
-        if x in [3, 5, 7, 9] and y == TOP:
-            # a's move is not finished, it is the only one that can continue
-            return [a]
-        if y == TOP:
-            result.append(a)
-            continue
-        if x != DEST_FOR[letter]:
-            result.append(a)
-            continue
-        if y == BOTTOM:
-            continue
-        other_pos = other_same_pos(positions, a)
-        if other_pos == (x, BOTTOM):
-            continue
-        result.append(a)
-
-    return result
-
-
-def is_column_free(positions, letter):
-    column = DEST_FOR[letter]
-    for other_letter, (x, y) in positions:
-        if y == TOP:
-            continue
-        if x == column and letter != other_letter:
-            return False
-    return True
-
-def find_possible_moves(maze, state, amphipod):
-    letter, (xa, ya) = amphipod
-    pos, _, _ = state
-    neighbors = [(xa+1, ya), (xa-1, ya), (xa, ya+1), (xa, ya-1)]
-    non_walls = [(xn, yn) for xn, yn in neighbors if '.' == maze[yn][xn]]
-    return [(letter, (xa, ya), (xn, yn)) for xn, yn in non_walls if not is_occupied(pos, (xn, yn))]
-
-
-def apply_move(state, move):
-    pos, current, locked = state
-    letter, src, dst = move
-    # assert (letter not in locked), (letter, move, locked)
-    new_pos = [a for a in pos if a != (letter, src)]
-    new_pos.append((letter, dst))
-    new_locked = locked.copy()
-    if letter != current:
-        new_locked.append(letter)
-    return (tuple(sorted(new_pos)), letter, new_locked)
-
-
-def energy_for(move):
-    letter = move[0]
-    return ENERGY_FOR[letter]
-
-def other_same_pos(positions, amphipod):
-    (letter, pos) = amphipod
-    for other_letter, other_pos in positions:
-        if other_letter == letter and other_pos != pos:
-            return other_pos
-
-
-def is_occupied(state, position):
-    for _, p in state:
-        if position == p:
-            return True
-    return False
-
-
-def empty_maze(filled_maze):
-    return [re.sub('[A-D]', '.', row) for row in filled_maze]
-
-
-def find_starting_positions(maze):
-    w = len(maze[0])
-    h = len(maze)
-    result = []
-    for y in range(h):
-        for x in range(w):
-            if maze[y][x] in 'ABCD':
-                result.append((maze[y][x], (x, y)))
-    return result
+            is_at_destination = False
+            cost += depth*ENERGY_FOR[c]
+            room.append(c)
+    return cost, rooms
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
