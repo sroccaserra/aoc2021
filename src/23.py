@@ -6,11 +6,59 @@ from heapq import heappush, heappop, heapify
 
 
 ENERGY_FOR = {'A': 1, 'B': 10, 'C': 100, 'D': 1000}
+FREE = '.'
+
+DISTANCES = [
+        [3, 5, 7, 9,],
+        [2, 4, 6, 8,],
+        [2, 2, 4, 6,],
+        [4, 2, 2, 4,],
+        [6, 4, 2, 2,],
+        [8, 6, 4, 2,],
+        [9, 7, 5, 3,],]
 
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
-    return start_cost_and_room_stacks(filled_maze)
+    start_cost, rooms = start_cost_and_room_stacks(filled_maze)
+    hallway = FREE*7
+    m = {}
+    state = encode_state(hallway, rooms)
+    m[state] = start_cost
+    print(decode_state(state))
+    return possible_moves(hallway, rooms)
+
+
+def possible_moves(hallway, rooms):
+    return possible_moves_to_hallway(hallway, rooms)
+
+
+def possible_moves_to_hallway(hallway, rooms):
+    result = []
+    for dst_i in range(len(hallway)):
+        c = hallway[dst_i]
+        if c != '.':
+            continue
+        for src_j in range(len(rooms)):
+            room = rooms[src_j]
+            if len(room) == 0:
+                continue
+            amphipod = room[-1]
+            distance = DISTANCES[dst_i][src_j]
+            cost = distance*ENERGY_FOR[amphipod]
+            result.append((cost, dst_i, src_j))
+    return result
+
+
+def encode_state(hallway, rooms):
+    return hallway, tuple([tuple(r) for r in rooms])
+
+
+def decode_state(state):
+    hallway = state[0]
+    rooms = [list(r) for r in state[1]]
+    return hallway, rooms
+
 
 def start_cost_and_room_stacks(filled_maze):
     rooms = []
