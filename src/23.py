@@ -1,8 +1,6 @@
 import sys
 import fileinput
 import re
-from collections import deque
-from heapq import heappush, heappop, heapify
 
 
 ENERGY_FOR = {'A': 1, 'B': 10, 'C': 100, 'D': 1000}
@@ -26,8 +24,16 @@ def solve_1(filled_maze):
     state_key = encode_state(hallway, rooms)
     m[state_key] = start_cost
     print(decode_state(state_key))
-    move = possible_moves(hallway, rooms)[0]
-    return move
+    return [apply_move(move, hallway, rooms) for move in possible_moves(hallway, rooms)]
+
+
+def apply_move(move, hallway, rooms):
+    cost, dst, room_index = move
+    room = rooms[room_index]
+    hallway = hallway[0:dst]+room[-1] + hallway[dst+1:]
+    rooms = list(rooms)
+    rooms[room_index] = room[:-1]
+    return cost, hallway, rooms
 
 
 def possible_moves(hallway, rooms):
