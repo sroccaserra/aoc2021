@@ -23,10 +23,11 @@ def solve_1(filled_maze):
     start_cost, rooms = start_cost_and_room_stacks(filled_maze)
     hallway = FREE*7
     m = {}
-    state = encode_state(hallway, rooms)
-    m[state] = start_cost
-    print(decode_state(state))
-    return possible_moves(hallway, rooms)
+    state_key = encode_state(hallway, rooms)
+    m[state_key] = start_cost
+    print(decode_state(state_key))
+    move = possible_moves(hallway, rooms)[0]
+    return move
 
 
 def possible_moves(hallway, rooms):
@@ -54,9 +55,9 @@ def encode_state(hallway, rooms):
     return hallway, tuple([tuple(r) for r in rooms])
 
 
-def decode_state(state):
-    hallway = state[0]
-    rooms = [list(r) for r in state[1]]
+def decode_state(state_key):
+    hallway = state_key[0]
+    rooms = [list(r) for r in state_key[1]]
     return hallway, rooms
 
 
