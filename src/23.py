@@ -26,13 +26,12 @@ DISTANCES = [
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
-    start_cost, rooms = start_cost_and_room_stacks(filled_maze)
-    hallway = FREE*7
+    cost, state = start_cost_and_state(filled_maze)
     m = {}
-    state_key = encode_state(hallway, rooms)
-    m[state_key] = start_cost
+    state_key = encode_state(state)
+    m[state_key] = cost
     print(decode_state(state_key))
-    return neighbors_with_cost((hallway, rooms))
+    return neighbors_with_cost(state)
 
 
 def neighbors_with_cost(state):
@@ -72,7 +71,8 @@ def possible_moves_to_hallway(hallway, rooms):
     return result
 
 
-def encode_state(hallway, rooms):
+def encode_state(state):
+    hallway, rooms = state
     return hallway, tuple([tuple(r) for r in rooms])
 
 
@@ -82,7 +82,7 @@ def decode_state(state_key):
     return hallway, rooms
 
 
-def start_cost_and_room_stacks(filled_maze):
+def start_cost_and_state(filled_maze):
     rooms = []
     cost = 0
     max_depth = 2
@@ -99,7 +99,8 @@ def start_cost_and_room_stacks(filled_maze):
             is_at_destination = False
             cost += depth*ENERGY_FOR[c]
             room.append(c)
-    return cost, rooms
+    hallway = FREE*7
+    return cost, (hallway, rooms)
 
 
 if __name__ == '__main__' and not sys.flags.interactive:
