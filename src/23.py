@@ -15,6 +15,14 @@ DISTANCES = [
         [8, 6, 4, 2,],
         [9, 7, 5, 3,],]
 
+##
+# TODO
+
+# - Traiter le blocage dans le couloir
+# - Générer les mouvements possibles du couloir vers les chambres
+# - Faire la recherche de minimum
+
+
 def solve_1(filled_maze):
     for r in filled_maze:
         print(r)
@@ -24,6 +32,11 @@ def solve_1(filled_maze):
     state_key = encode_state(hallway, rooms)
     m[state_key] = start_cost
     print(decode_state(state_key))
+    return neighbors_with_cost((hallway, rooms))
+
+
+def neighbors_with_cost(state):
+    hallway, rooms = state
     return [apply_move(move, hallway, rooms) for move in possible_moves(hallway, rooms)]
 
 
@@ -33,12 +46,14 @@ def apply_move(move, hallway, rooms):
     hallway = hallway[0:dst]+room[-1] + hallway[dst+1:]
     rooms = list(rooms)
     rooms[room_index] = room[:-1]
-    return cost, hallway, rooms
+    return cost, (hallway, rooms)
 
 
 def possible_moves(hallway, rooms):
-    return possible_moves_to_hallway(hallway, rooms)
+    return possible_moves_to_rooms(hallway, rooms) + possible_moves_to_hallway(hallway, rooms)
 
+def possible_moves_to_rooms(hallway, rooms):
+    return []
 
 def possible_moves_to_hallway(hallway, rooms):
     result = []
