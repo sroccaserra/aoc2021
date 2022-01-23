@@ -198,6 +198,12 @@ To run Scheme solutions:
 $ scheme --libdirs src --script src/01.{ss,in}
 ```
 
+To run uxn solutions (only hello world at the moment):
+
+```
+$ make 01
+```
+
 ## How it started
 
 ```shell
