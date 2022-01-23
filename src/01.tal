@@ -1,5 +1,6 @@
 %HALT { #010f DEO }
 %EMIT { #18 DEO }
+%PRINT  { ;print-str JSR2 #0a EMIT }
 
 ( devices )
 
@@ -10,13 +11,16 @@
 ( init )
 
 |0100 @program
-
     ;hello-word
+    PRINT
+    HALT
+BRK
+
+@print-str
     &loop
         ( send ) LDAk EMIT
         ( loop ) INC2 LDAk ,&loop JCN
     POP2
-    HALT
-BRK
+JMP2r
 
-@hello-word "Hello 20 "World! 0a
+@hello-word "Hello 20 "World!
