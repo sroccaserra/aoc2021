@@ -1,6 +1,4 @@
-%HALT { #010f DEO }
-%EMIT { #18 DEO }
-%PRINT  { ;print-str JSR2 #0a EMIT }
+~src/macros.tal
 
 ( devices )
 
@@ -13,14 +11,8 @@
 |0100 @program
     ;hello-word
     PRINT
-    HALT
 BRK
 
-@print-str
-    &loop
-        ( send ) LDAk EMIT
-        ( loop ) INC2 LDAk ,&loop JCN
-    POP2
-JMP2r
+@hello-word "Hello 20 "World! 00
 
-@hello-word "Hello 20 "World!
+~src/common.tal

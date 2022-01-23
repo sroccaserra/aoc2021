@@ -1,0 +1,3 @@
+%HALT { #010f DEO }
+%EMIT { #18 DEO }
+%PRINT  { ;print-str JSR2 #0a EMIT }
