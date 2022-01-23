@@ -1,3 +1,14 @@
+( Shorthands for logic and arithmetic opcodes )
+
+%+  { ADD }  %-  { SUB }  %*  { MUL }  %/  { DIV }
+%<  { LTH }  %>  { GTH }  %=  { EQU }  %!  { NEQ }
+%++ { ADD2 } %-- { SUB2 } %** { MUL2 } %// { DIV2 }
+%<< { LTH2 } %>> { GTH2 } %== { EQU2 } %!! { NEQ2 }
+
+( Debugger )
+
 %HALT { #010f DEO }
-%EMIT { #18 DEO }
+%EMIT { .Console/write DEO }
 %PRINT  { ;print-str JSR2 #0a EMIT }
+%DEBUG  { ;print-hex/byte JSR2 #0a EMIT }
+%DEBUG2 { ;print-hex JSR2 #0a EMIT }

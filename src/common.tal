@@ -1,6 +1,52 @@
-@print-str
-    &loop
-        LDAk EMIT
-        INC2 LDAk ,&loop JCN
+@print-hex ( value* -- )
+    SWP ,&byte JSR
+    &byte ( byte -- )
+        STHk #04 SFT ,&parse JSR #18 DEO
+        STHr #0f AND ,&parse JSR #18 DEO
+    JMP2r
+    &parse ( byte -- char ) DUP #09 GTH ,&above JCN #30 ADD JMP2r
+    &above #57 ADD JMP2r
+JMP2r
+
+@print-dec ( value* -- )
+    #2710 DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
+    #03e8 DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
+    #0064 DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
+    #000a DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
+    #30 ADD #18 DEO POP
+JMP2r
+
+@print-str ( string* -- )
+    #0001 SUB2
+    &while
+        INC2 LDAk DUP #18 DEO ,&while JCN
     POP2
+JMP2r
+
+@print-zeropage ( -- )
+    #0a #18 DEO
+    #0000
+    &loop
+        LDZk ;print-hex/byte JSR2
+        DUP #01 AND #00 = ,&no-space JCN
+            #2018 DEO
+            &no-space
+        DUP #0f AND #0f ! ,&no-break JCN
+            #0a18 DEO
+            &no-break
+        INC NEQk ,&loop JCN
+    POP2
+    #0a #18 DEO
+JMP2r
+
+( decimal string to hex number )
+
+@sdec ( addr* -- hex* )
+    ( res ) LIT2r 0000
+    &while
+        LDAk #30 - #00 SWP
+        STH2r #000a ** ++ STH2
+        INC2 LDAk ,&while JCN
+    POP2
+    ( res ) STH2r
 JMP2r
