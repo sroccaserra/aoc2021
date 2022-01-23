@@ -3,5 +3,4 @@
         LDAk EMIT
         INC2 LDAk ,&loop JCN
     POP2
-    HALT
 JMP2r

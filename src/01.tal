@@ -11,6 +11,7 @@
 |0100 @program
     ;hello-word
     PRINT
+    HALT
 BRK
 
 @hello-word "Hello 20 "World! 00
