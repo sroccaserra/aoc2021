@@ -6,7 +6,7 @@
     JMP2r
     &parse ( byte -- char ) DUP #09 GTH ,&above JCN #30 ADD JMP2r
     &above #57 ADD JMP2r
-JMP2r
+RTN
 
 @print-dec ( value* -- )
     #2710 DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
@@ -14,14 +14,14 @@ JMP2r
     #0064 DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
     #000a DIV2k DUP #30 ADD #18 DEO MUL2 SUB2
     #30 ADD #18 DEO POP
-JMP2r
+RTN
 
 @print-str ( string* -- )
     #0001 SUB2
     &while
         INC2 LDAk DUP #18 DEO ,&while JCN
     POP2
-JMP2r
+RTN
 
 @print-zeropage ( -- )
     #0a #18 DEO
@@ -37,7 +37,7 @@ JMP2r
         INC NEQk ,&loop JCN
     POP2
     #0a #18 DEO
-JMP2r
+RTN
 
 ( decimal string to hex number )
 

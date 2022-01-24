@@ -2,18 +2,32 @@
 
 ( devices )
 
-|00 @System     [ &vector $2 &wst  $1 &rst    $1 &pad   $4 &r $2 &g $2 &b $2   &debug $1 &halt $1 ]
-|10 @Console    [ &vector $2 &read $1 &pad    $5 &write $1 &error  $1 ]
+|00 @System     [ &vector $2 &wst $1 &rst $1 &pad $4 &r $2 &g $2 &b $2 &debug $1 &halt $1 ]
+|10 @Console    [ &vector $2 &read $1 &pad $5 &write $1 &error $1 ]
+|20 @Screen     [ &vector $2 &width $2 &height $2 &pad $2 &x $2 &y $2 &addr $2 &pixel $1 &sprite $1 ]
 |a0 @File       [ &vector $2 &success $2 &stat $2 &delete $1 &append $1 &name $2 &length $2 &read $2 &write $2 ]
 
 ( init )
 
 |0100 @program
-    ;hello-word
-    PRINT
-    HALT
+    ;filename .File/name DEO2
+    #2500 .File/length DEO2
+    ;filedata .File/read DEO2
+    .File/success DEI2 #0000 EQU2 ,&failure JCN
+
+    ;ok PRINT
+    ,&end JMP
+
+    &failure
+    ;error PRINT
+
+    &end
+    DUMP
 BRK
 
-@hello-word "Hello 20 "World! 00
-
 ~src/common.tal
+
+@filename "src/01.in 00
+@ok "ok 00
+@error "error_loading_file 00
+@filedata
