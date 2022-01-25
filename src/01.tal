@@ -7,27 +7,46 @@
 |20 @Screen     [ &vector $2 &width $2 &height $2 &pad $2 &x $2 &y $2 &addr $2 &pixel $1 &sprite $1 ]
 |a0 @File       [ &vector $2 &success $2 &stat $2 &delete $1 &append $1 &name $2 &length $2 &read $2 &write $2 ]
 
+( zero page )
+
+|0000
+@buffer &length $1 &data $ff
+
 ( init )
 
 |0100 @program
-    ;filename .File/name DEO2
-    #2500 .File/length DEO2
-    ;filedata .File/read DEO2
-    .File/success DEI2 #0000 EQU2 ,&failure JCN
-
-    ;ok PRINT
-    ,&end JMP
-
-    &failure
-    ;error PRINT
-
-    &end
-    DUMP
+    ;filename ,stream JSR
+    HALT
 BRK
+
+@stream ( addr* -- )
+    .File/name DEO2
+    #0001 .File/length DEO2
+
+    &loop
+    ;&char .File/read DEO2
+
+    ;&char LDA #0a NEQ ,&no-end JCN
+    #00 .buffer/length LDZ .buffer/data + STZ
+    ,on-line JSR
+    #00 .buffer/length STZ
+    ,&continue JMP
+
+    &no-end
+    ;&char LDA .buffer/length LDZ .buffer/data + STZ
+    .buffer/length LDZk INC SWP STZ
+
+    &continue
+    .File/success DEI2 #0000 NEQ2 ,&loop JCN
+RTN
+&char $1
+
+@on-line ( -- )
+    LIT ': EMIT
+    ;buffer ;print-str JSR2
+    #0a EMIT
+RTN
 
 ~src/common.tal
 
 @filename "src/01.in 00
-@ok "ok 00
-@error "error_loading_file 00
-@filedata

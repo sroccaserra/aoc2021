@@ -49,4 +49,4 @@ RTN
         INC2 LDAk ,&while JCN
     POP2
     ( res ) STH2r
-JMP2r
+RTN
