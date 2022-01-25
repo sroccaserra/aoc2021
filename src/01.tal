@@ -1,6 +1,6 @@
 ~src/macros.tal
 
-%HUGE { #ffff }
+%HUGE { #0fff }
 
 ( devices )
 
@@ -12,19 +12,23 @@
 ( zero page )
 
 |0000
-@previous $2
-@result $2
+@previous &1 $2 &2 $2 &3 $2
+@result &1 $2 &2 $2
 @buffer &length $1 &data $f
 
 ( init )
 
 |0100 @program
-    HUGE .previous STZ2
-    #0000 .result STZ2
+    HUGE .previous/1 STZ2
+    HUGE .previous/2 STZ2
+    HUGE .previous/3 STZ2
+    #0000 .result/1 STZ2
+    #0000 .result/2 STZ2
 
     ;filename ,stream JSR
 
-    .result LDZ2 ;print-dec JSR2 #0a EMIT
+    .result/1 LDZ2 ;print-dec JSR2 #0a EMIT
+    .result/2 LDZ2 ;print-dec JSR2 #0a EMIT
     HALT
 BRK
 
@@ -51,14 +55,30 @@ RTN
 &char $1
 
 @on-line ( -- )
-    .buffer/length LDZ #00 EQU ,&end JCN
-    .buffer/data ,to-hex-zp JSR
+    .buffer/length LDZ #00 EQU ;&end JCN2
+    .buffer/data ;to-hex-zp JSR2 ( n )
+
+    &part-one
     DUP2
-    .previous LDZ2
-    GTH2 #01 NEQ ,&no-depth+ JCN
-    .result LDZ2 INC2 .result STZ2
-    &no-depth+
-    .previous STZ2
+    .previous/1 LDZ2 ( n n previous/1 )
+    GTH2 #01 NEQ ,&part-two JCN
+    .result/1 LDZ2 INC2 .result/1 STZ2
+
+    &part-two
+    DUP2 ( n n )
+    .previous/1 LDZ2 ADD2
+    .previous/2 LDZ2 ADD2 ( n s1 )
+    #0000
+    .previous/1 LDZ2 ADD2
+    .previous/2 LDZ2 ADD2
+    .previous/3 LDZ2 ADD2 ( n s1 s2 )
+    GTH2 #01 NEQ ,&update-prevs JCN
+    .result/2 LDZ2 INC2 .result/2 STZ2
+
+    &update-prevs
+    .previous/2 LDZ2 .previous/3 STZ2
+    .previous/1 LDZ2 .previous/2 STZ2
+    ( n ) .previous/1 STZ2
     &end
 RTN
 
