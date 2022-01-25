@@ -165,6 +165,25 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 - Beware, if you want to update a count with -n `Map.insertWith (-)` will
   probably reverse the arguments. Use `flip (-)` or `(+) k (-n)`.
 
+### Uxn
+
+References:
+
+- <https://100r.co/site/uxn.html>
+- <https://wiki.xxiivv.com/site/uxntal.html>
+- <https://wiki.xxiivv.com/site/varvara.html>
+- <https://wiki.xxiivv.com/site/uxntal_reference.html>
+- <https://wiki.xxiivv.com/site/chr_format.html>
+- <https://compudanzas.net/uxn_tutorial.html>
+- <https://learnxinyminutes.com/docs/uxntal/>
+- <https://metasyn.github.io/learn-uxn/>
+- <https://github.com/hundredrabbits/awesome-uxn>
+- <https://mobile.twitter.com/hundredrabbits/status/1466454006906032131>
+
+Solutions:
+
+- <https://github.com/jonathanperret/aoc2021>
+- <https://git.sr.ht/~alderwick/>
 
 ## How to run
 
