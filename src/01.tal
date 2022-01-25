@@ -1,5 +1,7 @@
 ~src/macros.tal
 
+%HUGE { #ffff }
+
 ( devices )
 
 |00 @System     [ &vector $2 &wst $1 &rst $1 &pad $4 &r $2 &g $2 &b $2 &debug $1 &halt $1 ]
@@ -10,12 +12,19 @@
 ( zero page )
 
 |0000
+@previous $2
+@result $2
 @buffer &length $1 &data $f
 
 ( init )
 
 |0100 @program
+    HUGE .previous STZ2
+    #0000 .result STZ2
+
     ;filename ,stream JSR
+
+    .result LDZ2 ;print-dec JSR2 #0a EMIT
     HALT
 BRK
 
@@ -43,7 +52,13 @@ RTN
 
 @on-line ( -- )
     .buffer/length LDZ #00 EQU ,&end JCN
-    .buffer/data ,to-hex-zp JSR DEBUG2
+    .buffer/data ,to-hex-zp JSR
+    DUP2
+    .previous LDZ2
+    GTH2 #01 NEQ ,&no-depth+ JCN
+    .result LDZ2 INC2 .result STZ2
+    &no-depth+
+    .previous STZ2
     &end
 RTN
 
