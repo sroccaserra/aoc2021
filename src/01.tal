@@ -10,7 +10,7 @@
 ( zero page )
 
 |0000
-@buffer &length $1 &data $ff
+@buffer &length $1 &data $f
 
 ( init )
 
@@ -42,9 +42,17 @@ RTN
 &char $1
 
 @on-line ( -- )
-    LIT ': EMIT
-    ;buffer ;print-str JSR2
-    #0a EMIT
+    .buffer/length LDZ #00 EQU ,&end JCN
+
+    .buffer/data
+    ( res ) LIT2r 0000
+    &while
+    LDZk #30 - #00 SWP
+    STH2r #000a ** ++ STH2
+    INC LDZk ,&while JCN
+    POP
+    ( res ) STH2r DEBUG2
+    &end
 RTN
 
 ~src/common.tal
