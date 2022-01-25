@@ -43,16 +43,18 @@ RTN
 
 @on-line ( -- )
     .buffer/length LDZ #00 EQU ,&end JCN
+    .buffer/data ,to-hex-zp JSR DEBUG2
+    &end
+RTN
 
-    .buffer/data
+@to-hex-zp ( addr-zp -- hex )
     ( res ) LIT2r 0000
     &while
     LDZk #30 - #00 SWP
     STH2r #000a ** ++ STH2
     INC LDZk ,&while JCN
     POP
-    ( res ) STH2r DEBUG2
-    &end
+    ( res ) STH2r
 RTN
 
 ~src/common.tal
