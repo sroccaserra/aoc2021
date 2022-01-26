@@ -11,6 +11,8 @@ See also:
 
 ### Algorithms
 
+- General problem solving: How to Solve It (book) ~ <https://en.wikipedia.org/wiki/How_to_Solve_It>
+
 - Heaps & Priority Queues
     - Introduction to Algorithms, Third Edition, 6.1, p. 151
     - Algorithm Design, 2.5, p. 57
