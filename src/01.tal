@@ -58,24 +58,19 @@ RTN
     .buffer/length LDZ #00 EQU ;&end JCN2
     .buffer/data ;to-hex-zp JSR2 ( n )
 
-    &part-one
+    ( part-one )
     DUP2
     .previous/1 LDZ2 ( n n previous/1 )
-    GTH2 #01 NEQ ,&part-two JCN
-    .result/1 LDZ2 INC2 .result/1 STZ2
+    GTH2 #00 SWP ( #0000 or #0001 )
+    .result/1 LDZ2 ADD2 .result/1 STZ2
 
-    &part-two
-    DUP2 ( n n )
-    .previous/1 LDZ2 ADD2
-    .previous/2 LDZ2 ADD2 ( n s1 )
-    #0000
-    .previous/1 LDZ2 ADD2
-    .previous/2 LDZ2 ADD2
-    .previous/3 LDZ2 ADD2 ( n s1 s2 )
-    GTH2 #01 NEQ ,&update-prevs JCN
-    .result/2 LDZ2 INC2 .result/2 STZ2
+    ( part-two )
+    DUP2
+    .previous/3 LDZ2 ( no need to sum, compare n & p3 )
+    GTH2 #00 SWP
+    .result/2 LDZ2 ADD2 .result/2 STZ2
 
-    &update-prevs
+    ( update prevs )
     .previous/2 LDZ2 .previous/3 STZ2
     .previous/1 LDZ2 .previous/2 STZ2
     ( n ) .previous/1 STZ2
