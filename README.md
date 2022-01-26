@@ -169,6 +169,9 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 
 ### Uxn
 
+- Use `STH` and `STHr` to move values to and from the return stack
+- Use `LITr` to push values like `#00` to the return stack
+
 References:
 
 - <https://100r.co/site/uxn.html>
