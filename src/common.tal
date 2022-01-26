@@ -23,6 +23,14 @@ RTN
     POP2
 RTN
 
+@print-str-zp ( string* -- )
+    #01 SUB
+    &while
+        INC LDZk DUP #18 DEO ,&while JCN
+    POP
+    #0a #18 DEO
+RTN
+
 @print-zeropage ( -- )
     #0a #18 DEO
     #0000
