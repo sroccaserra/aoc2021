@@ -58,3 +58,16 @@ RTN
     POP2
     ( res ) STH2r
 RTN
+
+( See: https://github.com/jonathanperret/aoc2021/blob/main/library/string.tal )
+
+( -- s* )
+@inline-str
+    STH2r ( s* )
+    DUP2 ( s* s'* )
+    &loop
+        LDAk ( s* s'* b )
+        STH INC2 STHr ( s* s'*+1 b )
+        #00 NEQ ,&loop JCN
+    ( s* s'* )
+JMP2

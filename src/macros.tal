@@ -1,3 +1,7 @@
+( Flow )
+
+%RTN { JMP2r }
+
 ( Shorthands for logic and arithmetic opcodes )
 
 %+  { ADD }  %-  { SUB }  %*  { MUL }  %/  { DIV }
@@ -5,12 +9,19 @@
 %++ { ADD2 } %-- { SUB2 } %** { MUL2 } %// { DIV2 }
 %<< { LTH2 } %>> { GTH2 } %== { EQU2 } %!! { NEQ2 }
 
-( Debugger )
+( Print & Debug )
 
-%RTN { JMP2r }
+%\n { #0a }
+%EMIT { .Console/write DEO }
+%LF { \n EMIT }
+%PRINT { ;print-str JSR2 LF }
+
 %HALT { #01 .System/halt DEO }
 %DUMP { #0101 .System/debug DEO2 }
-%EMIT { .Console/write DEO }
-%PRINT { ;print-str JSR2 #0a EMIT }
-%DEBUG { ;print-hex/byte JSR2 #0a EMIT }
-%DEBUG2 { ;print-hex JSR2 #0a EMIT }
+%DEBUG { ;print-hex/byte JSR2 LF }
+%DEBUG2 { ;print-hex JSR2 LF }
+
+( See: https://github.com/jonathanperret/aoc2021/blob/main/library/string.tal )
+
+%S< { ;inline-str JSR2 } %>S { 00 }
+%P< { S< }               %>P { >S ;print-str JSR2 }

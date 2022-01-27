@@ -27,8 +27,8 @@
 
     ;filename ,stream JSR
 
-    .result/1 LDZ2 ;print-dec JSR2 #0a EMIT
-    .result/2 LDZ2 ;print-dec JSR2 #0a EMIT
+    .result/1 LDZ2 ;print-dec JSR2 LF
+    .result/2 LDZ2 ;print-dec JSR2 LF
     HALT
 BRK
 
@@ -39,7 +39,7 @@ BRK
     &loop
     ;&char .File/read DEO2
 
-    ,&char LDR #0a NEQ ,&no-end JCN
+    ,&char LDR \n NEQ ,&no-end JCN
     #00 .buffer/length LDZ .buffer/data + STZ
     ,on-line JSR
     #00 .buffer/length STZ
