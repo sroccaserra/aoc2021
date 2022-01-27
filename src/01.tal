@@ -12,9 +12,9 @@
 ( zero page )
 
 |00
-@previous &1 $2 &2 $2 &3 $2
-@result &1 $2 &2 $2
-@buffer &length $1 &data $f
+@previous [ &1 $2 &2 $2 &3 $2 ]
+@result   [ &1 $2 &2 $2 ]
+@buffer   [ &length $1 &data $f ]
 
 ( program )
 
