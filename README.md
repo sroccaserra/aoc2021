@@ -179,11 +179,16 @@ References:
 - <https://wiki.xxiivv.com/site/varvara.html>
 - <https://wiki.xxiivv.com/site/uxntal_reference.html>
 - <https://wiki.xxiivv.com/site/chr_format.html>
+
+Resources:
+
 - <https://compudanzas.net/uxn_tutorial.html>
 - <https://learnxinyminutes.com/docs/uxntal/>
 - <https://metasyn.github.io/learn-uxn/>
 - <https://github.com/hundredrabbits/awesome-uxn>
 - <https://mobile.twitter.com/hundredrabbits/status/1466454006906032131>
+- <https://llllllll.co/t/uxn-virtual-computer/46103>
+- Mini-gmp port for uxn virtual computer ~ <https://code.mathr.co.uk/ugmp>
 
 Solutions:
 
