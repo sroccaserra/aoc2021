@@ -169,6 +169,7 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 
 ### Uxn
 
+- Take great care with relative addresses. `#00 ,&a STR` works but `,&a #00 SWP STR` doesn't, because in the second case the relative address is measured from the wrong point.
 - Use `STH` and `STHr` to move values to and from the return stack
 - Use `LITr` to push values like `#00` to the return stack
 
