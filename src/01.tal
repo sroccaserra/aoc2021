@@ -11,14 +11,14 @@
 
 ( zero page )
 
-|0000
+|00
 @previous &1 $2 &2 $2 &3 $2
 @result &1 $2 &2 $2
 @buffer &length $1 &data $f
 
-( init )
+( program )
 
-|0100 @program
+|0100
     HUGE .previous/1 STZ2
     HUGE .previous/2 STZ2
     HUGE .previous/3 STZ2
@@ -39,14 +39,14 @@ BRK
     &loop
     ;&char .File/read DEO2
 
-    ;&char LDA #0a NEQ ,&no-end JCN
+    ,&char LDR #0a NEQ ,&no-end JCN
     #00 .buffer/length LDZ .buffer/data + STZ
     ,on-line JSR
     #00 .buffer/length STZ
     ,&continue JMP
 
     &no-end
-    ;&char LDA .buffer/length LDZ .buffer/data + STZ
+    ,&char LDR .buffer/length LDZ .buffer/data + STZ
     .buffer/length LDZk INC SWP STZ
 
     &continue
@@ -55,7 +55,7 @@ RTN
 &char $1
 
 @on-line ( -- )
-    .buffer/length LDZ #00 EQU ;&end JCN2
+    .buffer/length LDZ #00 EQU ,&end JCN
     .buffer/data ;to-hex-zp JSR2 ( n )
 
     ( part-one )
