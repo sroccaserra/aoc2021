@@ -13,17 +13,17 @@
 ( zero page )
 
 |00
-@result $2
 @buffer [ &length $1 &data $f ]
+@state  [ &hpos $2 &depth $2 ]
 
 ( init )
 
 |0100 @program
-    #0000 .result STZ2
+    #0000 .state/hpos STZ2
 
     ;filename ,stream JSR
 
-    .result LDZ2 ;print-dec JSR2 LF
+    .state/hpos LDZ2 ;print-dec JSR2 LF
     HALT
 BRK
 
@@ -57,10 +57,17 @@ RTN
         n'incrémenter la position horizontale que pour les commandes f
     )
 
-    #00 .buffer/data .buffer/length LDZ + #01 - LDZ ( dernier charactère ascii sur la pile )
-    #30 - ( valeur de la commande )
+    [ .buffer/data ] [ .buffer/length LDZ #01 - ] + LDZ
+    #30 - #00 SWP ( value* )
+    .buffer/data LDZ ( command^ )
+    LIT 'f EQU ,&forward JCN
+    P< "unknown #20 "command \n >P
+    POP2
+    ,&end JMP
 
-    .result LDZ2 ++ .result STZ2
+    &forward
+    .state/hpos LDZ2 ++ .state/hpos STZ2
+
     &end
 RTN
 
