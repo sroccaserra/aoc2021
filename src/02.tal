@@ -20,10 +20,13 @@
 
 |0100 @program
     #0000 .state/hpos STZ2
+    #0000 .state/depth STZ2
 
     ;filename ,stream JSR
 
-    .state/hpos LDZ2 ;print-dec JSR2 LF
+    ( 2162 1051 2272262 )
+    P< "hpos: #20 >P .state/hpos LDZ2 ;print-dec JSR2 LF
+    P< "depth: #20 >P .state/depth LDZ2 ;print-dec JSR2 LF
     HALT
 BRK
 
@@ -52,21 +55,28 @@ RTN
 @on-line ( -- )
     .buffer/length LDZ #00 EQU ;&end JCN2
 
-    ( plan :
-        avoir une position horizontale, et l'incrémenter à chaque commande
-        n'incrémenter la position horizontale que pour les commandes f
-    )
-
     [ .buffer/data ] [ .buffer/length LDZ #01 - ] + LDZ
     #30 - #00 SWP ( value* )
-    .buffer/data LDZ ( command^ )
-    LIT 'f EQU ,&forward JCN
-    P< "unknown #20 "command \n >P
-    POP2
+
+    .buffer/data LDZ ( value* command^ )
+    DUP LIT 'f EQU ,&forward JCN
+    DUP LIT 'u EQU ,&up JCN
+    DUP LIT 'd EQU ,&down JCN
+
+    P< "unknown #20 "command #20 >P ( command^ ) EMIT LF
+    HALT
+    BRK
+
+    &forward POP
+    .state/hpos LDZ2 ++ .state/hpos STZ2
     ,&end JMP
 
-    &forward
-    .state/hpos LDZ2 ++ .state/hpos STZ2
+    &up POP
+    .state/depth LDZ2 SWP2 -- .state/depth STZ2
+    ,&end JMP
+
+    &down POP
+    .state/depth LDZ2 ++ .state/depth STZ2
 
     &end
 RTN
