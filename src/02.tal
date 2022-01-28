@@ -33,16 +33,16 @@ BRK
 
     &loop
     ;&char .File/read DEO2
+    ;&char LDA EOL? ,&eol JCN
 
-    ;&char LDA \n NEQ ,&no-end JCN
+    ;&char LDA .buffer/length LDZ .buffer/data + STZ
+    .buffer/length LDZk INC SWP STZ
+    ,&continue JMP
+
+    &eol
     #00 .buffer/length LDZ .buffer/data + STZ
     ,on-line JSR
     #00 .buffer/length STZ
-    ,&continue JMP
-
-    &no-end
-    ;&char LDA .buffer/length LDZ .buffer/data + STZ
-    .buffer/length LDZk INC SWP STZ
 
     &continue
     .File/success DEI2 #0000 NEQ2 ,&loop JCN

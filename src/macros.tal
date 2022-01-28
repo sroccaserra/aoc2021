@@ -9,6 +9,10 @@
 %++ { ADD2 } %-- { SUB2 } %** { MUL2 } %// { DIV2 }
 %<< { LTH2 } %>> { GTH2 } %== { EQU2 } %!! { NEQ2 }
 
+( Parse )
+
+%EOL? { \n EQU }
+
 ( Print & Debug )
 
 %\n { #0a }
