@@ -13,6 +13,10 @@ $(BUILD):
 %: $(BUILD)/%.rom
 	uxncli $<
 
+.PRECIOUS: $(BUILD)/%.rom
+%w: $(BUILD)/%.rom
+	uxnemu $<
+
 .PHONY: clean
 clean:
 	rm -rf build/*
