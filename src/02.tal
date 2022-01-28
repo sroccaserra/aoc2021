@@ -7,13 +7,14 @@
 |00 @System     [ &vector $2 &wst $1 &rst $1 &pad $4 &r $2 &g $2 &b $2 &debug $1 &halt $1 ]
 |10 @Console    [ &vector $2 &read $1 &pad $5 &write $1 &error $1 ]
 |20 @Screen     [ &vector $2 &width $2 &height $2 &pad $2 &x $2 &y $2 &addr $2 &pixel $1 &sprite $1 ]
+|80 @Controller [ &vector $2 &button $1 &key $1 ]
 |a0 @File       [ &vector $2 &success $2 &stat $2 &delete $1 &append $1 &name $2 &length $2 &read $2 &write $2 ]
 
 ( zero page )
 
-|0000
+|00
 @result $2
-@buffer &length $1 &data $f
+@buffer [ &length $1 &data $f ]
 
 ( init )
 
@@ -22,7 +23,7 @@
 
     ;filename ,stream JSR
 
-    .result LDZ2 ;print-dec JSR2 #0a EMIT
+    .result LDZ2 ;print-dec JSR2 LF
     HALT
 BRK
 
@@ -33,7 +34,7 @@ BRK
     &loop
     ;&char .File/read DEO2
 
-    ;&char LDA #0a NEQ ,&no-end JCN
+    ;&char LDA \n NEQ ,&no-end JCN
     #00 .buffer/length LDZ .buffer/data + STZ
     ,on-line JSR
     #00 .buffer/length STZ
@@ -50,7 +51,16 @@ RTN
 
 @on-line ( -- )
     .buffer/length LDZ #00 EQU ;&end JCN2
-    .buffer/data ;print-str-zp JSR2
+
+    ( plan :
+        avoir une position horizontale, et l'incrémenter à chaque commande
+        n'incrémenter la position horizontale que pour les commandes f
+    )
+
+    #00 .buffer/data .buffer/length LDZ + #01 - LDZ ( dernier charactère ascii sur la pile )
+    #30 - ( valeur de la commande )
+
+    .result LDZ2 ++ .result STZ2
     &end
 RTN
 

@@ -26,9 +26,9 @@ RTN
 @print-str-zp ( string* -- )
     #01 SUB
     &while
-        INC LDZk DUP #18 DEO ,&while JCN
+        INC LDZk DUP .Console/write DEO ,&while JCN
     POP
-    #0a #18 DEO
+    \n .Console/write DEO
 RTN
 
 @print-zeropage ( -- )
