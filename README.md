@@ -196,6 +196,14 @@ Solutions:
 - <https://github.com/jonathanperret/aoc2021>
 - <https://git.sr.ht/~alderwick/>
 
+8 bit references:
+
+- <http://6502.org/source/integers/hex2dec.htm>
+- <https://codebase64.org/doku.php?id=base:another_hexadecimal_to_decimal_conversion>
+- <http://6502.org/source/integers/32muldiv.htm?utm_source=pocket_mylist>
+- <https://codebase64.org/doku.php?id=base:6502_6510_maths>
+- <https://devblogs.microsoft.com/oldnewthing/20141208-00/?p=43453>
+
 ## How to run
 
 To run Python solutions:

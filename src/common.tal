@@ -71,3 +71,35 @@ RTN
         #00 NEQ ,&loop JCN
     ( s* s'* )
 JMP2
+
+( 16 bit + Arithmetics )
+
+( would be simpler as a macro: no need to ROTr ROTr )
+@adc16 ( a* b* -- sum* ) ( -- carry^ )
+    OVR2 ADD2 GTH2k STH NIP2 ROTr ROTr
+RTN
+
+@mul16 ( a* b* -- prod** )
+    ,&rhs_h STR2 ,&lhs_h STR2
+    #00 ,&lhs_h LDR #00 ,&rhs_l LDR MUL2
+    #00 ,&lhs_l LDR #00 ,&rhs_h LDR MUL2
+    ;adc16 JSR2
+    #00 ,&lhs_h LDR #00 ,&rhs_h LDR MUL2
+    #00 STHr ADD2
+    #00 ,&lhs_l LDR #00 ,&rhs_l LDR MUL2
+    ,&res_4 STR
+
+    ROT STH ADD2
+    ,&res_3 STR
+    ,&res_2 STR
+    STHr
+    ,&res_1 STR
+
+    LIT &res_1 00
+    LIT &res_2 00
+    LIT &res_3 00
+    LIT &res_4 00
+RTN
+&lhs_h $1 &lhs_l $1
+&rhs_h $1 &rhs_l $1
+

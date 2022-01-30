@@ -1,7 +1,5 @@
 ~src/macros.tal
 
-%HUGE { #0fff }
-
 ( devices )
 
 |00 @System     [ &vector $2 &wst $1 &rst $1 &pad $4 &r $2 &g $2 &b $2 &debug $1 &halt $1 ]
@@ -27,6 +25,10 @@
     ( 2162 1051 2272262 )
     P< "hpos: #20 >P .state/hpos LDZ2 ;print-dec JSR2 LF
     P< "depth: #20 >P .state/depth LDZ2 ;print-dec JSR2 LF
+    .state/hpos LDZ2
+    .state/depth LDZ2
+    ;mul16 JSR2
+    DUMP
     HALT
 BRK
 
