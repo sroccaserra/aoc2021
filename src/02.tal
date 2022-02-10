@@ -94,5 +94,6 @@ RTN
 RTN
 
 ~src/common.tal
+~lib/math32.tal
 
 @filename "src/02.in 00

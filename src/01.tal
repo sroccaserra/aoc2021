@@ -87,6 +87,7 @@ RTN
     ( res ) STH2r
 RTN
 
+~lib/math32.tal
 ~src/common.tal
 
 @filename "src/01.in 00
