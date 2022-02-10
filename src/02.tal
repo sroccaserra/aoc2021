@@ -12,19 +12,28 @@
 
 |00
 @buffer [ &length $1 &data $f ]
-@state  [ &hpos $2 &depth $2 ]
+@state  [ &hpos-1 $2 &depth-1 $2 ] [ &hpos-2 $2 &depth-2 $4 &aim $2 ]
 
 ( init )
 
 |0100 @program
-    #0000 .state/hpos STZ2
-    #0000 .state/depth STZ2
+    #0000 .state/hpos-1 STZ2
+    #0000 .state/depth-1 STZ2
+
+    #0000 .state/hpos-2 STZ2
+    #0000 #0000 .state/depth-2 STZ4
+    #0000 .state/aim STZ2
 
     ;filename ;stream JSR2
 
-    .state/hpos LDZ2
-    .state/depth LDZ2
+    .state/hpos-1 LDZ2
+    .state/depth-1 LDZ2
     ;mul16 JSR2
+    ;print-dec-32 JSR2 LF
+
+    #0000 .state/hpos-2 LDZ2
+    .state/depth-2 LDZ4
+    ;mul32 JSR2
     ;print-dec-32 JSR2 LF
 
     HALT
@@ -68,15 +77,23 @@ RTN
     BRK
 
     &forward POP
-    .state/hpos LDZ2 ++ .state/hpos STZ2
+    DUP2
+    .state/hpos-1 LDZ2 ++ .state/hpos-1 STZ2
+    DUP2
+    .state/hpos-2 LDZ2 ++ .state/hpos-2 STZ2
+    .state/aim LDZ2 ;mul16 JSR2 .state/depth-2 LDZ4 ;add32 JSR2 .state/depth-2 STZ4
     ,&end JMP
 
     &up POP
-    .state/depth LDZ2 SWP2 -- .state/depth STZ2
+    DUP2
+    .state/depth-1 LDZ2 SWP2 -- .state/depth-1 STZ2
+    .state/aim LDZ2 SWP2 -- .state/aim STZ2
     ,&end JMP
 
     &down POP
-    .state/depth LDZ2 ++ .state/depth STZ2
+    DUP2
+    .state/depth-1 LDZ2 ++ .state/depth-1 STZ2
+    .state/aim LDZ2 ++ .state/aim STZ2
 
     &end
 RTN

@@ -24,6 +24,9 @@
 %10E8_u32 { #05f5 #e100 }
 %10E9_u32 { #3b9a #ca00 }
 
+%LDZ4 { DUP LDZ2 ROT #02 + LDZ2 }
+%STZ4 { DUP STH #02 + STZ2 STHr STZ2 }
+
 ( Parse )
 
 %EOL? { \n EQU }
