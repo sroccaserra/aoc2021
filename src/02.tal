@@ -20,15 +20,16 @@
     #0000 .state/hpos STZ2
     #0000 .state/depth STZ2
 
-    ;filename ,stream JSR
+    ;filename ;stream JSR2
 
-    ( 2162 1051 2272262 )
     P< "hpos: #20 >P .state/hpos LDZ2 ;print-dec JSR2 LF
     P< "depth: #20 >P .state/depth LDZ2 ;print-dec JSR2 LF
+
     .state/hpos LDZ2
     .state/depth LDZ2
     ;mul16 JSR2
-    DUMP
+    ;print-dec-32 JSR2 LF
+
     HALT
 BRK
 
@@ -46,7 +47,7 @@ BRK
 
     &eol
     #00 .buffer/length LDZ .buffer/data + STZ
-    ,on-line JSR
+    ;on-line JSR2
     #00 .buffer/length STZ
 
     &continue
@@ -93,7 +94,7 @@ RTN
     ( res ) STH2r
 RTN
 
-~src/common.tal
 ~lib/math32.tal
+~src/common.tal
 
 @filename "src/02.in 00
