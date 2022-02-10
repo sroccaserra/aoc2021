@@ -19,7 +19,7 @@ getDayRawInput :: Int -> IO String
 getDayRawInput day = do
   args <- getArgs
   case args of
-       [] -> readFile (printf "src/%02d.txt" day)
+       [] -> readFile (printf "src/%02d.in" day)
        "-":_ -> getContents
        fileName:_ -> readFile fileName
 
