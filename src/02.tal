@@ -22,9 +22,6 @@
 
     ;filename ;stream JSR2
 
-    P< "hpos: #20 >P .state/hpos LDZ2 ;print-dec JSR2 LF
-    P< "depth: #20 >P .state/depth LDZ2 ;print-dec JSR2 LF
-
     .state/hpos LDZ2
     .state/depth LDZ2
     ;mul16 JSR2
@@ -82,16 +79,6 @@ RTN
     .state/depth LDZ2 ++ .state/depth STZ2
 
     &end
-RTN
-
-@to-hex-zp ( addr-zp -- hex )
-    ( res ) LIT2r 0000
-    &while
-    LDZk #30 - #00 SWP
-    STH2r #000a ** ++ STH2
-    INC LDZk ,&while JCN
-    POP
-    ( res ) STH2r
 RTN
 
 ~lib/math32.tal
