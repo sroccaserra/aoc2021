@@ -242,7 +242,7 @@ To run uxn solutions
 $ make 01
 ```
 
-To run Elixir solution
+To run Elixir solutions
 
 ```
 $ elixir src/01.exs <src/01.in
