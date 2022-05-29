@@ -23,7 +23,7 @@ end
 
 numbers = read(:stdio, :all)
           |> split("\n", trim: true)
-          |> map(&(to_integer(&1)))
+          |> map(&to_integer/1)
 
 puts Day01.part_1(numbers)
 puts Day01.part_2(numbers)
