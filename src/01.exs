@@ -13,7 +13,7 @@ defmodule Day01 do
     |> part_1
   end
 
-  def sum_by_3(numbers) do
+  defp sum_by_3(numbers) do
     case numbers do
       [x, y, z | rest] -> [x+y+z] ++ sum_by_3([y, z | rest])
       _ -> []
