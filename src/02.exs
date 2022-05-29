@@ -5,17 +5,33 @@ import String, only: [split: 3, to_atom: 1, to_integer: 1]
 defmodule Day01 do
   def part_1(commands) do
     start = %{hpos: 0, depth: 0}
-    %{hpos: hpos, depth: depth} = reduce(commands, start, &apply_command/2)
+    %{hpos: hpos, depth: depth} = reduce(commands, start, &apply_command_1/2)
     hpos * depth
   end
 
-  defp apply_command(command, aState) do
+  def part_2(commands) do
+    start = %{hpos: 0, depth: 0, aim: 0}
+    %{hpos: hpos, depth: depth} = reduce(commands, start, &apply_command_2/2)
+    hpos * depth
+  end
+
+  defp apply_command_1(command, aState) do
     %{hpos: hpos, depth: depth} = aState
 
     case command do
-      [:forward, val] -> %{aState | hpos: hpos + val}
-      [:down, val] -> %{aState | depth: depth + val}
-      [:up, val] -> %{aState | depth: depth - val}
+      [:forward, x] -> %{aState | hpos: hpos + x}
+      [:down, x] -> %{aState | depth: depth + x}
+      [:up, x] -> %{aState | depth: depth - x}
+    end
+  end
+
+  defp apply_command_2(command, aState) do
+    %{hpos: hpos, depth: depth, aim: aim} = aState
+
+    case command do
+      [:forward, x] -> %{aState | hpos: hpos + x, depth: depth + aim * x}
+      [:down, x] -> %{aState | aim: aim + x}
+      [:up, x] -> %{aState | aim: aim - x}
     end
   end
 end
@@ -27,3 +43,4 @@ commands =
   |> map(fn [dir, val] -> [to_atom(dir), to_integer(val)] end)
 
 puts Day01.part_1(commands)
+puts Day01.part_2(commands)
