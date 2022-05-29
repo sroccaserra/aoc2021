@@ -236,10 +236,16 @@ To run Scheme solutions:
 $ scheme --libdirs src --script src/01.{ss,in}
 ```
 
-To run uxn solution(s)
+To run uxn solutions
 
 ```
 $ make 01
+```
+
+To run Elixir solution
+
+```
+$ elixir src/01.exs <src/01.in
 ```
 
 ## How it started
