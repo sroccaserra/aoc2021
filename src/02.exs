@@ -5,14 +5,14 @@ import String, only: [split: 3, to_atom: 1, to_integer: 1]
 defmodule Day01 do
   def part_1(commands) do
     start = %{hpos: 0, depth: 0}
-    %{hpos: hpos, depth: depth} = reduce(commands, start, &apply_command_1/2)
-    hpos * depth
+    stop = reduce(commands, start, &apply_command_1/2)
+    stop.hpos * stop.depth
   end
 
   def part_2(commands) do
     start = %{hpos: 0, depth: 0, aim: 0}
-    %{hpos: hpos, depth: depth} = reduce(commands, start, &apply_command_2/2)
-    hpos * depth
+    stop = reduce(commands, start, &apply_command_2/2)
+    stop.hpos * stop.depth
   end
 
   defp apply_command_1(command, aState) do
