@@ -220,6 +220,10 @@ Solutions:
 
 - <https://github.com/alexchao26/advent-of-code-go>
 
+Tools:
+
+- gopls ~ <https://pkg.go.dev/golang.org/x/tools/gopls>
+
 ## How to run
 
 To run Python solutions:
