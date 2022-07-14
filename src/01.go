@@ -3,7 +3,6 @@ package main
 import (
     "fmt"
     "math"
-    "strconv"
     "aoc2021/src/common"
 )
 
@@ -20,11 +19,6 @@ func solve(numbers []int) int {
 }
 
 func main() {
-    lines := common.GetInputLines()
-    var numbers []int
-    for _, line := range lines {
-        n, _ := strconv.Atoi(line)
-        numbers = append(numbers, n)
-    }
+    numbers := common.GetInputInts()
     fmt.Println(solve(numbers))
 }
