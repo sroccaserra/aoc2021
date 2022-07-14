@@ -248,6 +248,12 @@ To run Elixir solutions
 $ elixir src/01.exs <src/01.in
 ```
 
+To run Go solutions
+
+```
+$ go run src/01.{go,in}
+```
+
 ## How it started
 
 ```shell
