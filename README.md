@@ -216,6 +216,10 @@ References:
 - Go Modules Reference ~ <https://go.dev/ref/mod>
 - Standard Library ~ <https://pkg.go.dev/std>
 
+Solutions:
+
+- <https://github.com/alexchao26/advent-of-code-go>
+
 ## How to run
 
 To run Python solutions:
