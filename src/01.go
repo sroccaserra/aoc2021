@@ -21,15 +21,15 @@ func solve_1(numbers []int) int {
 }
 
 func solve_2(numbers []int) int {
-  var p1, p2, p3 = huge, huge, huge
-  result := 0
-  for _, n := range numbers {
-      if n + p1 + p2 > p1 + p2 + p3 {
-          result += 1
-      }
-      p1, p2, p3 = n, p1, p2
-  }
-  return result
+    var p1, p2, p3 = huge, huge, huge
+    result := 0
+    for _, n := range numbers {
+        if n+p1+p2 > p1+p2+p3 {
+            result += 1
+        }
+        p1, p2, p3 = n, p1, p2
+    }
+    return result
 }
 
 func main() {
