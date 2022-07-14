@@ -2,12 +2,13 @@ package main
 
 import (
     "fmt"
-    "math"
     "aoc2021/src/common"
 )
 
-func solve(numbers []int) int {
-    previous := math.MaxInt
+const huge = 9999999999
+
+func solve_1(numbers []int) int {
+    previous := huge
     result := 0
     for _, n := range numbers {
         if n > previous {
@@ -18,7 +19,20 @@ func solve(numbers []int) int {
     return result
 }
 
+func solve_2(numbers []int) int {
+  var p1, p2, p3 = huge, huge, huge
+  result := 0
+  for _, n := range numbers {
+      if n + p1 + p2 > p1 + p2 + p3 {
+          result += 1
+      }
+      p1, p2, p3 = n, p1, p2
+  }
+  return result
+}
+
 func main() {
     numbers := common.GetInputInts()
-    fmt.Println(solve(numbers))
+    fmt.Println(solve_1(numbers))
+    fmt.Println(solve_2(numbers))
 }
