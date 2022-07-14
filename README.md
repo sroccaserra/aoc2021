@@ -204,6 +204,18 @@ Solutions:
 - <https://codebase64.org/doku.php?id=base:6502_6510_maths>
 - <https://devblogs.microsoft.com/oldnewthing/20141208-00/?p=43453>
 
+### Go
+
+References:
+
+- Documentation ~ <https://go.dev/doc/>
+- A Tour of Go ~ <https://go.dev/tour/list>
+- Using Go Modules ~ <https://go.dev/blog/using-go-modules>
+- How to Write Go Code ~ <https://go.dev/doc/code>
+- The Go Programming Language Specification ~ <https://go.dev/ref/spec>
+- Go Modules Reference ~ <https://go.dev/ref/mod>
+- Standard Library ~ <https://pkg.go.dev/std>
+
 ## How to run
 
 To run Python solutions:
