@@ -1,25 +1,11 @@
 package main
 
 import (
-    "bufio"
     "fmt"
     "math"
-    "os"
     "strconv"
+    "aoc2021/src/common"
 )
-
-func main() {
-    // scanner := bufio.NewScanner(os.Stdin)
-    // fmt.Println(os.Args)
-    reader, _ := os.Open("src/01.in")
-    scanner := bufio.NewScanner(reader)
-    var numbers []int
-    for scanner.Scan() {
-        n, _ := strconv.Atoi(scanner.Text())
-        numbers = append(numbers, n)
-    }
-    fmt.Println(solve(numbers))
-}
 
 func solve(numbers []int) int {
     previous := math.MaxInt
@@ -31,4 +17,14 @@ func solve(numbers []int) int {
         previous = n
     }
     return result
+}
+
+func main() {
+    lines := common.GetInputLines()
+    var numbers []int
+    for _, line := range lines {
+        n, _ := strconv.Atoi(line)
+        numbers = append(numbers, n)
+    }
+    fmt.Println(solve(numbers))
 }
