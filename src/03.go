@@ -11,15 +11,7 @@ func solve_03_1(lines []string) int {
 	powOfTwo := 1 << (nbBits - 1)
 	var gamma, epsilon int
 	for i := 0; i < nbBits; i++ {
-		var nbOnes, nbZeros int
-		for _, line := range lines {
-			if line[i] == '0' {
-				nbZeros++
-			} else {
-				nbOnes++
-			}
-		}
-		if nbOnes > nbZeros {
+		if hasMoreOnes(i, lines) {
 			gamma += powOfTwo
 		} else {
 			epsilon += powOfTwo
@@ -27,6 +19,18 @@ func solve_03_1(lines []string) int {
 		powOfTwo >>= 1
 	}
 	return gamma * epsilon
+}
+
+func hasMoreOnes(i int, lines []string) bool {
+	var nbOnes, nbZeros int
+	for _, line := range lines {
+		if line[i] == '0' {
+			nbZeros++
+		} else {
+			nbOnes++
+		}
+	}
+	return nbOnes > nbZeros
 }
 
 func main() {
