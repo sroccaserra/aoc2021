@@ -29,28 +29,16 @@ func mark(n int, grid grid) {
 	for _, row := range grid {
 		for j, val := range row {
 			if val == n {
-				row[j] = marked(val)
+				row[j] = marked
 			}
 		}
 	}
 }
 
-func reset(grid grid) {
-	for _, row := range grid {
-		for j, val := range row {
-			if isMarked(val) {
-				row[j] = marked(val)
-			}
-		}
-	}
-}
-
-func marked(n int) int {
-	return -(n + 1)
-}
+const marked = -1
 
 func isMarked(n int) bool {
-	return n < 0
+	return n == marked
 }
 
 func hasWon(grid grid) bool {
@@ -59,7 +47,7 @@ func hasWon(grid grid) bool {
 			return true
 		}
 	}
-	for j := 0; j < len(grid[0]); j++ {
+	for j := range grid[0] {
 		var col []int
 		for _, row := range grid {
 			col = append(col, row[j])
@@ -92,8 +80,41 @@ func all[T any](pred func(T) bool, values []T) bool {
 	return true
 }
 
+func solve_04_2(order order, grids []grid) int {
+	var lastN int
+	var lastGrid grid
+	winningGrids := make(map[int]bool, len(grids))
+	for _, n := range order {
+		for k, grid := range grids {
+			if winningGrids[k] {
+				continue
+			}
+			mark(n, grid)
+			if hasWon(grid) {
+				lastN = n
+				lastGrid = grid
+				winningGrids[k] = true
+			}
+		}
+	}
+	return lastN * sumUnmarked(lastGrid)
+}
+
 type grid [][]int
 type order []int
+
+func copyGrids(grids []grid) []grid {
+	result := make([]grid, len(grids))
+	for k, srcGrid := range grids {
+		result[k] = make(grid, len(srcGrid))
+		dstGrid := result[k]
+		for i, row := range srcGrid {
+			dstGrid[i] = make([]int, len(row))
+			copy(dstGrid[i], srcGrid[i])
+		}
+	}
+	return result
+}
 
 func parse_04(lines []string) (order, []grid) {
 	order := common.SplitToInts(",", lines[0])
@@ -118,5 +139,6 @@ func parse_04(lines []string) (order, []grid) {
 func main() {
 	lines := common.GetInputLines()
 	order, grids := parse_04(lines)
-	fmt.Println(solve_04_1(order, grids))
+	fmt.Println(solve_04_1(order, copyGrids(grids)))
+	fmt.Println(solve_04_2(order, copyGrids(grids)))
 }
