@@ -8,7 +8,7 @@ import (
 
 const huge = 9999999999
 
-func solve_1(numbers []int) int {
+func solve_01_1(numbers []int) int {
 	previous := huge
 	result := 0
 	for _, n := range numbers {
@@ -20,7 +20,7 @@ func solve_1(numbers []int) int {
 	return result
 }
 
-func solve_2(numbers []int) int {
+func solve_01_2(numbers []int) int {
 	var p1, p2, p3 = huge, huge, huge
 	result := 0
 	for _, n := range numbers {
@@ -34,6 +34,6 @@ func solve_2(numbers []int) int {
 
 func main() {
 	numbers := common.GetInputInts()
-	fmt.Println(solve_1(numbers))
-	fmt.Println(solve_2(numbers))
+	fmt.Println(solve_01_1(numbers))
+	fmt.Println(solve_01_2(numbers))
 }
