@@ -10,7 +10,7 @@ func solve_03_1(report []string) int {
 	nbBits := len(report[0])
 	powOfTwo := 1 << (nbBits - 1)
 	var gamma, epsilon int
-	for i := 0; i < nbBits; i++ {
+	for i := range report[0] {
 		if hasLessOrEqualZerosThanOnes(i, report) {
 			gamma += powOfTwo
 		} else {
@@ -34,10 +34,8 @@ func hasLessOrEqualZerosThanOnes(i int, report []string) bool {
 }
 
 func solve_03_2(report []string) int {
-	nbBits := len(report[0])
-
 	oxygenLines, co2Lines := report, report
-	for i := 0; i < nbBits; i++ {
+	for i := range report[0] {
 		if hasLessOrEqualZerosThanOnes(i, oxygenLines) {
 			oxygenLines = keepOnly(i, '1', oxygenLines)
 		} else {
