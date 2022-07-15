@@ -11,7 +11,7 @@ func solve_03_1(report []string) int {
 	powOfTwo := 1 << (nbBits - 1)
 	var gamma, epsilon int
 	for i := 0; i < nbBits; i++ {
-		if hasMoreOnes(i, report) {
+		if hasLessOrEqualZerosThanOnes(i, report) {
 			gamma += powOfTwo
 		} else {
 			epsilon += powOfTwo
@@ -21,7 +21,7 @@ func solve_03_1(report []string) int {
 	return gamma * epsilon
 }
 
-func hasMoreOnes(i int, report []string) bool {
+func hasLessOrEqualZerosThanOnes(i int, report []string) bool {
 	var nbOnes, nbZeros int
 	for _, line := range report {
 		if line[i] == '0' {
@@ -30,10 +30,56 @@ func hasMoreOnes(i int, report []string) bool {
 			nbOnes++
 		}
 	}
-	return nbOnes > nbZeros
+	return nbZeros <= nbOnes
+}
+
+func solve_03_2(report []string) int {
+	nbBits := len(report[0])
+
+	oxygenLines, co2Lines := report, report
+	for i := 0; i < nbBits; i++ {
+		if hasLessOrEqualZerosThanOnes(i, oxygenLines) {
+			oxygenLines = keepOnly(i, '1', oxygenLines)
+		} else {
+			oxygenLines = keepOnly(i, '0', oxygenLines)
+		}
+		if hasLessOrEqualZerosThanOnes(i, co2Lines) {
+			co2Lines = keepOnly(i, '0', co2Lines)
+		} else {
+			co2Lines = keepOnly(i, '1', co2Lines)
+		}
+	}
+
+	return bitStringToInt(oxygenLines[0]) * bitStringToInt(co2Lines[0])
+}
+
+func keepOnly(i int, c byte, lines []string) []string {
+	if len(lines) == 1 {
+		return lines
+	}
+	var result []string
+	for _, line := range lines {
+		if line[i] == c {
+			result = append(result, line)
+		}
+	}
+	return result
+}
+
+func bitStringToInt(s string) int {
+	powOfTwo := 1 << (len(s) - 1)
+	var result int
+	for _, c := range s {
+		if c == '1' {
+			result += powOfTwo
+		}
+		powOfTwo >>= 1
+	}
+	return result
 }
 
 func main() {
 	report := common.GetInputLines()
 	fmt.Println(solve_03_1(report))
+	fmt.Println(solve_03_2(report))
 }
