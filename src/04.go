@@ -80,7 +80,7 @@ func all[T any](pred func(T) bool, values []T) bool {
 func solve_04_2(order order, grids []grid) int {
 	var lastN int
 	var lastGrid grid
-	winningGrids := make(map[int]bool, len(grids))
+	winningGrids := map[int]bool{}
 	for _, n := range order {
 		for k, grid := range grids {
 			if winningGrids[k] {
