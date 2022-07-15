@@ -215,6 +215,8 @@ References:
 - The Go Programming Language Specification ~ <https://go.dev/ref/spec>
 - Go Modules Reference ~ <https://go.dev/ref/mod>
 - Standard Library ~ <https://pkg.go.dev/std>
+- Frequently Asked Questions (FAQ) ~ <https://go.dev/doc/faq>
+- Error Handling and Go ~ <https://go.dev/blog/error-handling-and-go>
 
 Solutions:
 
