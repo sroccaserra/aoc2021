@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func GetInputLines() []string {
@@ -27,6 +28,13 @@ func GetParsedLines[T any](parse func(string) T) []T {
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		result = append(result, parse(scanner.Text()))
+	}
+	return result
+}
+func SplitToInts(sep string, s string) []int {
+	var result []int
+	for _, cs := range strings.Split(s, sep) {
+		result = append(result, parseInt(cs))
 	}
 	return result
 }
