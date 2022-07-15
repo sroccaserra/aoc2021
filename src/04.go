@@ -9,20 +9,15 @@ import (
 )
 
 func solve_04_1(order order, grids []grid) int {
-	var lastN int
-	var winningGrid grid
-out:
 	for _, n := range order {
 		for _, grid := range grids {
 			mark(n, grid)
 			if hasWon(grid) {
-				lastN = n
-				winningGrid = grid
-				break out
+				return n * sumUnmarked(grid)
 			}
 		}
 	}
-	return lastN * sumUnmarked(winningGrid)
+	return -1
 }
 
 func mark(n int, grid grid) {
@@ -48,11 +43,13 @@ func hasWon(grid grid) bool {
 		}
 	}
 	for j := range grid[0] {
-		var col []int
+		allMarked := true
 		for _, row := range grid {
-			col = append(col, row[j])
+			if !isMarked(row[j]) {
+				allMarked = false
+			}
 		}
-		if all(isMarked, col) {
+		if allMarked {
 			return true
 		}
 	}
