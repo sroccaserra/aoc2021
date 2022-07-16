@@ -221,6 +221,7 @@ References:
 Solutions:
 
 - <https://github.com/alexchao26/advent-of-code-go>
+- <https://github.com/paulden/aoc-2021>
 
 Tools:
 
