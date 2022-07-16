@@ -12,7 +12,7 @@ func solve_05_1(lines []line) int {
 	grid := map[string]int{}
 	for _, line := range lines {
 		if line.x1 == line.x2 || line.y1 == line.y2 {
-			markStraightLine(line, grid)
+			markLine(line, grid)
 		}
 	}
 	return countResult(grid)
@@ -21,32 +21,32 @@ func solve_05_1(lines []line) int {
 func solve_05_2(lines []line) int {
 	grid := map[string]int{}
 	for _, line := range lines {
-		if line.x1 == line.x2 || line.y1 == line.y2 {
-			markStraightLine(line, grid)
-		} else {
-			markDiagonalLine(line, grid)
-		}
+		markLine(line, grid)
 	}
 	return countResult(grid)
 }
 
-func markStraightLine(line line, grid map[string]int) {
-	minX, maxX := Min(line.x1, line.x2), Max(line.x1, line.x2)
-	minY, maxY := Min(line.y1, line.y2), Max(line.y1, line.y2)
-	for y := minY; y <= maxY; y++ {
-		for x := minX; x <= maxX; x++ {
-			key := makeKey(x, y)
-			grid[key] += 1
-		}
+func markLine(line line, grid map[string]int) {
+	deltaX, deltaY := line.x2-line.x1, line.y2-line.y1
+	var dx, dy int
+	switch {
+	case deltaX < 0:
+		dx = -1
+	case deltaX > 0:
+		dx = 1
+	default:
+		dx = 0
 	}
-}
-
-func markDiagonalLine(line line, grid map[string]int) {
-	minX, maxX := Min(line.x1, line.x2), Max(line.x1, line.x2)
-	width := maxX - minX
-	dx := (line.x2 - line.x1) / width
-	dy := (line.y2 - line.y1) / width
-	for x, y := line.x1, line.y1; x != line.x2+dx || y != line.y2+dy; x, y = x+dx, y+dy {
+	switch {
+	case deltaY < 0:
+		dy = -1
+	case deltaY > 0:
+		dy = 1
+	default:
+		dy = 0
+	}
+	n := Max(Abs(deltaX), Abs(deltaY))
+	for x, y, i := line.x1, line.y1, 0; i <= n; x, y, i = x+dx, y+dy, i+1 {
 		key := makeKey(x, y)
 		grid[key] += 1
 	}
