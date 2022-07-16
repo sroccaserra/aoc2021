@@ -13,7 +13,7 @@ func GetInputLines() []string {
 }
 
 func GetInputInts() []int {
-	return GetParsedLines(parseInt)
+	return GetParsedLines(ParseInt)
 }
 
 func GetParsedLines[T any](parse func(string) T) []T {
@@ -34,7 +34,7 @@ func GetParsedLines[T any](parse func(string) T) []T {
 func SplitToInts(sep string, s string) []int {
 	var result []int
 	for _, cs := range strings.Split(s, sep) {
-		result = append(result, parseInt(cs))
+		result = append(result, ParseInt(cs))
 	}
 	return result
 }
@@ -43,7 +43,21 @@ func id[T any](x T) T {
 	return x
 }
 
-func parseInt(s string) int {
+func ParseInt(s string) int {
 	n, _ := strconv.Atoi(s)
 	return n
+}
+
+func Min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func Max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
