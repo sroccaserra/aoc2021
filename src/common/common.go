@@ -12,6 +12,10 @@ func GetInputLines() []string {
 	return GetParsedLines(id[string])
 }
 
+func GetInputLine() string {
+	return GetParsedLines(id[string])[0]
+}
+
 func GetInputInts() []int {
 	return GetParsedLines(ParseInt)
 }
