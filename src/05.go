@@ -26,26 +26,21 @@ func solve_05_2(lines []line) int {
 
 func markLine(line line, grid map[point]int) {
 	deltaX, deltaY := line.x2-line.x1, line.y2-line.y1
-	var dx, dy int
-	switch {
-	case deltaX < 0:
-		dx = -1
-	case deltaX > 0:
-		dx = 1
-	default:
-		dx = 0
-	}
-	switch {
-	case deltaY < 0:
-		dy = -1
-	case deltaY > 0:
-		dy = 1
-	default:
-		dy = 0
-	}
+	dx, dy := direction(deltaX), direction(deltaY)
 	n := Max(Abs(deltaX), Abs(deltaY))
 	for x, y, i := line.x1, line.y1, 0; i <= n; x, y, i = x+dx, y+dy, i+1 {
 		grid[point{x, y}]++
+	}
+}
+
+func direction(delta int) int {
+	switch {
+	case delta < 0:
+		return -1
+	case delta > 0:
+		return 1
+	default:
+		return 0
 	}
 }
 
