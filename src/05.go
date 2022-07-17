@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
-	"unicode"
 
 	. "aoc2021/src/common"
 )
@@ -69,12 +67,9 @@ func makeKey(x int, y int) string {
 }
 
 func parse_05(s string) line {
-	parts := strings.FieldsFunc(s, func(c rune) bool { return !unicode.IsNumber(c) })
-	var numbers []int
-	for _, part := range parts {
-		numbers = append(numbers, ParseInt(part))
-	}
-	return line{numbers[0], numbers[1], numbers[2], numbers[3]}
+	var x1, y1, x2, y2 int
+	fmt.Sscanf(s, "%d,%d -> %d,%d", &x1, &y1, &x2, &y2)
+	return line{x1, y1, x2, y2}
 }
 
 func main() {
