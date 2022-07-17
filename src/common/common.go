@@ -9,11 +9,11 @@ import (
 )
 
 func GetInputLines() []string {
-	return GetParsedLines(id[string])
+	return GetParsedLines(Id[string])
 }
 
 func GetInputLine() string {
-	return GetParsedLines(id[string])[0]
+	return GetParsedLines(Id[string])[0]
 }
 
 func GetInputInts() []int {
@@ -43,7 +43,7 @@ func SplitToInts(sep string, s string) []int {
 	return result
 }
 
-func id[T any](x T) T {
+func Id[T any](x T) T {
 	return x
 }
 
