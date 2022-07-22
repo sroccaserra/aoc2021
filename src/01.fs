@@ -17,15 +17,15 @@ Create numbers max-lines cells allot
         swap drop ( count n )
     loop drop ( count ) ;
 
-: sum-two ( addr -- sum )
-    dup @ swap cell+ @ + ;
-
-: sum-three ( addr -- sum )
-    dup sum-two swap 2 cells + @ + ;
+: sum-first-n ( addr n -- addr sum )
+    0 swap ( addr result n )
+    0 do ( addr result )
+        over i cells + @ +
+    loop ;
 
 : has-bigger-sum ( addr-prevs n -- flag )
-    swap dup sum-three ( n addr-prevs prevs-sum )
-    swap sum-two rot +  ( prevs-sum new-sum )
+    swap 3 sum-first-n ( n addr-prevs prevs-sum )
+    swap 2 sum-first-n nip rot +  ( prevs-sum new-sum )
     < ;
 
 : shift-previous ( addr-prevs n -- addr-prevs )
