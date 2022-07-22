@@ -227,6 +227,33 @@ Tools:
 
 - gopls ~ <https://pkg.go.dev/golang.org/x/tools/gopls>
 
+### Forth
+
+Example of defining an unnamed word and executing it:
+
+```forth
+:noname
+  3 ;
+
+.s
+<1> 140266528584968  ok
+execute
+ok
+.s
+<1> 3  ok
+
+```
+
+References:
+
+- Gforth Manual ~ <https://gforth.org/manual/index.html>
+- Create ~ <https://gforth.org/manual/CREATE.html>
+- Execution Tokens ~ <https://gforth.org/manual/Execution-Tokens-Tutorial.html>
+- Quotations ~ <https://gforth.org/manual/Quotations.html>
+- General Files ~ <https://gforth.org/manual/General-files.html>
+- Line Input and Converstion ~ <https://gforth.org/manual/Line-input-and-conversion.html>
+
+
 ## How to run
 
 To run Python solutions:
@@ -259,22 +286,28 @@ To run Scheme solutions:
 $ scheme --libdirs src --script src/01.{ss,in}
 ```
 
-To run uxn solutions
+To run uxn solutions:
 
 ```
 $ make 01
 ```
 
-To run Elixir solutions
+To run Elixir solutions:
 
 ```
 $ elixir src/01.exs <src/01.in
 ```
 
-To run Go solutions
+To run Go solutions:
 
 ```
 $ go run src/01.{go,in}
+```
+
+To run Forth solutions:
+
+```
+$ gforth src/01.{fs,in}
 ```
 
 ## How it started
