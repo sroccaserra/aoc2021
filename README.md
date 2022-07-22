@@ -226,6 +226,7 @@ Solutions:
 Tools:
 
 - gopls ~ <https://pkg.go.dev/golang.org/x/tools/gopls>
+- Puzzle Template in Go ~ <https://github.com/dnnrly/puzzle-template>
 
 ### Forth
 
@@ -234,14 +235,12 @@ Example of defining an unnamed word and executing it:
 ```forth
 :noname
   3 ;
-
 .s
 <1> 140266528584968  ok
 execute
 ok
 .s
 <1> 3  ok
-
 ```
 
 References:
@@ -252,6 +251,7 @@ References:
 - Quotations ~ <https://gforth.org/manual/Quotations.html>
 - General Files ~ <https://gforth.org/manual/General-files.html>
 - Line Input and Converstion ~ <https://gforth.org/manual/Line-input-and-conversion.html>
+- The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
 
 ## How to run
