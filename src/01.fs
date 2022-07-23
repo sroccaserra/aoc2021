@@ -29,10 +29,10 @@ Create numbers max-lines cells allot
     swap 2 sum-first-n rot +  ( prevs-sum new-sum )
     < ;
 
-: shift-previous ( addr-prevs n -- addr-prevs )
-    swap dup cell+ @ over 2 cells + !
+: shift-previous ( n addr-prevs -- )
+    dup cell+ @ over 2 cells + !
     dup @ over cell+ !
-    dup -rot ! ;
+    ! ;
 
 : solve-01-2 ( -- result )
     0 here huge , huge , huge , ( count addr-prevs )
@@ -42,7 +42,7 @@ Create numbers max-lines cells allot
         if
             rot 1+ -rot ( count+1 addr-prevs n )
         then
-        shift-previous ( count addr-prevs )
+        over shift-previous ( count addr-prevs )
     loop drop ( count ) ;
 
 numbers parse-lines to nb-lines
