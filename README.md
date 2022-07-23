@@ -250,6 +250,7 @@ References:
 - Execution Tokens ~ <https://gforth.org/manual/Execution-Tokens-Tutorial.html>
 - Quotations ~ <https://gforth.org/manual/Quotations.html>
 - General Files ~ <https://gforth.org/manual/General-files.html>
+- The Input Stream ~ <https://gforth.org/manual/The-Input-Stream.html>
 - Line Input and Converstion ~ <https://gforth.org/manual/Line-input-and-conversion.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
