@@ -44,20 +44,20 @@ Create numbers max-lines cells allot
         shift-previous ( count addr-prevs )
     loop drop ( count ) ;
 
-: parse-lines
+: parse-lines ( dst-addr -- )
     next-arg r/o open-file throw >r
 
     begin
         line-buffer buffer-size r@ read-line throw
-    while ( nb-read-chars )
-        line-buffer swap s>number? 2drop ( n )
-        numbers nb-lines cells + !
+    while ( dst-addr nb-read-chars )
+        line-buffer swap s>number? 2drop ( dst-addr n )
+        over nb-lines cells + !
         nb-lines 1+ to nb-lines
     repeat drop
 
     r> close-file throw ;
 
-parse-lines
+numbers parse-lines
 solve-01-1 . cr
 solve-01-2 . cr
 bye
