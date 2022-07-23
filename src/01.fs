@@ -7,25 +7,25 @@ Create numbers max-lines cells allot
 99999999999 Constant huge
 
 : solve-01-1 ( -- result )
-    0 huge ( count prev )
-    nb-lines 0 do
-        numbers i cells + @ ( count prev n )
+    0 huge ( result prev )
+    numbers nb-lines cells bounds do
+        i @ ( result prev n )
         2dup <
         if
-            rot 1+ -rot ( count+1 prev n )
+            rot 1+ -rot \ increment result
         then
-        swap drop ( count n )
-    loop drop ( count ) ;
+        swap drop ( result n )
+    cell +loop drop ( result ) ;
 
-: sum-first-n ( addr n -- addr sum )
-    0 swap ( addr result n )
-    0 do ( addr result )
-        over i cells + @ +
-    loop ;
+: sum-first-n ( addr n -- sum )
+    0 -rot ( result addr n )
+    cells bounds do ( result )
+        i @ +
+    cell +loop ;
 
 : has-bigger-sum ( addr-prevs n -- flag )
-    swap 3 sum-first-n ( n addr-prevs prevs-sum )
-    swap 2 sum-first-n nip rot +  ( prevs-sum new-sum )
+    swap dup 3 sum-first-n ( n addr-prevs prevs-sum )
+    swap 2 sum-first-n rot +  ( prevs-sum new-sum )
     < ;
 
 : shift-previous ( addr-prevs n -- addr-prevs )
