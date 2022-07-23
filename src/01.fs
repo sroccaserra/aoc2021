@@ -1,12 +1,13 @@
-256 Constant buffer-size
-Create line-buffer buffer-size 2 + allot
+require common/common.fs
+
+0 Value nb-lines
 2000 Constant max-lines
 Create numbers max-lines cells allot
 
-0 Value nb-lines
 99999999999 Constant huge
 
 : solve-01-1 ( -- result )
+    assert( nb-lines max-lines <= )
     0 huge ( result prev )
     numbers nb-lines cells bounds do
         i @ ( result prev n )
@@ -44,20 +45,7 @@ Create numbers max-lines cells allot
         shift-previous ( count addr-prevs )
     loop drop ( count ) ;
 
-: parse-lines ( dst-addr -- )
-    next-arg r/o open-file throw >r
-
-    begin
-        line-buffer buffer-size r@ read-line throw
-    while ( dst-addr nb-read-chars )
-        line-buffer swap s>number? 2drop ( dst-addr n )
-        over nb-lines cells + !
-        nb-lines 1+ to nb-lines
-    repeat drop
-
-    r> close-file throw ;
-
-numbers parse-lines
+numbers parse-lines to nb-lines
 solve-01-1 . cr
 solve-01-2 . cr
 bye
