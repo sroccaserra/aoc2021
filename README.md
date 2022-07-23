@@ -252,6 +252,7 @@ References:
 - General Files ~ <https://gforth.org/manual/General-files.html>
 - The Input Stream ~ <https://gforth.org/manual/The-Input-Stream.html>
 - Line Input and Converstion ~ <https://gforth.org/manual/Line-input-and-conversion.html>
+- Designing the stack effect ~ <https://gforth.org/manual/Designing-the-stack-effect-Tutorial.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
 
