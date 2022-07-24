@@ -13,9 +13,9 @@ Create numbers max-lines cells allot
         i @ ( result prev n )
         2dup <
         if
-            rot 1+ -rot \ increment result
+            increment-3rd \ result++
         then
-        swap drop ( result n )
+        nip ( result n )
     cell +loop drop ( result ) ;
 
 : sum-first-n ( addr n -- sum )
@@ -25,8 +25,8 @@ Create numbers max-lines cells allot
     cell +loop ;
 
 : has-bigger-sum ( addr-prevs n -- flag )
-    swap dup 3 sum-first-n ( n addr-prevs prevs-sum )
-    swap 2 sum-first-n rot +  ( prevs-sum new-sum )
+    over 3 sum-first-n ( addr-prevs n prevs-sum )
+    rot 2 sum-first-n rot +  ( prevs-sum new-sum )
     < ;
 
 : shift-previous ( n addr-prevs -- )
@@ -40,7 +40,7 @@ Create numbers max-lines cells allot
         numbers i cells + @ ( count addr-prevs n )
         2dup has-bigger-sum
         if
-            rot 1+ -rot ( count+1 addr-prevs n )
+            increment-3rd \ count++
         then
         over shift-previous ( count addr-prevs )
     loop drop ( count ) ;
