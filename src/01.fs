@@ -43,7 +43,8 @@ Create numbers max-lines cells allot
         over shift-previous ( count addr-prevs )
     loop drop ( count ) ;
 
-numbers parse-lines to nb-lines
+numbers ' parse-number parse-lines to nb-lines
 solve-01-1 . cr
 solve-01-2 . cr
+
 bye
