@@ -252,7 +252,11 @@ References:
 - General Files ~ <https://gforth.org/manual/General-files.html>
 - The Input Stream ~ <https://gforth.org/manual/The-Input-Stream.html>
 - Line Input and Converstion ~ <https://gforth.org/manual/Line-input-and-conversion.html>
+- Number Conversion ~ <https://gforth.org/manual/Number-Conversion.html>
+- Simple Numeric Output ~ <https://gforth.org/manual/Simple-numeric-output.html>
 - Designing the stack effect ~ <https://gforth.org/manual/Designing-the-stack-effect-Tutorial.html>
+- Debugging ~ <https://gforth.org/manual/Debugging.html>
+- Examining Data and Code ~ <https://gforth.org/manual/Examining-data.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
 
