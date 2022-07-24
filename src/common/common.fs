@@ -7,6 +7,9 @@ Create line-buffer buffer-size 2 + allot
 : increment-3rd
     rot 1+ -rot ;
 
+: halt
+    .s bye ;
+
 : parse-lines ( dst-addr -- nb-lines )
     0 swap ( nb-lines dst-addr )
     next-arg r/o open-file throw >r
@@ -15,9 +18,9 @@ Create line-buffer buffer-size 2 + allot
         line-buffer buffer-size r@ read-line throw
     while ( dst-addr nb-read-chars )
         line-buffer swap s>number? 2drop ( dst-addr n )
-        swap cell+ swap
-        over !
-        increment-2nd
+        over !         \ store number
+        cell+          \ increment destination address
+        increment-2nd  \ increment line counter
     repeat 2drop
 
     r> close-file throw ;
