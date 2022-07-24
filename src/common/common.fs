@@ -1,3 +1,4 @@
+0 Value file-id
 256 Constant buffer-size
 Create line-buffer buffer-size 2 + allot
 
@@ -10,12 +11,12 @@ Create line-buffer buffer-size 2 + allot
 : halt
     .s bye ;
 
-: parse-lines ( dst-addr -- nb-lines )
-    0 swap ( nb-lines dst-addr )
-    next-arg r/o open-file throw >r
+: parse-lines { dst-addr -- nb-lines }
+    next-arg r/o open-file throw to file-id
 
+    0 dst-addr
     begin
-        line-buffer buffer-size r@ read-line throw
+        line-buffer buffer-size file-id read-line throw
     while ( dst-addr nb-read-chars )
         line-buffer swap s>number? 2drop ( dst-addr n )
         over !         \ store number
@@ -23,4 +24,4 @@ Create line-buffer buffer-size 2 + allot
         increment-2nd  \ increment line counter
     repeat 2drop
 
-    r> close-file throw ;
+    file-id close-file throw ;
