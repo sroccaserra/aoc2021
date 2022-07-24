@@ -23,9 +23,9 @@ Create numbers max-lines cells allot
         i @ +
     cell +loop ;
 
-: has-bigger-sum ( addr-prevs n -- flag )
-    over 3 sum-first-n ( addr-prevs n prevs-sum )
-    rot 2 sum-first-n rot +  ( prevs-sum new-sum )
+: has-bigger-sum { addr-prevs n -- flag }
+    addr-prevs 3 sum-first-n
+    addr-prevs 2 sum-first-n n +
     < ;
 
 : shift-previous ( n addr-prevs -- )
