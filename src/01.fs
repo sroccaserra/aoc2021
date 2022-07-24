@@ -11,8 +11,7 @@ Create numbers max-lines cells allot
     0 huge ( result prev )
     numbers nb-lines cells bounds do
         i @ ( result prev n )
-        2dup <
-        if
+        2dup < if
             increment-3rd \ result++
         then
         nip ( result n )
@@ -38,8 +37,7 @@ Create numbers max-lines cells allot
     0 here huge , huge , huge , ( count addr-prevs )
     nb-lines 0 do
         numbers i cells + @ ( count addr-prevs n )
-        2dup has-bigger-sum
-        if
+        2dup has-bigger-sum if
             increment-3rd \ count++
         then
         over shift-previous ( count addr-prevs )
