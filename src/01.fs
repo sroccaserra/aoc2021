@@ -35,17 +35,17 @@ Create numbers max-lines cells allot
     r> ! ;
 
 : solve-01-2 ( -- result )
-    0 here huge , huge , huge , ( count addr-prevs )
+    0 >r here huge , huge , huge , ( addr-prevs )
     numbers nb-lines cells bounds begin
-        2>r
-        r@ @ ( count addr-prevs n )
+        rot  ( end-addr addr addr-prevs )
+        over @  ( ... addr-prevs n )
         2dup has-bigger-sum if
-            increment-3rd \ count++
+            r> 1+ >r  \ result++
         then
-        over shift-previous ( count addr-prevs )
-        2r> cell+ 2dup <=
-    until 2drop
-    drop ( count ) ;
+        over shift-previous  ( ... addr-prevs )
+        -rot cell+ 2dup <=
+    until 2drop drop
+    r> ;
 
 numbers ' parse-number parse-lines to nb-lines
 solve-01-1 . cr
