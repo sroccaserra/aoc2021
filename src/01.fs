@@ -29,9 +29,10 @@ Create numbers max-lines cells allot
     < ;
 
 : shift-previous ( n addr-prevs -- )
-    dup cell+ @ over 2 cells + !
-    dup @ over cell+ !
-    ! ;
+    >r
+    r@ cell+ @ r@ 2 cells + !
+    r@ @ r@ cell+ !
+    r> ! ;
 
 : solve-01-2 ( -- result )
     0 here huge , huge , huge , ( count addr-prevs )
