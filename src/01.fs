@@ -36,13 +36,13 @@ Create numbers max-lines cells allot
 
 : solve-01-2 ( -- result )
     0 here huge , huge , huge , ( count addr-prevs )
-    nb-lines 0 do
-        numbers i cells + @ ( count addr-prevs n )
+    numbers nb-lines cells bounds do
+        i @ ( count addr-prevs n )
         2dup has-bigger-sum if
             increment-3rd \ count++
         then
         over shift-previous ( count addr-prevs )
-    loop drop ( count ) ;
+    cell +loop drop ( count ) ;
 
 numbers ' parse-number parse-lines to nb-lines
 solve-01-1 . cr
