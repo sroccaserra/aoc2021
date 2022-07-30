@@ -28,11 +28,13 @@ Create numbers max-lines cells allot
     addr-prevs 2 sum-first-n n +
     < ;
 
+: .1st ;
+: .2nd cell+ ;
+: .3rd 2 cells + ;
 : shift-previous ( n addr-prevs -- )
-    >r
-    r@ cell+ @ r@ 2 cells + !
-    r@ @ r@ cell+ !
-    r> ! ;
+    dup .2nd @ over .3rd !
+    dup .1st @ over .2nd !
+    ( n addr-prevs ) .1st ! ;
 
 : solve-01-2 ( -- result )
     0 >r here huge , huge , huge , ( addr-prevs )
@@ -50,5 +52,4 @@ Create numbers max-lines cells allot
 numbers ' parse-number parse-lines to nb-lines
 solve-01-1 . cr
 solve-01-2 . cr
-
 checkEmptyStack bye
