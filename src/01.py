@@ -3,22 +3,22 @@ import fileinput
 
 from collections import deque
 
-def solve_1(lines):
-    other_lines = lines.copy()
+def solve_1(numbers):
+    other_lines = numbers.copy()
     n = 0
-    for i in range(len(lines)-1):
-        if other_lines[i+1] > lines[i]:
+    for i in range(len(numbers)-1):
+        if other_lines[i+1] > numbers[i]:
             n += 1
     return n
 
-def solve_2(lines):
-    ns_1 = deque(lines)
+def solve_2(numbers):
+    ns_1 = deque(numbers)
     ns_1.pop()
     ns_1.pop()
-    ns_2 = deque(lines)
+    ns_2 = deque(numbers)
     ns_2.popleft()
     ns_2.pop()
-    ns_3 = deque(lines)
+    ns_3 = deque(numbers)
     ns_3.popleft()
     ns_3.popleft()
     n = 0
@@ -30,6 +30,6 @@ def solve_2(lines):
     return n
 
 if __name__ == '__main__' and not sys.flags.interactive:
-    lines = [int(line.strip()) for line in fileinput.input()]
-    print(solve_1(lines))
-    print(solve_2(lines))
+    numbers = [int(line.strip()) for line in fileinput.input()]
+    print(solve_1(numbers))
+    print(solve_2(numbers))
