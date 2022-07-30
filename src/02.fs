@@ -1,8 +1,8 @@
 require common/common.fs
 
-0 Value nb-lines
-1000 Constant max-lines
-Create numbers max-lines cells allot
+0 Value nb-commands
+1000 Constant max-commands
+Create commands max-commands cells allot
 
 : create-submarine ( -- sub-addr )
     here 0 , 0 , 0 , 0 , ;
@@ -40,9 +40,9 @@ Create numbers max-lines cells allot
     endcase ;
 
 : solve-02 ( -- result-2 result-1 )
-    assert( nb-lines max-lines <= )
+    assert( nb-commands max-commands <= )
     create-submarine { submarine }
-    numbers nb-lines cells bounds do
+    commands nb-commands cells bounds do
         submarine i @ eval-command
     cell +loop
     submarine dup sub.hpos @ swap sub.depth-2 @ *
@@ -53,7 +53,6 @@ Create numbers max-lines cells allot
     1- chars + 1 parse-number ( c-direction n-value )
     create-command ;
 
-numbers ' parse-02 parse-lines to nb-lines
+commands ' parse-02 parse-lines to nb-commands
 solve-02 . cr . cr
-
 checkEmptyStack bye
