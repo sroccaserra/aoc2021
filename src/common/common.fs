@@ -8,8 +8,11 @@ Create line-buffer buffer-size 2 + allot
 : increment-3rd
     rot 1+ -rot ;
 
+: .scr
+    .s cr ;
+
 : halt
-    .s bye ;
+    .s cr bye ;
 
 : checkEmptyStack ( -- )
     assert( depth 0 = ) ;
@@ -25,9 +28,9 @@ Create line-buffer buffer-size 2 + allot
     begin
         line-buffer buffer-size file-id read-line throw
     while ( dst-addr nb-read-chars )
-        line-buffer swap parse-xt execute ( dst-addr n )
-        over !         \ store number
-        cell+          \ increment destination address
+        line-buffer swap parse-xt execute ( dst-addr parsed-res-addr )
+        over !   \ store parsed result address
+        cell+    \ increment destination address
         increment-2nd  \ increment line counter
     repeat 2drop
 

@@ -1,7 +1,5 @@
 require common/common.fs
 
-\ "sub" is for submarine.
-
 0 Value nb-lines
 1000 Constant max-lines
 Create numbers max-lines cells allot
@@ -12,41 +10,64 @@ Create numbers max-lines cells allot
 : command-value ( command-addr -- n )
     char+ @ ;
 
+: create-submarine ( -- sub-addr )
+    here 0 , 0 , 0 , 0 , ;
+
 : sub-hpos ( sub-addr -- n )
     @ ;
 
-: inc-sub-hpos ( n sub-addr -- )
-    tuck sub-hpos + swap ! ;
+: inc-sub-hpos ( sub-addr n -- )
+    over sub-hpos + swap ! ;
 
-: sub-depth ( sub-addr -- n )
+: sub-depth-1 ( sub-addr -- n )
     cell+ @ ;
 
-: inc-sub-depth ( n sub-addr -- )
-    tuck sub-depth + swap cell+ ! ;
+: inc-sub-depth-1 ( sub-addr n -- )
+    over sub-depth-1 + swap cell+ ! ;
 
-: dec-sub-depth ( n sub-addr -- )
-    swap negate swap inc-sub-depth ;
+: dec-sub-depth-1 ( sub-addr n  -- )
+    negate inc-sub-depth-1 ;
+
+: sub-depth-2 ( sub-addr -- n )
+    2 cells + @ ;
+
+: inc-sub-depth-2 ( sub-addr n -- )
+    over sub-depth-2 + swap 2 cells + ! ;
+
+: dec-sub-depth-2 ( sub-addr n  -- )
+    negate inc-sub-depth-2 ;
+
+: sub-aim ( sub-addr -- n )
+    3 cells + @ ;
+
+: inc-sub-aim ( sub-addr n -- )
+    over sub-aim + swap 3 cells + ! ;
+
+: dec-sub-aim ( sub-addr n  -- )
+    negate inc-sub-aim ;
 
 : eval-command ( command-addr sub-addr -- )
     swap dup command-value swap command-direction
-    case
-        'f' of over inc-sub-hpos endof
-        'u' of over dec-sub-depth endof
-        'd' of over inc-sub-depth endof
-    endcase
-    drop ;
+    case ( addr n )
+        'f' of 2dup inc-sub-hpos over sub-aim * inc-sub-depth-2 endof
+        'u' of 2dup dec-sub-depth-1 dec-sub-aim endof
+        'd' of 2dup inc-sub-depth-1 inc-sub-aim endof
+    endcase ;
 
-: eval-result ( sub-addr -- n )
-    dup sub-hpos swap sub-depth * ;
+: eval-result-1 ( sub-addr -- n )
+    dup sub-hpos swap sub-depth-1 * ;
 
-: solve-02-1 ( -- result )
+: eval-result-2 ( sub-addr -- n )
+    dup sub-hpos swap sub-depth-2 * ;
+
+: solve-02 ( -- result-2 result-1 )
     assert( nb-lines max-lines <= )
-    here >r 0 , 0 ,
+    create-submarine >r
     numbers nb-lines cells bounds begin
         dup @ r@ eval-command
         cell+ 2dup <=
     until 2drop
-    r> eval-result ;
+    r> dup eval-result-2 swap eval-result-1 ;
 
 : parse-02 ( c-addr u -- command-addr )
     here >r
@@ -55,6 +76,6 @@ Create numbers max-lines cells allot
     r> ;
 
 numbers ' parse-02 parse-lines to nb-lines
-solve-02-1 . cr
+solve-02 . cr . cr
 
 checkEmptyStack bye
