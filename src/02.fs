@@ -1,5 +1,7 @@
 require common/common.fs
 
+\ "sub" is for submarine.
+
 0 Value nb-lines
 1000 Constant max-lines
 Create numbers max-lines cells allot
@@ -10,32 +12,32 @@ Create numbers max-lines cells allot
 : command-value ( command-addr -- n )
     char+ @ ;
 
-: state-hpos ( state-addr -- n )
+: sub-hpos ( sub-addr -- n )
     @ ;
 
-: inc-state-hpos ( n state-addr -- )
-    tuck state-hpos + swap ! ;
+: inc-sub-hpos ( n sub-addr -- )
+    tuck sub-hpos + swap ! ;
 
-: state-depth ( state-addr -- n )
+: sub-depth ( sub-addr -- n )
     cell+ @ ;
 
-: inc-state-depth ( n state-addr -- )
-    tuck state-depth + swap cell+ ! ;
+: inc-sub-depth ( n sub-addr -- )
+    tuck sub-depth + swap cell+ ! ;
 
-: dec-state-depth ( n state-addr -- )
-    swap negate swap inc-state-depth ;
+: dec-sub-depth ( n sub-addr -- )
+    swap negate swap inc-sub-depth ;
 
-: eval-command ( command-addr state-addr -- )
+: eval-command ( command-addr sub-addr -- )
     swap dup command-value swap command-direction
     case
-        'f' of over inc-state-hpos endof
-        'u' of over dec-state-depth endof
-        'd' of over inc-state-depth endof
+        'f' of over inc-sub-hpos endof
+        'u' of over dec-sub-depth endof
+        'd' of over inc-sub-depth endof
     endcase
     drop ;
 
-: eval-result ( state-addr -- n )
-    dup state-hpos swap state-depth * ;
+: eval-result ( sub-addr -- n )
+    dup sub-hpos swap sub-depth * ;
 
 : solve-02-1 ( -- result )
     assert( nb-lines max-lines <= )
