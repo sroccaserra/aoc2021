@@ -41,6 +41,15 @@ end
 ---
 -- IO
 
+
+function getParsedLines(parse_fn)
+  local result = {}
+  for line in io.lines(arg[1]) do
+    table.insert(result, parse_fn(line))
+  end
+  return result
+end
+
 function readlines(options)
   options = options or 'l'
   local result = {}
