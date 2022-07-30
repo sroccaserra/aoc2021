@@ -4,7 +4,8 @@ require common/common.fs
 1000 Constant max-lines
 Create numbers max-lines cells allot
 
-: create-submarine ( -- sub-addr ) here 0 , 0 , 0 , 0 , ;
+: create-submarine ( -- sub-addr )
+    here 0 , 0 , 0 , 0 , ;
 : sub.hpos ( sub-addr -- addr ) ;
 : sub.depth-1 ( sub-addr -- addr ) cell+ ;
 : sub.depth-2 ( sub-addr -- addr ) 2 cells + ;
@@ -25,6 +26,8 @@ Create numbers max-lines cells allot
 : dec-sub-aim ( sub-addr n  -- )
     negate inc-sub-aim ;
 
+: create-command ( c-direction n-value -- command-addr )
+    here -rot swap c, , ;
 : command.direction@ ( command-addr -- c ) c@ ;
 : command.value@ ( command-addr -- n ) char+ @ ;
 
@@ -46,10 +49,9 @@ Create numbers max-lines cells allot
     submarine dup sub.hpos @ swap sub.depth-1 @ * ;
 
 : parse-02 ( c-addr u -- command-addr )
-    here >r
-    over c@ c,
-    1- chars + 1 parse-number ,
-    r> ;
+    over c@ -rot ( c-direction c-addr u )
+    1- chars + 1 parse-number ( c-direction n-value )
+    create-command ;
 
 numbers ' parse-02 parse-lines to nb-lines
 solve-02 . cr . cr
