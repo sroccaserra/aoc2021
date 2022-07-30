@@ -11,6 +11,9 @@ Create line-buffer buffer-size 2 + allot
 : halt
     .s bye ;
 
+: checkEmptyStack ( -- )
+    assert( depth 0 = ) ;
+
 : parse-number ( c-addr u -- n )
     s>number? drop d>s ;
 

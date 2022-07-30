@@ -51,4 +51,4 @@ numbers ' parse-number parse-lines to nb-lines
 solve-01-1 . cr
 solve-01-2 . cr
 
-bye
+checkEmptyStack bye

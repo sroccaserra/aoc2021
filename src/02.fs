@@ -55,4 +55,4 @@ Create numbers max-lines cells allot
 numbers ' parse-02 parse-lines to nb-lines
 solve-02-1 . cr
 
-bye
+checkEmptyStack bye
