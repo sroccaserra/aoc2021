@@ -30,7 +30,7 @@ Create numbers max-lines cells allot
 
 : .1st ;
 : .2nd cell+ ;
-: .3rd 2 cells + ;
+: .3rd [ 2 cells ] literal + ;
 : shift-previous ( n addr-prevs -- )
     dup .2nd @ over .3rd !
     dup .1st @ over .2nd !
