@@ -8,8 +8,8 @@ Create commands max-commands cells allot
     here 0 , 0 , 0 , 0 , ;
 : sub.hpos ( sub-addr -- addr ) ;
 : sub.depth-1 ( sub-addr -- addr ) cell+ ;
-: sub.depth-2 ( sub-addr -- addr ) 2 cells + ;
-: sub.aim ( sub-addr -- addr ) 3 cells + ;
+: sub.depth-2 ( sub-addr -- addr ) [ 2 cells ] literal + ;
+: sub.aim ( sub-addr -- addr ) [ 3 cells ] literal + ;
 
 : inc-sub-hpos ( sub-addr n -- )
     over sub.hpos @ + swap sub.hpos ! ;

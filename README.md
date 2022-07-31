@@ -258,6 +258,8 @@ References:
 - Debugging ~ <https://gforth.org/manual/Debugging.html>
 - Examining Data and Code ~ <https://gforth.org/manual/Examining-data.html>
 - Postpone Tutorial ~ <https://gforth.org/manual/POSTPONE-Tutorial.html>
+- Literal Tutorial ~ <https://gforth.org/manual/Literal-Tutorial.html>
+- Literals ~ <https://gforth.org/manual/Literals.html>
 - Macros ~ <https://gforth.org/manual/Macros.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
