@@ -2,11 +2,14 @@
 256 Constant buffer-size
 Create line-buffer buffer-size 2 + allot
 
-: increment-2nd
+: inc-2nd ( -- )
     swap 1+ swap ;
 
-: increment-3rd
+: inc-3rd ( -- )
     rot 1+ -rot ;
+
+: inc-r ( -- )
+    postpone r> postpone 1+ postpone >r ; immediate compile-only
 
 : .scr
     .s cr ;
@@ -31,7 +34,7 @@ Create line-buffer buffer-size 2 + allot
         line-buffer swap parse-xt execute ( dst-addr parsed-res-addr )
         over !   \ store parsed result address
         cell+    \ increment destination address
-        increment-2nd  \ increment line counter
+        inc-2nd  \ increment line counter
     repeat 2drop
 
     file-id close-file throw ;

@@ -12,7 +12,7 @@ Create numbers max-lines cells allot
     numbers nb-lines cells bounds do
         i @ ( result prev n )
         2dup < if
-            increment-3rd \ result++
+            inc-3rd \ result++
         then
         nip ( result n )
     cell +loop drop ( result ) ;
@@ -42,7 +42,7 @@ Create numbers max-lines cells allot
         rot  ( end-addr addr addr-prevs )
         over @  ( ... addr-prevs n )
         2dup has-bigger-sum if
-            r> 1+ >r  \ result++
+            inc-r
         then
         over shift-previous  ( ... addr-prevs )
         -rot cell+ 2dup <=
