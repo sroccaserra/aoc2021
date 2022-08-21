@@ -77,3 +77,16 @@ func Abs(n int) int {
 	}
 	return n
 }
+
+///
+// Functions to use an array as a FIFO queue
+
+func Enqueue[T any](values *[]T, v T) {
+	*values = append(*values, v)
+}
+
+func Dequeue[T any](values *[]T) T {
+	result := (*values)[0]
+	*values = (*values)[1:]
+	return result
+}
