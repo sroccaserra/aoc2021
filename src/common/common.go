@@ -52,6 +52,11 @@ func ParseInt(s string) int {
 	return n
 }
 
+func ParseDigit(b byte) int {
+	return int(b) - int('0')
+}
+
+
 func Min(a, b int) int {
 	if a < b {
 		return a
