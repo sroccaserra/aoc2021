@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { getInputLines } from './common/common.js'
 
 const huge = 9999999999
 
@@ -26,8 +26,7 @@ function solve_01_2(numbers) {
 	return result
 }
 
-const file = readFileSync(process.argv[2], 'utf8')
-const numbers = file.split('\n').slice(0, -1).map(line => Number(line))
+const numbers = getInputLines().map(Number)
 
 console.log(solve_01_1(numbers))
 console.log(solve_01_2(numbers))

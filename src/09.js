@@ -1,12 +1,20 @@
-// @ts-check
-import { readFileSync } from 'fs'
+import { getInputLines, Queue } from './common/common.js'
 
 function solve_09_1(floorMap) {
   let result = 0
   for (const point of floorMap.findLowPoints()) {
-    result += floorMap.riskAt(point.i, point.j)
+    result += floorMap.riskAt(point)
   }
   return result
+}
+
+function solve_09_2(floorMap) {
+  const basinSizes = []
+  for (const point of floorMap.findLowPoints()) {
+    basinSizes.push(floorMap.basinSizeAt(point))
+  }
+  basinSizes.sort((a, b) => b - a)
+  return basinSizes[0] * basinSizes[1] * basinSizes[2]
 }
 
 class FloorMap {
@@ -20,29 +28,29 @@ class FloorMap {
     const result = []
     for (let i = 0; i < this.h; i++) {
       for (let j = 0; j < this.w; j++) {
-        if (this.isLowPoint(i, j)) {
-          result.push({i: i, j: j})
+        if (this.isLowPoint({i, j})) {
+          result.push({i, j})
         }
       }
     }
     return result
   }
 
-  isLowPoint(i, j) {
-    const c = this.charAt(i, j)
-    for (const n of this.neighbors(i, j)) {
-      if (this.charAt(n.i, n.j) <= c) {
+  isLowPoint(point) {
+    const c = this.charAt(point)
+    for (const n of this.neighbors(point)) {
+      if (this.charAt(n) <= c) {
         return false
       }
     }
     return true
   }
 
-  charAt(i, j) {
+  charAt({i, j}) {
     return this.lines[i][j]
   }
 
-  neighbors(i, j) {
+  neighbors({i, j}) {
     const result = []
     if (0 < i) {
       result.push({i: i-1, j})
@@ -59,13 +67,49 @@ class FloorMap {
     return result
   }
 
-  riskAt(i, j) {
-    return 1+ Number(this.charAt(i, j))
+  riskAt(point) {
+    return 1 + Number(this.charAt(point))
+  }
+
+  basinSizeAt(lowPoint) {
+    let result = 0
+    const known = {}
+    const q = new Queue()
+
+    function process(point) {
+      result += 1
+      q.enqueue(point)
+      known[`${point.i}_${point.j}`] = true
+    }
+
+    process(lowPoint)
+    while (q.size() > 0 ) {
+      const point = q.dequeue()
+      for (const n of this.flowingNeighbors(point)) {
+        if (!known[`${n.i}_${n.j}`]) {
+          process(n)
+        }
+      }
+    }
+    return result
+  }
+
+  flowingNeighbors(point) {
+    const c = this.charAt(point)
+
+    const result = []
+    for (const n of this.neighbors(point)) {
+      const neighborChar = this.charAt(n)
+      if (c < neighborChar && '9' != neighborChar) {
+        result.push(n)
+      }
+    }
+    return result
   }
 }
 
-const file = readFileSync(process.argv[2], 'utf8')
-const lines = file.split('\n').slice(0, -1)
+const lines = getInputLines()
 const floorMap = new FloorMap(lines)
 
 console.log(solve_09_1(floorMap))
+console.log(solve_09_2(floorMap))
