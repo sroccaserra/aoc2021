@@ -13,7 +13,7 @@ func solve_01_1(numbers []int) int {
 	result := 0
 	for _, n := range numbers {
 		if n > previous {
-			result += 1
+			result++
 		}
 		previous = n
 	}
@@ -25,7 +25,7 @@ func solve_01_2(numbers []int) int {
 	result := 0
 	for _, n := range numbers {
 		if n+p1+p2 > p1+p2+p3 {
-			result += 1
+			result++
 		}
 		p1, p2, p3 = n, p1, p2
 	}

@@ -1,0 +1,24 @@
+{
+  "name": "aoc2021",
+  "version": "1.0.0",
+  "description": "## Learnings",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sroccaserra/aoc2021.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sroccaserra/aoc2021/issues"
+  },
+  "homepage": "https://github.com/sroccaserra/aoc2021#readme"
+}

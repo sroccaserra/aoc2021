@@ -319,6 +319,12 @@ To run Forth solutions:
 $ gforth src/01.{fs,in}
 ```
 
+To run Node.js solutions:
+
+```
+$ node src/01.{js,in}
+```
+
 ## How it started
 
 ```shell
