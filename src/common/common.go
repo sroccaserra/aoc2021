@@ -35,6 +35,7 @@ func GetParsedLines[T any](parse func(string) T) []T {
 	}
 	return result
 }
+
 func SplitToInts(sep string, s string) []int {
 	var result []int
 	for _, cs := range strings.Split(s, sep) {
@@ -88,5 +89,19 @@ func Enqueue[T any](values *[]T, v T) {
 func Dequeue[T any](values *[]T) T {
 	result := (*values)[0]
 	*values = (*values)[1:]
+	return result
+}
+
+///
+// Functions to use an array as a LIFO stack
+
+func Push[T any](values *[]T, v T) {
+	*values = append(*values, v)
+}
+
+func Pop[T any](values *[]T) T {
+	n := len(*values) - 1
+	result := (*values)[n]
+	*values = (*values)[:n]
 	return result
 }
