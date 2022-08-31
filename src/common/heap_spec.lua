@@ -1,4 +1,4 @@
-local heap = require 'src/heap'
+local heap = require 'src.common.heap'
 
 describe('Heap', function()
   it('creates an empty heap', function()

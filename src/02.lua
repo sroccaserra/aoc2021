@@ -1,4 +1,4 @@
-require 'src.common'
+require 'src.common.common'
 
 local actions = {
   forward = function(submarine, value)

@@ -1,4 +1,4 @@
-require 'src.common'
+require 'src.common.common'
 
 function solve(floor)
   local w = #floor[1]

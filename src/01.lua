@@ -1,4 +1,4 @@
-require 'src.common'
+require 'src.common.common'
 
 local huge = math.huge
 

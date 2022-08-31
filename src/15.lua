@@ -1,5 +1,5 @@
-require 'src/common'
-heap = require 'src/heap'
+require 'src.common.common'
+heap = require 'src.common.heap'
 
 local insert = heap.insert
 local remove_min = heap.remove_min
