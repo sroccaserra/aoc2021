@@ -325,6 +325,12 @@ To run Node.js solutions:
 $ node src/01.{js,in}
 ```
 
+To run C++ solutions:
+
+```
+make 01_cpp
+```
+
 ## How it started
 
 ```shell
