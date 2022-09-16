@@ -45,7 +45,8 @@ $(BUILD)/%_cpp: $(SRC)/%.cpp $(SRC)/common/common.h
 
 .PRECIOUS: $(BUILD)/%_rs
 $(BUILD)/%_rs: $(SRC)/%.rs $(SRC)/common/common.rs
-	rustc $< -o $@
+	rustc -O -o $@ $<
+	strip $@
 
 .PHONY: %_rs
 %_rs: $(BUILD)/%_rs

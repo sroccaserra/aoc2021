@@ -263,6 +263,81 @@ References:
 - Macros ~ <https://gforth.org/manual/Macros.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
+### Rust
+
+- The iterator returned by `into_iter` may yield any of `T`, `&T` or `&mut T`,
+  depending on the context.
+- The iterator returned by `iter will` yield `&T`, by convention.
+- The iterator returned by `iter_mut` will yield `&mut T`, by convention.
+
+The argument to a `for` loop must implement `IntoIterator`. There are two
+different implementations of `IntoIterator` for `Vec` and `&Vec`. You get
+values for `Vec` and references for `&Vec` because that's how the iterators are
+defined.
+
+```
+impl<T> IntoIterator for Vec<T> {
+    type Item = T;
+    type IntoIter = IntoIter<T>
+}
+
+impl<'a, T> IntoIterator for &'a Vec<T> {
+    type Item = &'a T;
+    type IntoIter = Iter<'a, T>
+}
+```
+
+When you use `a_vector` inside a `for..in` loop, Rust will call the
+`IntoIterator::into_iter` trait method of the `Vec`, which takes ownership of
+`self`. Therefore you cannot use `a_vector` afterwards.
+
+```
+use std::iter::IntoIterator;
+
+// these are equivalent
+for i in a_vector { /* ... */ }
+for i in IntoIterator::into_iter(a_vector) { /* ... */ }
+```
+
+The index operator, on the other hands, calls the `Index::index` trait method
+of the `Vec`, which takes `self` by reference. Additionally, it automatically
+dereferences the value, so that if the items inside the vector implement
+`Copy`, they will be copied out of the vector instead of borrowed (you need to
+explicitly borrow if you want a reference):
+
+```
+use std::ops::Index;
+
+// these are equivalent
+let x = a_vector[0];
+let x = *Index::index(&a_vector, 0);
+
+// these are equivalent
+let x = &a_vector[0];
+let x = Index::index(&a_vector, 0);
+```
+
+References:
+
+- The Rust Programming Language (Book) ~ <https://doc.rust-lang.org/book/title-page.html>
+- Rust by Example ~ <https://doc.rust-lang.org/stable/rust-by-example/>
+- The Rust Standard Library ~ <https://doc.rust-lang.org/std/index.html>
+- The Rust Reference ~ <https://doc.rust-lang.org/reference/index.html>
+- `std::ops::Index` ~ <https://doc.rust-lang.org/std/ops/trait.Index.html>
+- `std::ops::Index::index` ~ <https://doc.rust-lang.org/std/ops/trait.Index.html#tymethod.index>
+- `std::iter::IntoIterrator::into_iter` ~ <https://doc.rust-lang.org/std/iter/trait.IntoIterator.html#tymethod.into_iter>
+- Module Source Filenames ~ <https://doc.rust-lang.org/reference/items/modules.html#module-source-filenames>
+- Rust by Example - Read lines ~ <https://doc.rust-lang.org/rust-by-example/std_misc/file/read_lines.html>
+
+- Rustlings ~ <https://github.com/rust-lang/rustlings/>
+- rust-analyzer ~ <https://github.com/rust-lang/rust-analyzer>
+- Nom parser ~ <https://github.com/Geal/nom>
+- A Gentle Introduction to Rust ~ <https://stevedonovan.github.io/rust-gentle-intro/readme.html>
+
+- `iter`, `into_iter`, `iter_mut` ~ <https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter>
+- Vector or Vector reference to `for` loop ~ <https://stackoverflow.com/questions/43036279/what-does-it-mean-to-pass-in-a-vector-into-a-for-loop-versus-a-reference-to-a>
+- Vectors borrowing and ownership ~ <https://stackoverflow.com/questions/61169889/vectors-borrowing-and-ownership>
+
 ## How to run
 
 To run Python solutions:
