@@ -298,7 +298,7 @@ $ scheme --libdirs src --script src/01.{ss,in}
 To run uxn solutions:
 
 ```
-$ make 01
+$ make 01_tal
 ```
 
 To run Elixir solutions:
@@ -328,7 +328,7 @@ $ node src/01.{js,in}
 To run C++ solutions:
 
 ```
-make 01_cpp
+$ make 01_cpp
 ```
 
 ## How it started
