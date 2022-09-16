@@ -331,6 +331,12 @@ To run C++ solutions:
 $ make 01_cpp
 ```
 
+To run Rust solutions:
+
+```
+$ make 01_rs
+```
+
 ## How it started
 
 ```shell

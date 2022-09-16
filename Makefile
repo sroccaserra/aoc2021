@@ -39,3 +39,14 @@ $(BUILD)/%_cpp: $(SRC)/%.cpp $(SRC)/common/common.h
 .PHONY: %_cpp
 %_cpp: $(BUILD)/%_cpp
 	@$< src/$*.in
+
+##
+# Rust
+
+.PRECIOUS: $(BUILD)/%_rs
+$(BUILD)/%_rs: $(SRC)/%.rs $(SRC)/common/common.rs
+	rustc $< -o $@
+
+.PHONY: %_rs
+%_rs: $(BUILD)/%_rs
+	@$< src/$*.in
