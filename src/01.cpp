@@ -1,18 +1,15 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <functional>
 
 #include "common/common.h"
 
-using namespace std;
+const int HUGE = 99999;
 
-const auto HUGE = 99999l;
-
-long solve_1(vector<long> numbers) {
-    auto previous = HUGE;
-    auto result = 0l;
-    for (long n : numbers) {
+int solve_1(const std::vector<int> &numbers) {
+    int previous = HUGE;
+    int result = 0l;
+    for (const int n : numbers) {
         if (n > previous) {
             ++result;
         }
@@ -21,10 +18,10 @@ long solve_1(vector<long> numbers) {
     return result;
 }
 
-long solve_2(vector<long> numbers) {
-    long p_1 = HUGE, p_2 = HUGE, p_3 = HUGE;
-    long result = 0l;
-    for (long n : numbers) {
+int solve_2(const std::vector<int> &numbers) {
+    int p_1 = HUGE, p_2 = HUGE, p_3 = HUGE;
+    int result = 0l;
+    for (const int n : numbers) {
         if (n + p_1 + p_2 > p_1 + p_2 + p_3) {
             ++result;
         }
@@ -35,10 +32,9 @@ long solve_2(vector<long> numbers) {
     return result;
 }
 
-int main(int argc, char** argv)
-{
-    function<long(string)> parse = [](string s) {return stoi(s);};
-    vector<long> numbers = getParsedLines(argv[1], parse);
-    cout << solve_1(numbers) << endl;
-    cout << solve_2(numbers) << endl;
+int main(int argc, char** argv) {
+    std::function<int(std::string)> parse = [](std::string s) {return stoi(s);};
+    std::vector<int> numbers = getParsedLines(argv[1], parse);
+    std::cout << solve_1(numbers) << std::endl;
+    std::cout << solve_2(numbers) << std::endl;
 }

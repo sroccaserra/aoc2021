@@ -263,6 +263,12 @@ References:
 - Macros ~ <https://gforth.org/manual/Macros.html>
 - The Forth Foundation Library (FFL) ~ <https://github.com/RickCarlino/ffl>
 
+### C++
+
+Solutions:
+
+- <https://github.com/RiotNu/advent-of-code>
+
 ### Rust
 
 - The iterator returned by `into_iter` may yield any of `T`, `&T` or `&mut T`,

@@ -34,7 +34,7 @@ $(BUILD)/%.rom: $(SRC)/%.tal $(BUILD) $(SRC)/common.tal $(SRC)/macros.tal $(LIB)
 
 .PRECIOUS: $(BUILD)/%_cpp
 $(BUILD)/%_cpp: $(SRC)/%.cpp $(SRC)/common/common.h
-	g++ $< -o $@ --std=c++20
+	g++ -Wall -Wpedantic -fsanitize=address,leak -std=c++20 -o $@ $<
 
 .PHONY: %_cpp
 %_cpp: $(BUILD)/%_cpp
