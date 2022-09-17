@@ -267,7 +267,7 @@ References:
 
 - The iterator returned by `into_iter` may yield any of `T`, `&T` or `&mut T`,
   depending on the context.
-- The iterator returned by `iter will` yield `&T`, by convention.
+- The iterator returned by `iter` will yield `&T`, by convention.
 - The iterator returned by `iter_mut` will yield `&mut T`, by convention.
 
 The argument to a `for` loop must implement `IntoIterator`. There are two
@@ -337,6 +337,7 @@ References:
 - `iter`, `into_iter`, `iter_mut` ~ <https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter>
 - Vector or Vector reference to `for` loop ~ <https://stackoverflow.com/questions/43036279/what-does-it-mean-to-pass-in-a-vector-into-a-for-loop-versus-a-reference-to-a>
 - Vectors borrowing and ownership ~ <https://stackoverflow.com/questions/61169889/vectors-borrowing-and-ownership>
+- Differences between String and str ~ <https://stackoverflow.com/questions/24158114/what-are-the-differences-between-rusts-string-and-str>
 
 ## How to run
 

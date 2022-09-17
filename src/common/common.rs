@@ -1,13 +1,13 @@
-use std::env;
+use std::env::{args};
 use std::fs::File;
-use std::io::{self, BufRead};
+use std::io::{BufRead, BufReader};
 
 pub fn get_parsed_lines<T, F: Fn(String) -> T>(parse: F) -> Vec<T> {
-    let args: Vec<String> = env::args().collect();
-    let filename = &args[1];
+    let filename = args().nth(1).unwrap();
     let file = File::open(filename).unwrap();
-    return io::BufReader::new(file)
+
+    return BufReader::new(file)
         .lines()
         .map(|x| parse(x.unwrap()))
-        .collect::<Vec<T>>();
+        .collect();
 }
