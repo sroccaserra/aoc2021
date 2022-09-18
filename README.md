@@ -351,6 +351,15 @@ Interesting SO questions:
 - Vectors borrowing and ownership ~ <https://stackoverflow.com/questions/61169889/vectors-borrowing-and-ownership>
 - Differences between String and str ~ <https://stackoverflow.com/questions/24158114/what-are-the-differences-between-rusts-string-and-str>
 
+### GNU Smalltalk
+
+#### References
+
+- GNU Smalltalk Library Reference ~ <https://www.gnu.org/software/smalltalk/manual-base/gst-base.html>
+- Turorial ~ <https://www.gnu.org/software/smalltalk/manual/gst.html#Tutorial>
+- Creating Classes ~ <https://www.gnu.org/software/smalltalk/manual/html_node/Creating-classes.html>
+- OrderedCollection ~ <https://www.gnu.org/software/smalltalk/manual-base/html_node/OrderedCollection.html#OrderedCollection>
+
 ## How to run
 
 To run Python solutions:
@@ -423,6 +432,12 @@ To run Rust solutions:
 
 ```
 $ make 01_rs
+```
+
+To run GNU Smalltalk solutions:
+
+```
+$ gst src/01.st -a src/01.in
 ```
 
 ## How it started
