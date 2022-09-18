@@ -51,3 +51,10 @@ $(BUILD)/%_rs: $(SRC)/%.rs $(SRC)/common/common.rs
 .PHONY: %_rs
 %_rs: $(BUILD)/%_rs
 	@$< src/$*.in
+
+##
+# GNU Smalltalk
+
+.PHONY: %_st
+%_st:
+	@gst --no-gc-message $(SRC)/common/common.st $(SRC)/$*.st -a $(SRC)/$*.in

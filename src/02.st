@@ -1,9 +1,6 @@
-Object subclass: Submarine [
+AOCObject subclass: Submarine [
     | hpos depth_1 depth_2 aim |
-    Submarine class >> new [
-        ^super new init ; yourself
-    ]
-    init [
+    initialize [
         hpos := 0.
         depth_1 := 0.
         depth_2 := 0.
@@ -39,18 +36,10 @@ Object subclass: Submarine [
     ]
 ]
 
-Object subclass: Puzzle02 [
+AOCObject subclass: Puzzle02Solver [
     | commands |
-    Puzzle02 class >> new [
-        ^super new init ; yourself
-    ]
-    init [
-        | f filename |
+    initialize [
         commands := OrderedCollection new.
-        filename := Smalltalk arguments at: 1.
-        f := FileStream open: filename mode: FileStream read.
-        f linesDo: [ :line | commands add: (self commandFrom: line). ].
-        f close.
     ]
     solve [
         | submarine |
@@ -59,14 +48,17 @@ Object subclass: Puzzle02 [
         ^{ (submarine hpos) * (submarine depth_1).
            (submarine hpos) * (submarine depth_2) }
     ]
-    commandFrom: line [
-        | parts |
+    processInputLine: line [
+        | parts command |
         parts := line substrings.
-        ^Dictionary from: { #direction -> parts first.
-                            #value -> parts last asNumber }
+        command := Dictionary from: { #direction -> parts first.
+                                      #value -> parts last asNumber }.
+        commands add: command.
     ]
 ]
 
-results := Puzzle02 new solve.
+solver := Puzzle02Solver new.
+InputFileReader readInputFor: solver.
+results := solver solve.
 Transcript show: (results first) asString ; nl.
 Transcript show: (results last) asString ; nl.

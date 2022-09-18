@@ -353,6 +353,8 @@ Interesting SO questions:
 
 ### GNU Smalltalk
 
+Apparently, GNU Smalltalk classes don't call `initialize` methods in `new` (?)
+
 The `#inspect` message is useful in GNU Smalltalk too, it prints the receiver's
 value to `stdout`.
 
@@ -381,6 +383,7 @@ forward: aValue`.
 - Creating Classes ~ <https://www.gnu.org/software/smalltalk/manual/html_node/Creating-classes.html>
 - OrderedCollection ~ <https://www.gnu.org/software/smalltalk/manual-base/html_node/OrderedCollection.html#OrderedCollection>
 - The Existing Hierarchy ~ <https://www.gnu.org/software/smalltalk/manual/html_node/The-existing-hierarchy.html>
+- Sources ~ <https://github.com/gnu-smalltalk/smalltalk>
 
 ## How to run
 
@@ -459,7 +462,7 @@ $ make 01_rs
 To run GNU Smalltalk solutions:
 
 ```
-$ gst src/01.st -a src/01.in
+$ make 01_st
 ```
 
 ## How it started

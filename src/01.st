@@ -1,23 +1,9 @@
-Object subclass: Puzzle01 [
+AOCObject subclass: Puzzle01Solver [
     | numbers |
-    Puzzle01 class >> new [
-        <category: 'instance creation'>
-        | r |
-        r := super new.
-        r init.
-        ^r
-    ]
-    init [
-        <category: 'initialization'>
-        | f filename |
+    initialize [
         numbers := OrderedCollection new.
-        filename := Smalltalk arguments at: 1.
-        f := FileStream open: filename mode: FileStream read.
-        f linesDo: [ :line | numbers add:(line asNumber). ].
-        f close.
     ]
     solve1 [
-        <category: 'solving'>
         | result previous |
         result := 0.
         previous := 9999.
@@ -26,7 +12,6 @@ Object subclass: Puzzle01 [
         ^result
     ]
     solve2 [
-        <category: 'solving'>
         | result p1 p2 p3 |
         result := 0.
         p1 := 9999.
@@ -38,8 +23,12 @@ Object subclass: Puzzle01 [
                            p1 := n ].
         ^result
     ]
+    processInputLine: line [
+        numbers add: (line asNumber).
+    ]
 ]
 
-p := Puzzle01 new.
-Transcript show: p solve1 asString ; nl.
-Transcript show: p solve2 asString ; nl.
+solver := Puzzle01Solver new.
+InputFileReader readInputFor: solver.
+Transcript show: solver solve1 asString ; nl.
+Transcript show: solver solve2 asString ; nl.
