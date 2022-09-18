@@ -90,7 +90,7 @@ See also:
 - The `do` special form looks powerful:
     - <http://www.r6rs.org/final/html/r6rs-lib/r6rs-lib-Z-H-6.html>
 
-References:
+#### References
 
 - <http://www.r6rs.org/>
 - <http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-2.html>
@@ -173,7 +173,7 @@ local key = string.format("%d %d %d %d", p1_pos, p1_score, p2_pos, p2_score)
 - Use `STH` and `STHr` to move values to and from the return stack
 - Use `LITr` to push values like `#00` to the return stack
 
-References:
+#### References
 
 - <https://100r.co/site/uxn.html>
 - <https://wiki.xxiivv.com/site/uxntal.html>
@@ -206,7 +206,7 @@ Solutions:
 
 ### Go
 
-References:
+#### References
 
 - Documentation ~ <https://go.dev/doc/>
 - A Tour of Go ~ <https://go.dev/tour/list>
@@ -243,7 +243,7 @@ ok
 <1> 3  ok
 ```
 
-References:
+#### References
 
 - Gforth Manual ~ <https://gforth.org/manual/index.html>
 - Create ~ <https://gforth.org/manual/CREATE.html>
@@ -323,7 +323,9 @@ let x = &a_vector[0];
 let x = Index::index(&a_vector, 0);
 ```
 
-References:
+#### References
+
+Standard doc links:
 
 - The Rust Programming Language (Book) ~ <https://doc.rust-lang.org/book/title-page.html>
 - Rust by Example ~ <https://doc.rust-lang.org/stable/rust-by-example/>
@@ -335,10 +337,14 @@ References:
 - Module Source Filenames ~ <https://doc.rust-lang.org/reference/items/modules.html#module-source-filenames>
 - Rust by Example - Read lines ~ <https://doc.rust-lang.org/rust-by-example/std_misc/file/read_lines.html>
 
+Other refs & tools:
+
 - Rustlings ~ <https://github.com/rust-lang/rustlings/>
 - rust-analyzer ~ <https://github.com/rust-lang/rust-analyzer>
 - Nom parser ~ <https://github.com/Geal/nom>
 - A Gentle Introduction to Rust ~ <https://stevedonovan.github.io/rust-gentle-intro/readme.html>
+
+Interesting SO questions:
 
 - `iter`, `into_iter`, `iter_mut` ~ <https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter>
 - Vector or Vector reference to `for` loop ~ <https://stackoverflow.com/questions/43036279/what-does-it-mean-to-pass-in-a-vector-into-a-for-loop-versus-a-reference-to-a>
