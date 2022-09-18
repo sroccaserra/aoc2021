@@ -353,12 +353,34 @@ Interesting SO questions:
 
 ### GNU Smalltalk
 
+The `#inspect` message is useful in GNU Smalltalk too, it prints the receiver's
+value to `stdout`.
+
+Two ways to send a dynamic message to an object. Let `aSelector`, a symbol of
+the message to be sent, and `anObjet`, the receiver:
+
+```
+anObject perform: aSelector with: aValue.
+```
+
+or:
+
+```
+aMessage := Message selector: aSelector argument: aValue.
+aMessage sendTo: anObject.
+```
+
+For example, if `anObject` was `aSubmarine`, and the selector was `#forward:`,
+`aSubmarine perform: #forward: with: aValue` would be equivalent to `aSubmarine
+forward: aValue`.
+
 #### References
 
 - GNU Smalltalk Library Reference ~ <https://www.gnu.org/software/smalltalk/manual-base/gst-base.html>
 - Turorial ~ <https://www.gnu.org/software/smalltalk/manual/gst.html#Tutorial>
 - Creating Classes ~ <https://www.gnu.org/software/smalltalk/manual/html_node/Creating-classes.html>
 - OrderedCollection ~ <https://www.gnu.org/software/smalltalk/manual-base/html_node/OrderedCollection.html#OrderedCollection>
+- The Existing Hierarchy ~ <https://www.gnu.org/software/smalltalk/manual/html_node/The-existing-hierarchy.html>
 
 ## How to run
 
