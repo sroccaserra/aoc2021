@@ -22,7 +22,7 @@ fn solve(commands: &Vec<Command>) -> (i32, i32) {
             _ => panic!(),
         }
     }
-    return (hpos * depth_1, hpos * depth_2);
+    (hpos * depth_1, hpos * depth_2)
 }
 
 struct Command {
@@ -32,10 +32,10 @@ struct Command {
 
 fn parse(line: String) -> Command {
     let chunks: Vec<_> = line.split_whitespace().collect();
-    return Command {
-        direction: chunks[0].to_string(),
-        value: chunks[1].parse().unwrap(),
-    };
+    let direction = chunks[0].to_string();
+    let value = chunks[1].parse().unwrap();
+
+    Command{ direction, value }
 }
 
 fn main() {

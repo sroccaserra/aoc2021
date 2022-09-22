@@ -14,7 +14,7 @@ fn solve_1(numbers: &Vec<i32>) -> i32 {
         }
         previous = n;
     }
-    return result;
+    result
 }
 
 fn solve_2(numbers: &Vec<i32>) -> i32 {
@@ -26,7 +26,7 @@ fn solve_2(numbers: &Vec<i32>) -> i32 {
         }
         (p_1, p_2, p_3) = (n, p_1, p_2);
     }
-    return result;
+    result
 }
 
 fn main() {
