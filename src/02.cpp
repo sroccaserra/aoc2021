@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <functional>
 
 #include "common/common.h"
 
@@ -45,8 +44,7 @@ Command parse(std::string line) {
 }
 
 int main(int argc, char** argv) {
-    std::function<Command (std::string)> f = parse;
-    std::vector<Command> commands = getParsedLines(argv[1], f);
+    std::vector<Command> commands = getParsedLines(argv[1], parse);
     std::cout << solve(commands).first << std::endl;
     std::cout << solve(commands).second << std::endl;
 }

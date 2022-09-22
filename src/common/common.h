@@ -4,14 +4,16 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <functional>
 
 template<typename T>
-std::vector<T> getParsedLines(char* filename, std::function<T (std::string)> parse_fn) {
+using parse_fn = T(*)(std::string);
+
+template<typename T>
+std::vector<T> getParsedLines(char* filename, parse_fn<T> parse) {
     std::ifstream infile(filename);
     std::vector<T> numbers = {};
     for (std::string line; std::getline(infile, line); ) {
-        numbers.emplace_back(parse_fn(line));
+        numbers.emplace_back(parse(line));
     }
     return numbers;
 }

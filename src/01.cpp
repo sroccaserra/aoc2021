@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <functional>
 
 #include "common/common.h"
 
@@ -33,7 +32,7 @@ int solve_2(const std::vector<int> &numbers) {
 }
 
 int main(int argc, char** argv) {
-    std::function<int(std::string)> parse = [](std::string s) {return stoi(s);};
+    parse_fn<int> parse = [](std::string s) {return std::stoi(s);};
     std::vector<int> numbers = getParsedLines(argv[1], parse);
     std::cout << solve_1(numbers) << std::endl;
     std::cout << solve_2(numbers) << std::endl;
