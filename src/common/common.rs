@@ -8,6 +8,7 @@ pub fn get_parsed_lines<T, F: Fn(String) -> T>(parse: F) -> Vec<T> {
 
     BufReader::new(file)
         .lines()
-        .map(|x| parse(x.unwrap()))
+        .map(Result::unwrap)
+        .map(parse)
         .collect()
 }

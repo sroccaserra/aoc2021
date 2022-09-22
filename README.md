@@ -334,6 +334,7 @@ Standard doc links:
 - `std::ops::Index` ~ <https://doc.rust-lang.org/std/ops/trait.Index.html>
 - `std::ops::Index::index` ~ <https://doc.rust-lang.org/std/ops/trait.Index.html#tymethod.index>
 - `std::iter::IntoIterrator::into_iter` ~ <https://doc.rust-lang.org/std/iter/trait.IntoIterator.html#tymethod.into_iter>
+- `std::result` ~ <https://doc.rust-lang.org/std/result/>
 - Module Source Filenames ~ <https://doc.rust-lang.org/reference/items/modules.html#module-source-filenames>
 - Rust by Example - Read lines ~ <https://doc.rust-lang.org/rust-by-example/std_misc/file/read_lines.html>
 
