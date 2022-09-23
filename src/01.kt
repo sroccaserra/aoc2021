@@ -1,5 +1,4 @@
 import java.io.File
-import java.util.Arrays
 
 const val HUGE = 9999
 
@@ -33,7 +32,7 @@ fun solve2(numbers: List<Int>): Int {
     return result
 }
 
-fun getParsedLines(filename: String, parse: (String) -> Int): List<Int> {
+fun <T> getParsedLines(filename: String, parse: (String) -> T): List<T> {
     return File(filename)
         .readLines()
         .map(parse)
