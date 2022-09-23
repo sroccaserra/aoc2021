@@ -63,8 +63,8 @@ $(BUILD)/%_rs: $(SRC)/%.rs $(SRC)/common/common.rs
 # Java
 
 .PRECIOUS: $(BUILD)/%.class
-$(BUILD)/%.class: $(SRC)/%.java
-	javac -d $(BUILD) $<
+$(BUILD)/%.class: $(SRC)/%.java $(SRC)/common/*.java
+	javac -d $(BUILD) $< $(SRC)/common/*.java
 
 .PHONY: %_java
 %_java: $(BUILD)/Day%.class

@@ -1,13 +1,10 @@
-import java.io.IOException;
-import java.lang.Integer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.lang.String.format;
+
+import aoc.common.InputReader;
+import aoc.common.Solver;
 
 public class Day01
 {
@@ -57,21 +54,5 @@ public class Day01
         InputReader.readLines(args[0], solver);
         System.out.println(format("%d", solver.solve1()));
         System.out.println(format("%d", solver.solve2()));
-    }
-}
-
-interface Solver {
-    void processLine(String line);
-}
-
-class InputReader {
-    public static void readLines(String filename, Solver solver) {
-        final Path path = Paths.get(filename);
-        try (final Stream<String> lines = Files.lines(path)) {
-            lines.forEachOrdered(line -> solver.processLine(line));
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
