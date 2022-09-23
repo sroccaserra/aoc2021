@@ -265,6 +265,11 @@ ok
 
 ### C++
 
+#### References
+
+- C++ Reference ~ <https://en.cppreference.com/w/>
+- Fluent C++ Posts ~ <https://www.fluentcpp.com/posts/>
+
 Solutions:
 
 - <https://github.com/RiotNu/advent-of-code>
