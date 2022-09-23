@@ -69,3 +69,14 @@ $(BUILD)/%.class: $(SRC)/%.java
 .PHONY: %_java
 %_java: $(BUILD)/Day%.class
 	@java --class-path=$(BUILD) Day$* src/$*.in
+
+##
+# Kotlin
+
+.PRECIOUS: $(BUILD)/%.jar
+$(BUILD)/%.jar: $(SRC)/%.kt
+	kotlinc $< -d $@
+
+.PHONY: %_kt
+%_kt: $(BUILD)/%.jar
+	@kotlin -classpath $(BUILD)/$*.jar _$*Kt src/$*.in

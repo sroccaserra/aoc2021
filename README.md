@@ -387,6 +387,12 @@ forward: aValue`.
 - The Existing Hierarchy ~ <https://www.gnu.org/software/smalltalk/manual/html_node/The-existing-hierarchy.html>
 - Sources ~ <https://github.com/gnu-smalltalk/smalltalk>
 
+### Kotlin
+
+#### References
+
+- Kotlin command-line Compiler ~ <https://kotlinlang.org/docs/command-line.html>
+
 ## How to run
 
 To run Python solutions:
@@ -465,6 +471,18 @@ To run GNU Smalltalk solutions:
 
 ```
 $ make 01_st
+```
+
+To run Java solutions:
+
+```
+$ make 01_java
+```
+
+To run Kotlin solutions:
+
+```
+$ make 01_kt
 ```
 
 ## How it started
