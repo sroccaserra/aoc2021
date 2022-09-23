@@ -396,6 +396,7 @@ forward: aValue`.
 
 #### References
 
+- Data Classes ~ <https://kotlinlang.org/docs/data-classes.html>
 - Kotlin command-line Compiler ~ <https://kotlinlang.org/docs/command-line.html>
 
 ## How to run
