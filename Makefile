@@ -74,8 +74,8 @@ $(BUILD)/%.class: $(SRC)/%.java
 # Kotlin
 
 .PRECIOUS: $(BUILD)/%.jar
-$(BUILD)/%.jar: $(SRC)/%.kt
-	kotlinc $< -d $@
+$(BUILD)/%.jar: $(SRC)/%.kt $(SRC)/common/*.kt
+	kotlinc $< $(SRC)/common/*.kt -d $@
 
 .PHONY: %_kt
 %_kt: $(BUILD)/%.jar

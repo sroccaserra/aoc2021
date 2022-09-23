@@ -1,4 +1,5 @@
 import java.io.File
+import aoc.common.getParsedLines
 
 const val HUGE = 9999
 
@@ -30,12 +31,6 @@ fun solve2(numbers: List<Int>): Int {
     }
 
     return result
-}
-
-fun <T> getParsedLines(filename: String, parse: (String) -> T): List<T> {
-    return File(filename)
-        .readLines()
-        .map(parse)
 }
 
 fun main(args: Array<String>) {
