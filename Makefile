@@ -58,3 +58,14 @@ $(BUILD)/%_rs: $(SRC)/%.rs $(SRC)/common/common.rs
 .PHONY: %_st
 %_st:
 	@gst --no-gc-message $(SRC)/common/common.st $(SRC)/$*.st -a $(SRC)/$*.in
+
+##
+# Java
+
+.PRECIOUS: $(BUILD)/%.class
+$(BUILD)/%.class: $(SRC)/%.java
+	javac -d $(BUILD) $<
+
+.PHONY: %_java
+%_java: $(BUILD)/Day%.class
+	@java --class-path=$(BUILD) Day$* src/$*.in
