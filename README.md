@@ -24,6 +24,7 @@ Contents:
 - [#rust](#rust)
 - [#gnu-smalltalk](#gnu-smalltalk)
 - [#kotlin](#kotlin)
+- [#ruby](#ruby)
 - [#how-to-run](#how-to-run)
 
 ### Algorithms
@@ -416,6 +417,12 @@ forward: aValue`.
 - Data Classes ~ <https://kotlinlang.org/docs/data-classes.html>
 - Kotlin command-line Compiler ~ <https://kotlinlang.org/docs/command-line.html>
 
+### Ruby
+
+#### References
+
+- Ruby Syle Guide ~ <https://github.com/airbnb/ruby>
+
 ## How to run
 
 To run Python solutions:
@@ -506,6 +513,12 @@ To run Kotlin solutions:
 
 ```
 $ make 01_kt
+```
+
+To run Ruby solutions:
+
+```
+$ ruby src/01.{rb,in}
 ```
 
 ## How it started
