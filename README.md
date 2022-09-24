@@ -9,6 +9,23 @@ See also:
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
 
+Contents:
+
+- [#algorithms](#algorithms)
+- [#linux](#linux)
+- [#scheme](#scheme)
+- [#lua](#lua)
+- [#python](#python)
+- [#haskell](#haskell)
+- [#uxn](#uxn)
+- [#go](#go)
+- [#forth](#forth)
+- [#c++](#c)
+- [#rust](#rust)
+- [#gnu-smalltalk](#gnu-smalltalk)
+- [#kotlin](#kotlin)
+- [#how-to-run](#how-to-run)
+
 ### Algorithms
 
 - General problem solving: How to Solve It (book) ~ <https://en.wikipedia.org/wiki/How_to_Solve_It>
