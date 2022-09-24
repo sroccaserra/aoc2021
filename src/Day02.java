@@ -8,18 +8,14 @@ public class Day02
 {
     private final static class Day02Solver implements Solver
     {
-        private final List<Command> commands;
+        private final List<Command> commands = new ArrayList<>();
 
-        public Day02Solver() {
-            commands = new ArrayList<>();
-        }
-
-        public Results solve() {
-            Integer hpos = 0;
-            Integer depth_1 = 0;
-            Integer depth_2 = 0;
-            Integer aim = 0;
-            for (final Command command : commands) {
+        Results solve() {
+            var hpos = 0;
+            var depth_1 = 0;
+            var depth_2 = 0;
+            var aim = 0;
+            for (final var command : commands) {
                 switch (command.direction) {
                     case "forward":
                         hpos += command.value;
@@ -39,34 +35,18 @@ public class Day02
             return new Results(hpos * depth_1, hpos * depth_2);
         }
 
+        @Override
         public void processLine(String line) {
             final String[] parts = line.split(" ");
             commands.add(new Command(parts[0], Integer.valueOf(parts[1])));
         }
     }
 
-    private static class Command {
-        public final String direction;
-        public final Integer value;
-
-        public Command(String direction, Integer value) {
-            this.direction = direction;
-            this.value = value;
-        }
-    }
-
-    private static class Results {
-        public final Integer first;
-        public final Integer second;
-
-        public Results(Integer first, Integer second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
+    private static record Command(String direction, Integer value) {}
+    private static record Results(Integer first, Integer second) {}
 
     public static void main(String[] args) {
-        final Day02Solver solver = new Day02Solver();
+        final var solver = new Day02Solver();
         InputReader.readLines(args[0], solver);
         final Results results = solver.solve();
         System.out.println(results.first);

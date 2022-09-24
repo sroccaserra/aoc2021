@@ -10,17 +10,13 @@ public class Day01
 {
     private final static class Day01Solver implements Solver
     {
-        private final List<Integer> numbers;
+        private final List<Integer> numbers = new ArrayList<>();
         private final static Integer HUGE = 99999;
 
-        public Day01Solver() {
-            numbers = new ArrayList<>();
-        }
-
-        public Integer solve1() {
-            Integer result = 0;
-            Integer previous = HUGE;
-            for (final Integer n : numbers) {
+        Integer solve1() {
+            var result = 0;
+            var previous = HUGE;
+            for (final var n : numbers) {
                 if (n > previous) {
                     ++result;
                 }
@@ -29,10 +25,10 @@ public class Day01
             return result;
         }
 
-        public Integer solve2() {
-            Integer result = 0;
+        Integer solve2() {
+            var result = 0;
             Integer p1 = HUGE, p2 = HUGE, p3 = HUGE;
-            for (final Integer n : numbers) {
+            for (final var n : numbers) {
                 if (n + p1 + p2 > p1 + p2 + p3) {
                     ++result;
                 }
@@ -43,14 +39,14 @@ public class Day01
             return result;
         }
 
+        @Override
         public void processLine(String line) {
             numbers.add(Integer.valueOf(line));
         }
-
     }
 
     public static void main(String[] args) {
-        final Day01Solver solver = new Day01Solver();
+        final var solver = new Day01Solver();
         InputReader.readLines(args[0], solver);
         System.out.println(format("%d", solver.solve1()));
         System.out.println(format("%d", solver.solve2()));
