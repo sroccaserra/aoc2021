@@ -31,7 +31,7 @@ std::pair<int, int> solve(const std::vector<Command> &commands) {
     return std::pair(hpos * depth_1, hpos * depth_2);
 }
 
-Command parse(std::string line) {
+Command parse(const std::string &line) {
     std::stringstream lineStream{line};
 
     std::string direction;
@@ -45,6 +45,7 @@ Command parse(std::string line) {
 
 int main(int argc, char** argv) {
     std::vector<Command> commands = getParsedLines(argv[1], parse);
-    std::cout << solve(commands).first << std::endl;
-    std::cout << solve(commands).second << std::endl;
+    const auto results = solve(commands);
+    std::cout << results.first << std::endl;
+    std::cout << results.second << std::endl;
 }

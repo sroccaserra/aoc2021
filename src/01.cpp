@@ -20,7 +20,7 @@ int solve_1(const std::vector<int> &numbers) {
 int solve_2(const std::vector<int> &numbers) {
     int p_1 = HUGE, p_2 = HUGE, p_3 = HUGE;
     int result = 0l;
-    for (const int n : numbers) {
+    for (const auto n : numbers) {
         if (n + p_1 + p_2 > p_1 + p_2 + p_3) {
             ++result;
         }
@@ -32,8 +32,8 @@ int solve_2(const std::vector<int> &numbers) {
 }
 
 int main(int argc, char** argv) {
-    parse_fn<int> parse = [](std::string s) {return std::stoi(s);};
-    std::vector<int> numbers = getParsedLines(argv[1], parse);
+    parse_fn<int> parse = [](const std::string &s) {return std::stoi(s);};
+    const auto numbers = getParsedLines(argv[1], parse);
     std::cout << solve_1(numbers) << std::endl;
     std::cout << solve_2(numbers) << std::endl;
 }

@@ -6,7 +6,7 @@
 #include <fstream>
 
 template<typename T>
-using parse_fn = T(*)(std::string);
+using parse_fn = T(*)(const std::string&);
 
 template<typename T>
 std::vector<T> getParsedLines(char* filename, parse_fn<T> parse) {
