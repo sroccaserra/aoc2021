@@ -6,7 +6,7 @@ import static java.lang.String.format;
 import aoc.common.InputReader;
 import aoc.common.Solver;
 
-public class Day01
+public class _01
 {
     private final static class Day01Solver implements Solver
     {

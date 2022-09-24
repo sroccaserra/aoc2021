@@ -67,8 +67,8 @@ $(BUILD)/%.class: $(SRC)/%.java $(SRC)/common/*.java
 	javac -d $(BUILD) $< $(SRC)/common/*.java
 
 .PHONY: %_java
-%_java: $(BUILD)/Day%.class
-	@java --class-path=$(BUILD) Day$* src/$*.in
+%_java: $(BUILD)/_%.class
+	@java --class-path=$(BUILD) _$* src/$*.in
 
 ##
 # Kotlin

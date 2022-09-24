@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import aoc.common.InputReader;
 import aoc.common.Solver;
 
-public class Day02
+public class _02
 {
     private final static class Day02Solver implements Solver
     {
