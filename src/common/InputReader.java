@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class InputReader {
-    public static void readLines(String filename, Solver solver) {
+    public static void processInputLines(String filename, Solver solver) {
         final var path = Paths.get(filename);
         try (final var lines = Files.lines(path)) {
             lines.forEachOrdered(solver::processLine);

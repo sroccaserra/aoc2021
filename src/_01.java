@@ -3,8 +3,8 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-import aoc.common.InputReader;
 import aoc.common.Solver;
+import static aoc.common.InputReader.processInputLines;
 
 public class _01 implements Solver {
     private final List<Integer> numbers = new ArrayList<>();
@@ -43,7 +43,7 @@ public class _01 implements Solver {
 
     public static void main(String[] args) {
         final var solver = new _01();
-        InputReader.readLines(args[0], solver);
+        processInputLines(args[0], solver);
         System.out.println(format("%d", solver.solve1()));
         System.out.println(format("%d", solver.solve2()));
     }

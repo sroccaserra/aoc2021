@@ -1,8 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
 
-import aoc.common.InputReader;
 import aoc.common.Solver;
+import static aoc.common.InputReader.processInputLines;
 
 public class _02 implements Solver {
     private final List<Command> commands = new ArrayList<>();
@@ -28,13 +28,12 @@ public class _02 implements Solver {
                     break;
             }
         }
-
         return new Results(hpos * depth_1, hpos * depth_2);
     }
 
     @Override
     public void processLine(String line) {
-        final String[] parts = line.split(" ");
+        final var parts = line.split(" ");
         commands.add(new Command(parts[0], Integer.valueOf(parts[1])));
     }
 
@@ -43,7 +42,7 @@ public class _02 implements Solver {
 
     public static void main(String[] args) {
         final var solver = new _02();
-        InputReader.readLines(args[0], solver);
+        processInputLines(args[0], solver);
         final var results = solver.solve();
         System.out.println(results.first);
         System.out.println(results.second);
