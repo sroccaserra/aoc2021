@@ -14,18 +14,18 @@ public class _02 implements Solver {
         var aim = 0;
         for (final var command : commands) {
             switch (command.direction) {
-                case "forward":
+                case "forward" -> {
                     hpos += command.value;
                     depth_2 +=  aim * command.value;
-                    break;
-                case "up":
+                }
+                case "up" -> {
                     depth_1 -= command.value;
                     aim -=  command.value;
-                    break;
-                case "down":
+                }
+                case "down" -> {
                     depth_1 += command.value;
                     aim +=  command.value;
-                    break;
+                }
             }
         }
         return new Results(hpos * depth_1, hpos * depth_2);
