@@ -1,3 +1,5 @@
+require './src/common/common.rb'
+
 HUGE = 9999
 
 def solve_1(numbers)
@@ -24,11 +26,8 @@ def solve_2(numbers)
   result
 end
 
-parse = lambda { |line| line.to_i }
-
 if __FILE__ == $0
-  filename = ARGV[0]
-  numbers = File.readlines(filename).map { |line| parse.call(line) }
+  numbers = get_parsed_lines(lambda { |line| line.to_i })
   puts solve_1(numbers)
   puts solve_2(numbers)
 end

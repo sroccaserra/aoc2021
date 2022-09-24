@@ -1,16 +1,18 @@
+require './src/common/common.rb'
+
 HUGE = 9999
 
 def solve(commands)
   hpos = depth_1 = depth_2 = aim = 0
   commands.each do |command|
     case command.direction
-    when "forward"
+    when 'forward'
       hpos += command.value
       depth_2 += aim * command.value
-    when "up"
+    when 'up'
       depth_1 -= command.value
       aim -= command.value
-    when "down"
+    when 'down'
       depth_1 += command.value
       aim += command.value
     end
@@ -26,8 +28,7 @@ parse = lambda do |line|
 end
 
 if __FILE__ == $0
-  filename = ARGV[0]
-  commands = File.readlines(filename).map { |line| parse.call(line) }
+  commands = get_parsed_lines(parse)
   result_1, result_2 = solve(commands)
   puts result_1
   puts result_2
