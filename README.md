@@ -489,6 +489,8 @@ Sites:
 - Linux System Call Table ~ <http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/>
 - Learning Assembly ~ <https://github.com/danbev/learning-assembly/blob/master/README.md>
 - Assembly Language, Calling Convention, and the Stack ~ <https://cs.brown.edu/courses/csci1310/2020/notes/l08.html>
+- Stack frame layout on x86-64 ~ <https://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64/>
+- Assembler Directives ~ <https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_toc.html>
 
 SO questions:
 
