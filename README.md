@@ -25,6 +25,7 @@ Contents:
 - [#gnu-smalltalk](#gnu-smalltalk)
 - [#kotlin](#kotlin)
 - [#ruby](#ruby)
+- [#x64-assembly](#x64-assembly)
 - [#how-to-run](#how-to-run)
 
 ### Algorithms
@@ -423,6 +424,77 @@ forward: aValue`.
 
 - Ruby Syle Guide ~ <https://github.com/airbnb/ruby>
 
+### x64 Assembly
+
+This runs under Linux only.
+
+See also: <https://github.com/sroccaserra/learning-x64-assembly>
+
+Register mode: `%rdi` is the contents of register `%rdi`.
+
+Immediate mode: `$0x1234` is the value `0x1234`. `$localvar` is the value of
+`localvar` (the address represented by the symbol `localvar`).
+
+Direct Memory mode: `0x1234` is the value at address `0x1234`. `localvar` is
+the value at address `localvar`.
+
+Register Indirect mode: `(%rbx)` is the value at the address contained in
+`%rbx`.
+
+When built with `as` or with `gcc -nostdlib`, command line arguments are passed
+on the stack. The number of command line arguments is at `(%rsp)`. The address
+of the name of the executable is at `8(%rsp)`. The adress of the first command
+line argument is at `16(%rsp)`, etc.
+
+When built with the stdlib (gcc default), the C runtime provides the `_start`
+entry point, so in our assembly code we would define a `main` function as entry
+point instead of `_start`.
+
+When built with the stdlib, the command line arguments are not passed on the
+stack. Our `main` function is called with argc in `%rdi`, and a `char**` in
+`%rsi` (beware the number of indirections here, it's different than
+previously).
+
+To generate position-independant code, we can use `localvar(%rip)` or
+`globalvar@GOTPCREL(%rip)` instead of `localvar` or `globalvar`. GOT = Global
+Offset Table. Instructions like `movq $mystring, %rsi` can become `leaq
+mystring(%rip), %rsi`.
+
+Using gdb:
+- Use `gdb --args build/01_s src/01.in` to pass arguments to the debugged executable
+- Use `br *_start` to add a break to the start of the programm
+- Use `start` to start the programm
+- Use `disass` to see the assembly code listing
+- Use `ni` to execute the current instruction
+- Use `print/x $rax` to print the contents of `%rax` in hex
+- Use `print/x *0x7fffffffda9b` to print contents of a memory address
+- Use `x $rax` to explore the memory pointed by `%rax`
+- Use `x <address>` to explore the contents of the address
+- Use `x/4gx <address>` to see the contents of the address as hex, four 8 bytes chunks
+- Use `x/s <address>` to see the contents of the address as null terminated string
+- Use `x *<address>` to explore the contents pointed to by address
+
+#### References
+
+- `$ man syscalls`
+
+Sites:
+
+- x86 and amd64 instruction reference ~ <https://www.felixcloutier.com/x86/>
+- MOV -- Move ~ <https://www.felixcloutier.com/x86/mov>
+- LEA -- Load Effective Address ~ <https://www.felixcloutier.com/x86/lea>
+- 64-bit system call numbers and entry vectors ~ <https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_64.tbl>
+- Linux System Call Table ~ <https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md>
+- fcntl.h ~ <https://github.com/torvalds/linux/blob/master/include/uapi/asm-generic/fcntl.h>
+- Linux System Call Table ~ <http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/>
+- Learning Assembly ~ <https://github.com/danbev/learning-assembly/blob/master/README.md>
+- Assembly Language, Calling Convention, and the Stack ~ <https://cs.brown.edu/courses/csci1310/2020/notes/l08.html>
+
+SO questions:
+
+- Linux 64 command line parameters in Assembly ~ <https://stackoverflow.com/questions/3683144/linux-64-command-line-parameters-in-assembly>
+- Why isn't movl from memory to memory allowed? ~ <https://stackoverflow.com/questions/33794169/why-isnt-movl-from-memory-to-memory-allowed>
+
 ## How to run
 
 To run Python solutions:
@@ -519,6 +591,12 @@ To run Ruby solutions:
 
 ```
 $ ruby src/01.{rb,in}
+```
+
+To run x64 Assembly solutions
+
+```
+$ make 01_s
 ```
 
 ## How it started

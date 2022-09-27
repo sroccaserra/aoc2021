@@ -80,3 +80,21 @@ $(BUILD)/%.jar: $(SRC)/%.kt $(SRC)/common/*.kt
 .PHONY: %_kt
 %_kt: $(BUILD)/%.jar
 	@kotlin -classpath $(BUILD)/$*.jar _$*Kt src/$*.in
+
+##
+# x64 Assembly
+
+.PRECIOUS: $(BUILD)/%_s
+$(BUILD)/%_s: $(SRC)/%.s
+	# gcc -L . -pie -o $@ $<
+	# gcc -no-pie -nostdlib -o $@ $<
+	as -o $(BUILD)/$*.o $<
+	ld -o $@ $(BUILD)/$*.o
+
+.PHONY: %_s
+%_s: $(BUILD)/%_s
+	@$< src/$*.in
+
+.PHONY: %_sd
+%_sd: $(BUILD)/%_s
+	gdb -ex 'br *_start' -ex start --args $< src/$*.in
