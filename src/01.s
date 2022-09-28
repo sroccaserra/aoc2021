@@ -6,9 +6,13 @@ file:
     .quad 0
 buffer:
     .skip 0x100
+eol:
+    .byte '\n'
 
 .equ O_RDONLY, 0x00
 .equ STDOUT, 0x01
+.equ EOS, 0
+.equ OK, 0
 
 .section .text
 _start:
@@ -26,7 +30,7 @@ _start:
     call print
 
     movq $0x3c, %rax  # 0x3c syscall is exit()
-    movq $0, %rdi
+    movq $OK, %rdi
     syscall
 
 ##
@@ -39,6 +43,9 @@ open:
     ret
 
 ##
+# Reads a line from the currently opened file and stores it as a null
+# terminated string
+#
 # rdi - destination address
 # returns: ?
 readline:
@@ -46,11 +53,14 @@ readline:
 loopreadline:
     call readc
     cmpb $'\n', (%rsp)
-    jz endreadline
+    je endreadline
     incq (%rsp)
     movq (%rsp), %rdi
     jmp loopreadline
 endreadline:
+    movq (%rsp), %rax
+    incq %rax
+    movb $EOS, (%rax)
     addq $8, %rsp  # pop
     ret
 
@@ -73,12 +83,29 @@ close:
     ret
 
 ##
-# rdi - the buffer to print
+# rdi - the address of the null-terminated buffer to print
 print:
+    pushq %rdi
+loopprint:
+    cmpb $EOS, (%rsp)
+    je endprint
+    movq (%rsp), %rdi
+    call putc
+    incq (%rsp)
+    jmp loopprint
+endprint:
+    leaq eol, %rdi
+    call putc
+    addq $8, %rsp
+    ret
+
+##
+# rdi - the address of the byte to print
+putc:
     movq %rdi, %rsi  # function's first arg is second syscall arg
     movq $0x01, %rax  # 0x01 syscall is write()
     movq $STDOUT, %rdi
     # Length of the data
-    movq $4, %rdx
+    movq $1, %rdx
     syscall
     ret
