@@ -7,8 +7,8 @@ file:
 buffer:
     .skip 0x100
 
-.equ O_RDONLY, 0x0
-.equ STDOUT, 0x1
+.equ O_RDONLY, 0x00
+.equ STDOUT, 0x01
 
 .section .text
 _start:
@@ -16,6 +16,7 @@ _start:
     call open
     movq %rax, file
 
+    leaq buffer, %rdi
     call readline
 
     leaq file, %rdi
@@ -37,11 +38,30 @@ open:
     syscall
     ret
 
+##
+# rdi - destination address
+# returns: ?
 readline:
+    pushq %rdi
+loopreadline:
+    call readc
+    cmpb $'\n', (%rsp)
+    jz endreadline
+    incq (%rsp)
+    movq (%rsp), %rdi
+    jmp loopreadline
+endreadline:
+    addq $8, %rsp  # pop
+    ret
+
+##
+# rdi - destination address
+# returns: the number of bytes read
+readc:
+    movq %rdi, %rsi  # store input to %rsi
     movq $0x00, %rax  # 0x00 syscall is read()
     movq file, %rdi
-    leaq buffer, %rsi
-    movq $8, %rdx
+    movq $1, %rdx
     syscall
     ret
 
