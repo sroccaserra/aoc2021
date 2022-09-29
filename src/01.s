@@ -9,9 +9,17 @@ buffer:
 eol:
     .byte '\n'
 
+.equ SYS_READ, 0x00
+.equ SYS_WRITE, 0x01
+.equ SYS_OPEN, 0x02
+.equ SYS_CLOSE, 0x03
+.equ SYS_EXIT, 0x3c
+
 .equ O_RDONLY, 0x00
+
 .equ STDIN, 0x00
 .equ STDOUT, 0x01
+
 .equ EOS, 0
 .equ OK, 0
 
@@ -37,7 +45,7 @@ hasfilename:
     leaq buffer, %rdi
     call print
 
-    movq $0x3c, %rax  # 0x3c syscall is exit()
+    movq $SYS_EXIT, %rax
     movq $OK, %rdi
     syscall
 
@@ -45,7 +53,7 @@ hasfilename:
 # rdi - address of null terminated filename
 # returns: the open file descriptor
 open:
-    movq $0x02, %rax  # 0x02 syscall is open()
+    movq $SYS_OPEN, %rax
     movq $O_RDONLY, %rsi
     syscall
     ret
@@ -77,7 +85,7 @@ endreadline:
 # returns: the number of bytes read
 readc:
     movq %rdi, %rsi  # store input to %rsi
-    movq $0x00, %rax  # 0x00 syscall is read()
+    movq $SYS_READ, %rax  # 0x00 syscall is read()
     movq file, %rdi
     movq $1, %rdx
     syscall
@@ -86,7 +94,7 @@ readc:
 ##
 # rdi - the file descriptor to close
 close:
-    movq $0x03, %rax  # 0x03 syscall is close()
+    movq $SYS_CLOSE, %rax
     syscall
     ret
 
@@ -111,7 +119,7 @@ endprint:
 # rdi - the address of the byte to print
 putc:
     movq %rdi, %rsi  # function's first arg is second syscall arg
-    movq $0x01, %rax  # 0x01 syscall is write()
+    movq $SYS_WRITE, %rax
     movq $STDOUT, %rdi
     # Length of the data
     movq $1, %rdx
