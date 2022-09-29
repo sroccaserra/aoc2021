@@ -68,7 +68,8 @@ readline:
     pushq %rdi
 loopreadline:
     call readc
-    cmpb $'\n', (%rsp)
+    movq (%rsp), %rax
+    cmpb $'\n', (%rax)
     je endreadline
     incq (%rsp)
     movq (%rsp), %rdi
