@@ -2,10 +2,12 @@
 
 .section .data
 
+.equ MAX_LINE, 0xff
+
 file:
     .quad 0
 buffer:
-    .skip 0x100
+    .skip MAX_LINE+1
 eol:
     .byte '\n'
 
@@ -39,8 +41,7 @@ hasfilename:
 readloop:
     leaq buffer, %rdi
     call readline
-    movb buffer, %dil
-    test %dil, %dil  # buffer first byte is zero <=> readline read nothing
+    test %rax, %rax
     jz endreadloop
 
     leaq buffer, %rdi
@@ -71,22 +72,11 @@ open:
 # Convention: a line includes the eol char if any.
 #
 # rdi - destination address
-# returns: zero if the end of file was reached, otherwise non zero
-#
-# 1234n -> 1234n0
-# xxxxxx
-# ^
-# 1xxxxx
-# ^
-# n -> n0
-#
-# 1234z -> 12340
-#
-# z -> 0
-#
+# returns: zero if nothing was read, otherwise non zero
 readline:
     enter $16, $0
     movq %rdi, -8(%rbp)
+    movq %rdi, -16(%rbp)  # remember start of buffer / dest address
 loopreadline:
     movq -8(%rbp), %rdi
     call readc
@@ -98,7 +88,10 @@ loopreadline:
     jne loopreadline
 endreadline:
     movq -8(%rbp), %rdi
-    movb $EOS, (%rdi)
+    movb $EOS, (%rdi)  # end buffer with zero byte
+    mov $0, %rax
+    mov -16(%rbp), %rdi
+    mov (%rdi), %al  # first read byte is stored in %rax, zero if no read
     leave
     ret
 
