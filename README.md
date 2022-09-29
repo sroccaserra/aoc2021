@@ -426,7 +426,8 @@ forward: aValue`.
 
 ### x64 Assembly
 
-This runs under Linux only.
+This runs under Linux only. Please note that this is mostly ⌨️ 🐈️ code, I'm
+learning basics along the way.
 
 See also: <https://github.com/sroccaserra/learning-x64-assembly>
 
@@ -480,6 +481,7 @@ Using gdb:
 
 Sites:
 
+- x86-64 ~ <https://en.wikipedia.org/wiki/X86-64>
 - x86 and amd64 instruction reference ~ <https://www.felixcloutier.com/x86/>
 - MOV -- Move ~ <https://www.felixcloutier.com/x86/mov>
 - LEA -- Load Effective Address ~ <https://www.felixcloutier.com/x86/lea>
@@ -494,6 +496,7 @@ Sites:
 
 SO questions:
 
+- x86 Tag Info ~ <https://stackoverflow.com/tags/x86/info>
 - Linux 64 command line parameters in Assembly ~ <https://stackoverflow.com/questions/3683144/linux-64-command-line-parameters-in-assembly>
 - Why isn't movl from memory to memory allowed? ~ <https://stackoverflow.com/questions/33794169/why-isnt-movl-from-memory-to-memory-allowed>
 

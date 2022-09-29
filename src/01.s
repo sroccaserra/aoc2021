@@ -10,14 +10,22 @@ eol:
     .byte '\n'
 
 .equ O_RDONLY, 0x00
+.equ STDIN, 0x00
 .equ STDOUT, 0x01
 .equ EOS, 0
 .equ OK, 0
 
 .section .text
 _start:
+    cmpq $2, (%rsp)  # (%rsp) is argc, compare 2 to it.
+    jl hasnofilename
     movq 16(%rsp), %rdi  # 16(%rsp) is argv[1], pass it to open
     call open
+    movq %rax, file
+    jmp hasfilename
+hasnofilename:
+    movq $STDIN, %rax
+hasfilename:
     movq %rax, file
 
     leaq buffer, %rdi
