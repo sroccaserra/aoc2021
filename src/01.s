@@ -63,21 +63,21 @@ open:
 # terminated string
 #
 # rdi - destination address
-# returns: ?
+# returns: zero if the end of file was reached, otherwise non zero
 readline:
     pushq %rdi
 loopreadline:
     call readc
-    movq (%rsp), %rax
-    cmpb $'\n', (%rax)
+    movq (%rsp), %rdi
+    cmpb $'\n', (%rdi)
     je endreadline
     incq (%rsp)
     movq (%rsp), %rdi
     jmp loopreadline
 endreadline:
-    movq (%rsp), %rax
-    incq %rax
-    movb $EOS, (%rax)
+    movq (%rsp), %rdi
+    incq %rdi
+    movb $EOS, (%rdi)
     addq $8, %rsp  # pop
     ret
 
