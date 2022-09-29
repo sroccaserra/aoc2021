@@ -39,11 +39,12 @@ hasfilename:
 readloop:
     leaq buffer, %rdi
     call readline
-    test %rax, %rax
+    movb buffer, %dil
+    test %dil, %dil  # buffer first byte is zero <=> readline read nothing
     jz endreadloop
 
     leaq buffer, %rdi
-    call print
+    call processline
     jmp readloop
 
 endreadloop:
@@ -71,20 +72,32 @@ open:
 #
 # rdi - destination address
 # returns: zero if the end of file was reached, otherwise non zero
+#
+# 1234n -> 1234n0
+# xxxxxx
+# ^
+# 1xxxxx
+# ^
+# n -> n0
+#
+# 1234z -> 12340
+#
+# z -> 0
+#
 readline:
     enter $16, $0
     movq %rdi, -8(%rbp)
 loopreadline:
+    movq -8(%rbp), %rdi
     call readc
+    test %rax, %rax
+    jz endreadline
     movq -8(%rbp), %rdi
-    cmpb $'\n', (%rdi)
-    je endreadline
     incq -8(%rbp)
-    movq -8(%rbp), %rdi
-    jmp loopreadline
+    cmpb $'\n', (%rdi)
+    jne loopreadline
 endreadline:
     movq -8(%rbp), %rdi
-    incq %rdi
     movb $EOS, (%rdi)
     leave
     ret
@@ -105,6 +118,12 @@ readc:
 close:
     movq $SYS_CLOSE, %rax
     syscall
+    ret
+
+##
+# rdi - the address of the null-terminated buffer to process
+processline:
+    call print
     ret
 
 ##
