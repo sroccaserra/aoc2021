@@ -477,7 +477,9 @@ Using gdb:
 
 #### References
 
-- `$ man syscalls`
+- [man 2 intro](https://man7.org/linux/man-pages/man2/intro.2.html)
+- [man 2 syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html)
+- [man 2 syscall](https://man7.org/linux/man-pages/man2/syscall.2.html)
 
 Sites:
 
