@@ -67,23 +67,26 @@ open:
 # Reads a line from the currently opened file and stores it as a null
 # terminated string
 #
+# Convention: a line includes the eol char if any.
+#
 # rdi - destination address
 # returns: zero if the end of file was reached, otherwise non zero
 readline:
-    pushq %rdi
+    enter $16, $0
+    movq %rdi, -8(%rbp)
 loopreadline:
     call readc
-    movq (%rsp), %rdi
+    movq -8(%rbp), %rdi
     cmpb $'\n', (%rdi)
     je endreadline
-    incq (%rsp)
-    movq (%rsp), %rdi
+    incq -8(%rbp)
+    movq -8(%rbp), %rdi
     jmp loopreadline
 endreadline:
-    movq (%rsp), %rdi
+    movq -8(%rbp), %rdi
     incq %rdi
     movb $EOS, (%rdi)
-    addq $8, %rsp  # pop
+    leave
     ret
 
 ##

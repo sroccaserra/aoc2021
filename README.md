@@ -467,7 +467,7 @@ Using gdb:
 - Use `start` to start the programm
 - Use `disass` to see the assembly code listing
 - Use `ni` to execute the current instruction
-- Use `print/x $rax` to print the contents of `%rax` in hex
+- Use `print/x $rax` or `p/x $rax` to print the contents of `%rax` in hex
 - Use `print/x *0x7fffffffda9b` to print contents of a memory address
 - Use `x $rax` to explore the memory pointed by `%rax`
 - Use `x <address>` to explore the contents of the address
