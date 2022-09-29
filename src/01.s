@@ -36,14 +36,19 @@ hasnofilename:
 hasfilename:
     movq %rax, file
 
+readloop:
     leaq buffer, %rdi
     call readline
-
-    leaq file, %rdi
-    call close
+    test %rax, %rax
+    jz endreadloop
 
     leaq buffer, %rdi
     call print
+    jmp readloop
+
+endreadloop:
+    leaq file, %rdi
+    call close
 
     movq $SYS_EXIT, %rax
     movq $OK, %rdi
