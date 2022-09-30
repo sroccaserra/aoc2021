@@ -116,7 +116,31 @@ close:
 ##
 # rdi - the address of the null-terminated buffer to process
 processline:
+    pushq %rdi
     call print
+    popq %rdi
+    call parseint
+    ret
+
+##
+# rdi - the address of the null-terminated buffer to process
+# returns: the int value of parsed number
+parseint:
+    xor %rax, %rax
+    mov $10, %rdx
+loopparse:
+    xor %rcx, %rcx
+    movb (%rdi), %cl
+    test %cl, %cl
+    jz endparse
+    cmpb eol, %cl
+    je endparse
+    imul %rdx, %rax
+    sub $'0', %rcx
+    add %rcx, %rax
+    inc %rdi
+    jmp loopparse
+endparse:
     ret
 
 ##

@@ -462,6 +462,7 @@ Offset Table. Instructions like `movq $mystring, %rsi` can become `leaq
 mystring(%rip), %rsi`.
 
 Using gdb:
+- Use `layout asm` to show disassembly window
 - Use `gdb --args build/01_s src/01.in` to pass arguments to the debugged executable
 - Use `br *_start` to add a break to the start of the programm
 - Use `start` to start the programm
