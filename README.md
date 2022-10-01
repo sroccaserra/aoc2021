@@ -461,6 +461,8 @@ To generate position-independant code, we can use `localvar(%rip)` or
 Offset Table. Instructions like `movq $mystring, %rsi` can become `leaq
 mystring(%rip), %rsi`.
 
+Use `objdump -SD build/01.o` to explore generated code.
+
 Using gdb:
 - Use `layout asm` to show disassembly window
 - Use `gdb --args build/01_s src/01.in` to pass arguments to the debugged executable
@@ -496,7 +498,12 @@ Sites:
 - Learning Assembly ~ <https://github.com/danbev/learning-assembly/blob/master/README.md>
 - Assembly Language, Calling Convention, and the Stack ~ <https://cs.brown.edu/courses/csci1310/2020/notes/l08.html>
 - Stack frame layout on x86-64 ~ <https://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64/>
-- Assembler Directives ~ <https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_toc.html>
+
+Tools:
+
+- Using as ~ <https://sourceware.org/binutils/docs/as/>
+- Assembler Directives ~ <https://sourceware.org/binutils/docs/as/Pseudo-Ops.html>
+- objdump ~ <https://man7.org/linux/man-pages/man1/objdump.1.html>
 
 SO questions:
 

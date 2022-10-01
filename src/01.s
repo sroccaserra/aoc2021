@@ -1,16 +1,5 @@
 .global _start
 
-.section .data
-
-.equ MAX_LINE, 0xff
-
-file:
-    .quad 0
-buffer:
-    .skip MAX_LINE+1
-eol:
-    .byte '\n'
-
 .equ SYS_READ, 0x00
 .equ SYS_WRITE, 0x01
 .equ SYS_OPEN, 0x02
@@ -24,6 +13,18 @@ eol:
 
 .equ EOS, 0
 .equ OK, 0
+
+.equ MAX_LINE, 0xff
+
+.section .data
+eol:
+    .byte '\n'
+
+.section .bss
+file:
+    .skip 8
+buffer:
+    .skip MAX_LINE+1
 
 .section .text
 _start:
