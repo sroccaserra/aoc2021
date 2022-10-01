@@ -464,6 +464,7 @@ mystring(%rip), %rsi`.
 Use `objdump -SD build/01.o` to explore generated code.
 
 Using gdb:
+- Use `tui reg general` to show registers window
 - Use `layout asm` to show disassembly window
 - Use `gdb --args build/01_s src/01.in` to pass arguments to the debugged executable
 - Use `br *_start` to add a break to the start of the programm
@@ -477,6 +478,15 @@ Using gdb:
 - Use `x/4gx <address>` to see the contents of the address as hex, four 8 bytes chunks
 - Use `x/s <address>` to see the contents of the address as null terminated string
 - Use `x *<address>` to explore the contents pointed to by address
+
+```
+(gdb) p/x $rsp
+$2 = 0x7fffffffd570
+(gdb) x/xg $rsp
+0x7fffffffd570: 0x00007fffffffd594
+(gdb) x/xg *(int**)$rsp
+0x7fffffffd594: 0x0040200039333131
+```
 
 #### References
 
@@ -503,6 +513,7 @@ Tools:
 
 - Using as ~ <https://sourceware.org/binutils/docs/as/>
 - Assembler Directives ~ <https://sourceware.org/binutils/docs/as/Pseudo-Ops.html>
+- Debugging with GDB ~ <https://sourceware.org/gdb/current/onlinedocs/gdb/index.html>
 - objdump ~ <https://man7.org/linux/man-pages/man1/objdump.1.html>
 
 SO questions:

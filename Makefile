@@ -85,7 +85,7 @@ $(BUILD)/%.jar: $(SRC)/%.kt $(SRC)/common/*.kt
 # x64 Assembly
 
 .PRECIOUS: $(BUILD)/%_s
-$(BUILD)/%_s: $(SRC)/%.s
+$(BUILD)/%_s: $(SRC)/%.s $(SRC)/common/common.s
 	# gcc -L . -pie -o $@ $<
 	# gcc -no-pie -nostdlib -o $@ $<
 	as -o $(BUILD)/$*.o $<
