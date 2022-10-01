@@ -28,27 +28,27 @@ eol:
 .section .text
 _start:
     cmpq $2, (%rsp)  # (%rsp) is argc, compare 2 to it.
-    jl hasnofilename
+    jl .hasnofilename
     movq 16(%rsp), %rdi  # 16(%rsp) is argv[1], pass it to open
     call open
     movq %rax, file
-    jmp hasfilename
-hasnofilename:
+    jmp .hasfilename
+.hasnofilename:
     movq $STDIN, %rax
-hasfilename:
+.hasfilename:
     movq %rax, file
 
-readloop:
+.mainloop:
     leaq buffer, %rdi
     call readline
     test %rax, %rax
-    jz endreadloop
+    jz .endmainloop
 
     leaq buffer, %rdi
     call processline
-    jmp readloop
+    jmp .mainloop
 
-endreadloop:
+.endmainloop:
     leaq file, %rdi
     call close
 
@@ -77,16 +77,16 @@ readline:
     enter $16, $0
     movq %rdi, -8(%rbp)
     movq %rdi, -16(%rbp)  # remember start of buffer / dest address
-loopreadline:
+.loopreadline:
     movq -8(%rbp), %rdi
     call readc
     test %rax, %rax
-    jz endreadline
+    jz .endreadline
     movq -8(%rbp), %rdi
     incq -8(%rbp)
     cmpb $'\n', (%rdi)
-    jne loopreadline
-endreadline:
+    jne .loopreadline
+.endreadline:
     movq -8(%rbp), %rdi
     movb $EOS, (%rdi)  # end buffer with zero byte
     mov $0, %rax
@@ -128,33 +128,33 @@ processline:
 parseint:
     xor %rax, %rax
     mov $10, %rdx
-loopparse:
+.loopparse:
     xor %rcx, %rcx
     movb (%rdi), %cl
     test %cl, %cl
-    jz endparse
+    jz .endparse
     cmpb eol, %cl
-    je endparse
+    je .endparse
     imul %rdx, %rax
     sub $'0', %rcx
     add %rcx, %rax
     inc %rdi
-    jmp loopparse
-endparse:
+    jmp .loopparse
+.endparse:
     ret
 
 ##
 # rdi - the address of the null-terminated buffer to print
 print:
     pushq %rdi
-loopprint:
+.loopprint:
     cmpb $EOS, (%rsp)
-    je endprint
+    je .endprint
     movq (%rsp), %rdi
     call putc
     incq (%rsp)
-    jmp loopprint
-endprint:
+    jmp .loopprint
+.endprint:
     leaq eol, %rdi
     call putc
     addq $8, %rsp
