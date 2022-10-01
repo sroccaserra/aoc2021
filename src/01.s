@@ -15,16 +15,19 @@
 .equ OK, 0
 
 .equ MAX_LINE, 0xff
+.equ BUFFER_SIZE, MAX_LINE+1
 
 .section .data
 eol:
     .byte '\n'
 
 .section .bss
+sum:
+    .quad 0
 file:
-    .skip 8
+    .quad 0
 buffer:
-    .skip MAX_LINE+1
+    .skip BUFFER_SIZE
 
 .section .text
 _start:
@@ -53,9 +56,19 @@ _start:
     leaq file, %rdi
     call close
 
+    mov sum, %rdi
+    call print_u64
+
     movq $SYS_EXIT, %rax
     movq $OK, %rdi
     syscall
+
+##
+# rdi - the address of the null-terminated buffer to process
+processline:
+    call parseint
+    add %rax, sum
+    ret
 
 ##
 # rdi - address of null terminated filename
@@ -116,15 +129,6 @@ close:
 
 ##
 # rdi - the address of the null-terminated buffer to process
-processline:
-    pushq %rdi
-    call print
-    popq %rdi
-    call parseint
-    ret
-
-##
-# rdi - the address of the null-terminated buffer to process
 # returns: the int value of parsed number
 parseint:
     xor %rax, %rax
@@ -142,6 +146,26 @@ parseint:
     inc %rdi
     jmp .loopparse
 .endparse:
+    ret
+
+##
+# rdi - the value to print
+print_u64:
+    mov %rdi, %rax # Set the initial value to print
+    mov $10, %r10  # Set our divisor
+    mov $'0', %r11 # Ascii offset for numbers
+    lea buffer+BUFFER_SIZE, %rdi
+    movb $EOS, (%rdi)  # Set null-terminated string
+.loopp64:
+    dec %rdi
+    xor %rdx, %rdx
+    div %r10
+    add %r11, %rdx
+    mov %dl, (%rdi)
+    test %rax, %rax
+    jnz .loopp64
+
+    call print
     ret
 
 ##
