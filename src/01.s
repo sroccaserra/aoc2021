@@ -17,12 +17,22 @@
 .equ MAX_LINE, 0xff
 .equ BUFFER_SIZE, MAX_LINE+1
 
+.equ HUGE, 9999
+
 .section .data
 eol:
     .byte '\n'
+p1:
+    .quad HUGE
+p2:
+    .quad HUGE
+p3:
+    .quad HUGE
 
 .section .bss
-sum:
+result_1:
+    .quad 0
+result_2:
     .quad 0
 file:
     .quad 0
@@ -51,12 +61,14 @@ _start:
     leaq buffer, %rdi
     call processline
     jmp .mainloop
-
 .endmainloop:
+
     leaq file, %rdi
     call close
 
-    mov sum, %rdi
+    mov result_1, %rdi
+    call print_u64
+    mov result_2, %rdi
     call print_u64
 
     movq $SYS_EXIT, %rax
@@ -67,7 +79,31 @@ _start:
 # rdi - the address of the null-terminated buffer to process
 processline:
     call parseint
-    add %rax, sum
+
+    cmp p1, %rax
+    jle .noinc1
+    incq result_1
+.noinc1:
+
+    mov p1, %rcx
+    add p2, %rcx
+    add p3, %rcx
+
+    mov %rax, %rdx
+    add p1, %rdx
+    add p2, %rdx
+
+    cmp %rcx, %rdx
+    jle .noinc2
+    incq result_2
+.noinc2:
+
+    mov p2, %rcx
+    mov %rcx, p3
+    mov p1, %rcx
+    mov %rcx, p2
+    mov %rax, p1
+
     ret
 
 ##
