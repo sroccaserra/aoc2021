@@ -25,7 +25,7 @@ Contents:
 - [#gnu-smalltalk](#gnu-smalltalk)
 - [#kotlin](#kotlin)
 - [#ruby](#ruby)
-- [#x64-assembly](#x64-assembly)
+- [#x86-64-assembly](#x86-64-assembly)
 - [#how-to-run](#how-to-run)
 
 ### Algorithms
@@ -424,7 +424,7 @@ forward: aValue`.
 
 - Ruby Syle Guide ~ <https://github.com/airbnb/ruby>
 
-### x64 Assembly
+### x86-64 Assembly
 
 This runs under Linux only. Please note that this is mostly ⌨️ 🐈️ code, I'm
 learning basics along the way.
@@ -620,10 +620,16 @@ To run Ruby solutions:
 $ ruby src/01.{rb,in}
 ```
 
-To run x64 Assembly solutions
+To run x86-64 Assembly solutions:
 
 ```
 $ make 01_s
+```
+
+To debug x86-64 Assembly solutions, you can add a `halt:` label in your code, and:
+
+```
+$ make 01_sd
 ```
 
 ## How it started

@@ -97,4 +97,4 @@ $(BUILD)/%_s: $(SRC)/%.s $(SRC)/common/common.s
 
 .PHONY: %_sd
 %_sd: $(BUILD)/%_s
-	gdb -ex 'br *_start' -ex start --args $< src/$*.in
+	gdb -ex 'br *_start' -ex start -ex 'br halt' -ex 'layout asm' -ex 'tui reg general' -ex 'focus cmd' --args $< src/$*.in
