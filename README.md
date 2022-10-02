@@ -1,16 +1,14 @@
 # aoc2021
 
-## Learnings
-
-See also:
-
-- <https://github.com/sroccaserra/aoc2015#learnings>
-- <https://github.com/sroccaserra/aoc2018#learnings>
-- <https://github.com/sroccaserra/aoc2019#learnings>
-- <https://github.com/sroccaserra/aoc2020#learnings>
+In this repository, I solved all 25 days for Advent of Code 2021, using mostly
+Python and Haskell. This was both fun and really hard for me at the end. I had
+to take a small break on day 24. I got back on time for day 25 and I'm really
+proud of that. But there is more: then, for what it's worth, I solved the first
+two days in 16 different languages. And took some notes along the way.
 
 Contents:
 
+- [#two-problems-16-languages](#two-problems-16-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -27,6 +25,70 @@ Contents:
 - [#ruby](#ruby)
 - [#x86-64-assembly](#x86-64-assembly)
 - [#how-to-run](#how-to-run)
+
+See also:
+
+- <https://github.com/sroccaserra/aoc2015#learnings>
+- <https://github.com/sroccaserra/aoc2018#learnings>
+- <https://github.com/sroccaserra/aoc2019#learnings>
+- <https://github.com/sroccaserra/aoc2020#learnings>
+
+## Two problems, 16 languages
+
+For what it's worth, I solved the first two days in 16 different languages:
+
+- C++
+- Elixir
+- GNU Forth
+- GNU Smalltalk
+- Go
+- Haskell
+- Java
+- Kotlin
+- Lua
+- Node.js (JavaScript)
+- Python 3
+- Ruby
+- Rust
+- Scheme (Lisp)
+- Uxntal
+- x86-64 Assembly (with some low level Linux IO syscalls)
+
+Some languages I know very well, some I had to learn from scratch. So please
+tell me if I did it totally wrong in your favorite language. I enjoyed them all
+though, and the first two days propose very simple problems so it should be at
+least barely correct.
+
+You can find theses solutions in the `src` directory, in `01.*` and `02.*`
+files. The `*.in` files are my input files for the problems. Please note that
+this is not a good naming convention for anything other than Advent of Code.
+
+What is interesting about these first two days is that they invite you to
+learn how to:
+
+- Read some inputs
+- Process input lines with simple parsing and a simple computation
+- Create and pass around a small ad hoc data structure (for day two)
+- Print some output
+- Move the common code for generic stuff in a common file
+- Require the common file
+
+All this forms a good starting point to learn any programming language I guess?
+If you know how to do that, you have everything you need to start writing
+useful stuff that interacts with input data, maybe comming from other programs,
+and pass your output to yet other programs. You also have everything you need
+to start automating some tests for example.
+
+Part of the intention here is this. If you are curious about programming
+language X or Y, find any possible reason to write some code in it, some code
+where you can check the correctness. Simple Advent of Code problems are one
+way, there are others. A repl, or practicing TDD are other examples.
+
+Below I tried to document some of my learnings. These are mostly notes for
+myself, and not all languages are documented. But I hope you can find something
+to enjoy here too. Cheers!
+
+## Learnings
 
 ### Algorithms
 
@@ -620,13 +682,14 @@ To run Ruby solutions:
 $ ruby src/01.{rb,in}
 ```
 
-To run x86-64 Assembly solutions:
+To run x86-64 Assembly solutions (Linux only):
 
 ```
 $ make 01_s
 ```
 
-To debug x86-64 Assembly solutions, you can add a `halt:` label in your code, and:
+To debug x86-64 Assembly solutions with gdb, you can add a `halt:` label in
+your code, and:
 
 ```
 $ make 01_sd
