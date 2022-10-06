@@ -98,3 +98,14 @@ $(BUILD)/%_s: $(SRC)/%.s $(SRC)/common/common.s
 .PHONY: %_sd
 %_sd: $(BUILD)/%_s
 	gdb -ex 'br *_start' -ex start -ex 'br halt' -ex 'layout asm' -ex 'tui reg general' -ex 'focus cmd' --args $< src/$*.in
+
+##
+# Go (for perf tests only, go run is just as good)
+
+.PRECIOUS: $(BUILD)/%_go
+$(BUILD)/%_go: $(SRC)/%.go $(SRC)/common/common.go
+	go build -o $@ $<
+
+.PHONY: %_go
+%_go: $(BUILD)/%_go
+	@$< src/$*.in
