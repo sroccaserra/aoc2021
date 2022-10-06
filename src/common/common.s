@@ -1,3 +1,5 @@
+//go:build exclude
+
 .equ SYS_READ, 0x00
 .equ SYS_WRITE, 0x01
 .equ SYS_OPEN, 0x02

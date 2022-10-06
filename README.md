@@ -298,6 +298,8 @@ Solutions:
 - Standard Library ~ <https://pkg.go.dev/std>
 - Frequently Asked Questions (FAQ) ~ <https://go.dev/doc/faq>
 - Error Handling and Go ~ <https://go.dev/blog/error-handling-and-go>
+- Build ~ <https://pkg.go.dev/go/build>
+- A Quick Guide to Go's Assembler ~ <https://go.dev/doc/asm>
 
 Solutions:
 
