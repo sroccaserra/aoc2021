@@ -697,6 +697,12 @@ your code, and:
 $ make 01_sd
 ```
 
+To run Common Lisp solutions:
+
+```
+$ sbcl --script src/01.{lisp,in}
+```
+
 ## How it started
 
 ```shell
