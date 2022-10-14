@@ -4,11 +4,11 @@ In this repository, I solved all 25 days for Advent of Code 2021, using mostly
 Python and Haskell. This was both fun and really hard for me at the end. I had
 to take a small break on day 24. I got back on time for day 25 and I'm really
 proud of that. But there is more: then, for what it's worth, I solved the first
-two days in 16 different languages. And took some notes along the way.
+two days in 17 different languages. And took some notes along the way.
 
 Contents:
 
-- [#two-problems-16-languages](#two-problems-16-languages)
+- [#two-problems-17-languages](#two-problems-17-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -33,11 +33,12 @@ See also:
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
 
-## Two problems, 16 languages
+## Two problems, 17 languages
 
-For what it's worth, I solved the first two days in 16 different languages:
+For what it's worth, I solved the first two days in 17 different languages:
 
 - C++
+- Common Lisp
 - Elixir
 - GNU Forth
 - GNU Smalltalk
@@ -585,6 +586,16 @@ SO questions:
 - x86 Tag Info ~ <https://stackoverflow.com/tags/x86/info>
 - Linux 64 command line parameters in Assembly ~ <https://stackoverflow.com/questions/3683144/linux-64-command-line-parameters-in-assembly>
 - Why isn't movl from memory to memory allowed? ~ <https://stackoverflow.com/questions/33794169/why-isnt-movl-from-memory-to-memory-allowed>
+
+### Common Lisp
+
+- SBLC ~ <https://www.sbcl.org/>
+- SBCL User Manual ~ <https://www.sbcl.org/manual/index.html>
+- <https://common-lisp.net/libraries>
+- UIOP ~ <https://gitlab.common-lisp.net/asdf/asdf/blob/master/uiop/README.md>
+- HyperSpec ~ <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
+- Common Lisp the Language ~ <https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/clm.html>
+- Practical Common Lisp ~ <https://gigamonkeys.com/book/>
 
 ## How to run
 
