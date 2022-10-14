@@ -1,9 +1,4 @@
-(require "uiop")
-
-(defun get-lines ()
-  (let ((filename (first (uiop:command-line-arguments))))
-    (loop for line in (uiop:read-file-lines filename)
-          collect (parse-integer line))))
+(require "common" "src/common/common.lisp")
 
 (defconstant HUGE 9999)
 
