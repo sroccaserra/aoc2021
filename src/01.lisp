@@ -24,6 +24,6 @@
       (setq p1 n))
     result))
 
-(let ((numbers (get-lines)))
+(let ((numbers (get-parsed-lines #'parse-integer)))
   (write-line (write-to-string (solve-1 numbers)))
   (write-line (write-to-string (solve-2 numbers))))

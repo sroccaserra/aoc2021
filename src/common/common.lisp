@@ -1,8 +1,8 @@
 (require "uiop")
 
-(defun get-lines ()
+(defun get-parsed-lines (parse-fn)
   (let ((filename (first (uiop:command-line-arguments))))
     (loop for line in (uiop:read-file-lines filename)
-          collect (parse-integer line))))
+          collect (funcall parse-fn line))))
 
 (provide "common")
