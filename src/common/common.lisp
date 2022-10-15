@@ -1,4 +1,4 @@
-(require "uiop")
+(require "asdf")
 
 (defun get-parsed-lines (parse-fn)
   (let ((filename (first (uiop:command-line-arguments))))

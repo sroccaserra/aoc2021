@@ -739,6 +739,12 @@ To run Common Lisp solutions:
 $ sbcl --script src/01.{lisp,in}
 ```
 
+or:
+
+```
+$ clisp src/01.lisp -- src/01.in
+```
+
 ## How it started
 
 ```shell

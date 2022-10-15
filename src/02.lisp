@@ -1,4 +1,4 @@
-(require "uiop")
+(require "asdf")
 
 (require "common" "src/common/common.lisp")
 
@@ -7,7 +7,7 @@
         (depth-1 0)
         (depth-2 0)
         (aim 0))
-    (loop for (direction value) (symbol integer) in commands do
+    (loop for (direction value) of-type (symbol integer) in commands do
           (cond ((eq ':|forward| direction)
                  (incf hpos value)
                  (incf depth-2 (* aim value)))
