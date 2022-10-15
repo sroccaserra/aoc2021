@@ -1,5 +1,6 @@
 -module(aoc).
 -export([main/1]).
+-include("common/common.hrl").
 
 -define(HUGE, 9999).
 
@@ -27,20 +28,3 @@ main([Filename]) ->
     Numbers = get_parsed_lines(Filename, fun erlang:list_to_integer/1),
     io:fwrite("~w~n", [solve_1(Numbers)]),
     io:fwrite("~w~n", [solve_2(Numbers)]).
-
-%%
-% IO Functions
-
-get_parsed_lines(FileName, ParseFn) ->
-    {ok, Device} = file:open(FileName, [read]),
-    try
-        parse_all_lines(Device, ParseFn)
-    after
-        file:close(Device)
-    end.
-
-parse_all_lines(Device, ParseFn) ->
-    case io:get_line(Device, []) of
-        eof  -> [];
-        Line -> [ParseFn(string:trim(Line)) | parse_all_lines(Device, ParseFn)]
-    end.
