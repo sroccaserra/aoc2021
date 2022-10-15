@@ -615,6 +615,7 @@ Tools & Libs:
 - UIOP ~ <https://asdf.common-lisp.dev/uiop.html>
 - UIOP ~ <https://gitlab.common-lisp.net/asdf/asdf/blob/master/uiop/README.md>
 - Awesome Common Lisp ~ <https://github.com/CodyReichert/awesome-cl>
+- Lisp Games Wiki ~ <https://github.com/lispgames/lispgames.github.io/wiki>
 
 Books:
 
