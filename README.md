@@ -25,6 +25,7 @@ Contents:
 - [#ruby](#ruby)
 - [#x86-64-assembly](#x86-64-assembly)
 - [#common-lisp](#common-lisp)
+- [#erlang](#erlang)
 - [#how-to-run](#how-to-run)
 
 See also:
@@ -625,6 +626,13 @@ Books:
 - Practical Common Lisp ~ <https://gigamonkeys.com/book/>
 - Land of Lisp ~ <http://landoflisp.com/>
 
+### Erlang
+
+- Erlang Docs ~ <https://www.erlang.org/doc/index.html>
+- Efficiency Guide ~ <https://www.erlang.org/doc/efficiency_guide>
+- Programming Examples - Funs ~ <https://www.erlang.org/doc/programming_examples/funs.html>
+- IO ~ <https://www.erlang.org/doc/man/io.html>
+
 ## How to run
 
 To run Python solutions:
@@ -746,6 +754,12 @@ or:
 
 ```
 $ clisp src/01.lisp -- src/01.in
+```
+
+To run Erlang solutions:
+
+```
+$ escript src/01.{erl,in}
 ```
 
 ## How it started
