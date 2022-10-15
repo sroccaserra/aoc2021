@@ -590,6 +590,16 @@ SO questions:
 
 ### Common Lisp
 
+- The reader upcases symbols, so `'forward` becomes `FORWARD`. The `#'intern`
+  function does not upcase its value, so `(intern "forward")` becomes
+  `|forward|`.
+- Inside a symbol, `|`-enclosed parts preserve their case. `'what|? wow |this|
+  also works|?` is ` |WHAT? wow THIS also works?|`
+- Symbols prefixed by `:` are symbols from the `KEYWORD` package. `(intern
+  "forward" "KEYWORD")` is `:|forward|`
+
+References:
+
 - HyperSpec ~ <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
 - SBLC ~ <https://www.sbcl.org/>
 - SBCL User Manual ~ <https://www.sbcl.org/manual/index.html>
