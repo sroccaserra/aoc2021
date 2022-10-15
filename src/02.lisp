@@ -7,21 +7,21 @@
         (depth-1 0)
         (depth-2 0)
         (aim 0))
-    (loop for (direction value) (string integer) in commands do
-          (cond ((string= "forward" direction)
+    (loop for (direction value) (symbol integer) in commands do
+          (cond ((eq 'forward direction)
                  (incf hpos value)
                  (incf depth-2 (* aim value)))
-                ((string= "up" direction)
+                ((eq 'up direction)
                  (decf depth-1 value)
                  (decf aim value))
-                ((string= "down" direction)
+                ((eq 'down direction)
                  (incf depth-1 value)
                  (incf aim value))))
     (list (* hpos depth-1) (* hpos depth-2))))
 
 (defun parse-command (line)
   (destructuring-bind (direction value-str) (uiop:split-string line)
-    (list direction (parse-integer value-str))))
+    (list (read-from-string direction) (parse-integer value-str))))
 
 (let ((commands (get-parsed-lines #'parse-command)))
   (destructuring-bind (result-1 result-2) (solve commands)
