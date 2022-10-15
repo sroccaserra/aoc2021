@@ -4,11 +4,11 @@ In this repository, I solved all 25 days for Advent of Code 2021, using mostly
 Python and Haskell. This was both fun and really hard for me at the end. I had
 to take a small break on day 24. I got back on time for day 25 and I'm really
 proud of that. But there is more: then, for what it's worth, I solved the first
-two days in 17 different languages. And took some notes along the way.
+two days in 18 different languages. And took some notes along the way.
 
 Contents:
 
-- [#two-problems-17-languages](#two-problems-17-languages)
+- [#two-problems-18-languages](#two-problems-18-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -35,13 +35,14 @@ See also:
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
 
-## Two problems, 17 languages
+## Two problems, 18 languages
 
-For what it's worth, I solved the first two days in 17 different languages:
+For what it's worth, I solved the first two days in 18 different languages:
 
 - C++
 - Common Lisp
 - Elixir
+- Erlang
 - GNU Forth
 - GNU Smalltalk
 - Go
@@ -628,10 +629,16 @@ Books:
 
 ### Erlang
 
+- To pass a function defined in an escript to another function, I had to add
+  `-mode(compile).`
+
+References:
+
 - Erlang Docs ~ <https://www.erlang.org/doc/index.html>
 - Efficiency Guide ~ <https://www.erlang.org/doc/efficiency_guide>
 - Programming Examples - Funs ~ <https://www.erlang.org/doc/programming_examples/funs.html>
 - IO ~ <https://www.erlang.org/doc/man/io.html>
+- Learn X in Y minutes - Where X=erlang ~ <https://learnxinyminutes.com/docs/erlang/>
 
 ## How to run
 

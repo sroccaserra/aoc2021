@@ -7,7 +7,7 @@
 solve_1(Numbers) ->
     solve_1(Numbers, ?HUGE, 0).
 
-solve_1([N|Rest], Previous, Result) ->
+solve_1([N | Rest], Previous, Result) ->
     NextResult = Result + case (N > Previous) of true -> 1; false -> 0 end,
     case Rest of
         [] -> NextResult;
@@ -17,7 +17,7 @@ solve_1([N|Rest], Previous, Result) ->
 solve_2(Numbers) ->
     solve_2(Numbers, ?HUGE, ?HUGE, ?HUGE, 0).
 
-solve_2([N|Rest], P1, P2, P3, Result) ->
+solve_2([N | Rest], P1, P2, P3, Result) ->
     NextResult = Result + case (N+P1+P2 > P1+P2+P3) of true -> 1; false -> 0 end,
     case Rest of
         [] -> NextResult;
