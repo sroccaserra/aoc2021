@@ -19,9 +19,9 @@
     (dolist (n numbers)
       (when (> (+ n p1 p2) (+ p1 p2 p3))
         (setq result (+ 1 result)))
-      (setq p3 p2)
-      (setq p2 p1)
-      (setq p1 n))
+      (setq p3 p2
+            p2 p1
+            p1 n))
     result))
 
 (let ((numbers (get-parsed-lines #'parse-integer)))
