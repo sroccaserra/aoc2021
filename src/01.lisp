@@ -25,5 +25,5 @@
     result))
 
 (let ((numbers (get-parsed-lines #'parse-integer)))
-  (write-line (write-to-string (solve-1 numbers)))
-  (write-line (write-to-string (solve-2 numbers))))
+  (format t "~d~%" (solve-1 numbers))
+  (format t "~d~%" (solve-2 numbers)))

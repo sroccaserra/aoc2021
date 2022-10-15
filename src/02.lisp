@@ -17,13 +17,11 @@
                 ((eq ':|down| direction)
                  (incf depth-1 value)
                  (incf aim value))))
-    (values (* hpos depth-1) (* hpos depth-2))))
+    (list (* hpos depth-1) (* hpos depth-2))))
 
 (defun parse-command (line)
   (destructuring-bind (direction value-str) (uiop:split-string line)
     (list (intern direction "KEYWORD") (parse-integer value-str))))
 
 (let ((commands (get-parsed-lines #'parse-command)))
-  (multiple-value-bind (result-1 result-2) (solve commands)
-    (write-line (write-to-string result-1))
-    (write-line (write-to-string result-2))))
+  (format t "~{~a~%~}" (solve commands)))
