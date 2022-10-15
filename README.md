@@ -24,6 +24,7 @@ Contents:
 - [#kotlin](#kotlin)
 - [#ruby](#ruby)
 - [#x86-64-assembly](#x86-64-assembly)
+- [#common-lisp](#common-lisp)
 - [#how-to-run](#how-to-run)
 
 See also:
@@ -589,13 +590,27 @@ SO questions:
 
 ### Common Lisp
 
+- HyperSpec ~ <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
 - SBLC ~ <https://www.sbcl.org/>
 - SBCL User Manual ~ <https://www.sbcl.org/manual/index.html>
-- <https://common-lisp.net/libraries>
+- Common-Lisp.net ~ <https://common-lisp.net/>
+- CLiki - The Common Lisp Wiki ~ <https://cliki.net/>
+- The Common Lisp Cookbook ~ <https://lispcookbook.github.io/cl-cookbook/>
+- Learn X in Y minutes - Where X=Common Lisp ~ <https://learnxinyminutes.com/docs/common-lisp/>
+
+Tools & Libs:
+
+- Libraries ~ <https://common-lisp.net/libraries>
+- ASDF - Another System Definition Facility ~ <https://asdf.common-lisp.dev/>
+- UIOP ~ <https://asdf.common-lisp.dev/uiop.html>
 - UIOP ~ <https://gitlab.common-lisp.net/asdf/asdf/blob/master/uiop/README.md>
-- HyperSpec ~ <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
+- Awesome Common Lisp ~ <https://github.com/CodyReichert/awesome-cl>
+
+Books:
+
 - Common Lisp the Language ~ <https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/clm.html>
 - Practical Common Lisp ~ <https://gigamonkeys.com/book/>
+- Land of Lisp ~ <http://landoflisp.com/>
 
 ## How to run
 
