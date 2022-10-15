@@ -607,6 +607,7 @@ References:
 - CLiki - The Common Lisp Wiki ~ <https://cliki.net/>
 - The Common Lisp Cookbook ~ <https://lispcookbook.github.io/cl-cookbook/>
 - Data Structures ~ <https://lispcookbook.github.io/cl-cookbook/data-structures.html>
+- Destructuring ~ <https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node252.html>
 - Learn X in Y minutes - Where X=Common Lisp ~ <https://learnxinyminutes.com/docs/common-lisp/>
 
 Tools & Libs:
