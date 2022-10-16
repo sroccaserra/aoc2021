@@ -629,13 +629,13 @@ Books:
 
 ### Erlang
 
-- To pass a function defined in an escript to another function, I had to add
-  `-mode(compile).`
+- To pass a function defined in an escript to another function in the same
+  script, I had to add `-mode(compile).`
 
 References:
 
 - Erlang Docs ~ <https://www.erlang.org/doc/index.html>
-- Efficiency Guide ~ <https://www.erlang.org/doc/efficiency_guide>
+- Efficiency Guide ~ <https://www.erlang.org/doc/efficiency_guide/users_guide.html>
 - Programming Examples - Funs ~ <https://www.erlang.org/doc/programming_examples/funs.html>
 - IO ~ <https://www.erlang.org/doc/man/io.html>
 - Learn X in Y minutes - Where X=erlang ~ <https://learnxinyminutes.com/docs/erlang/>
