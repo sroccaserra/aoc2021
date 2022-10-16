@@ -18,7 +18,7 @@ solve([{command, Direction, Value} | Rest], HPos, Depth1, Depth2, Aim) ->
     end.
 
 parse_command(Line) ->
-    [Part1 | [Part2 | _]] = string:tokens(Line, [$\s]),
+    [Part1, Part2 | _] = string:tokens(Line, [$\s]),
     {command, list_to_atom(Part1), list_to_integer(Part2)}.
 
 main([Filename]) ->
