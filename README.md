@@ -26,6 +26,7 @@ Contents:
 - [#x86-64-assembly](#x86-64-assembly)
 - [#common-lisp](#common-lisp)
 - [#erlang](#erlang)
+- [#j](#j)
 - [#how-to-run](#how-to-run)
 
 See also:
@@ -47,6 +48,7 @@ For what it's worth, I solved the first two days in 18 different languages:
 - GNU Smalltalk
 - Go
 - Haskell
+- J
 - Java
 - Kotlin
 - Lua
@@ -640,6 +642,15 @@ References:
 - IO ~ <https://www.erlang.org/doc/man/io.html>
 - Learn X in Y minutes - Where X=erlang ~ <https://learnxinyminutes.com/docs/erlang/>
 
+### J
+
+References:
+
+- J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
+- The J programming language ~ <https://www.jsoftware.com/>
+- Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
+- Files ~ <https://www.jsoftware.com/help/primer/files.htm>
+
 ## How to run
 
 To run Python solutions:
@@ -767,6 +778,12 @@ To run Erlang solutions:
 
 ```
 $ escript src/01.{erl,in}
+```
+
+To run J solutions:
+
+```
+iconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
 ```
 
 ## How it started
