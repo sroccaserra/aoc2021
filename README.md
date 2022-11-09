@@ -644,12 +644,24 @@ References:
 
 ### J
 
+How I installed the 'plot' addon:
+
+```ijs
+$ sudo ijconsole  # sudo is required if j is installed to /usr
+   getscripts_j_ 'plot'  NB. Gives the category/module corresponding to 'plot'
+   load 'pacman'  NB. Probably not required
+   install 'graphics/plot'
+   ...
+```
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
 - The J programming language ~ <https://www.jsoftware.com/>
 - Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
+- Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
+- To install 'plot' ~ <https://stackoverflow.com/questions/23746407/j-languages-load-command>
 
 ## How to run
 
@@ -783,7 +795,7 @@ $ escript src/01.{erl,in}
 To run J solutions:
 
 ```
-iconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
+ijconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
 ```
 
 ## How it started
