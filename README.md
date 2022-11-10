@@ -658,10 +658,14 @@ References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
 - The J programming language ~ <https://www.jsoftware.com/>
+- Learning J ~ <https://www.jsoftware.com/help/learning/contents.htm>
 - Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
 - Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
 - To install 'plot' ~ <https://stackoverflow.com/questions/23746407/j-languages-load-command>
+- NuVoc 🤯 ~ <https://code.jsoftware.com/wiki/NuVoc>
+- Currying ~ <https://rosettacode.org/wiki/Currying#J>
+- When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
 
 ## How to run
 

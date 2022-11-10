@@ -1,9 +1,10 @@
-readfile =: 1!:1
+getParsedLines =: 3 : 0
+    readfile =. 1!:1
+    > parse_subfn each cutopen .toJ readfile < y
+)
 
-
-filename =. < input  NB. the interface with the environment requires a boxed string
-contents =. readfile filename
-numbers =.  > 0 ". each cutopen .toJ contents
+parse_subfn =: ".
+numbers =. getParsedLines input
 
 load 'plot'
 plot numbers
