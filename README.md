@@ -654,11 +654,26 @@ $ sudo ijconsole  # sudo is required if j is installed to /usr
    ...
 ```
 
+If a verb has a noun on its left, it is executed as a dyadic verb with a left
+and right operand.  If the verb does not have a noun on its left, it is
+executed as monadic with just a right operand.  You must know the part of
+speech of the names in a sentence to understand the execution order.  In the
+sentence `result =. name1 verb2 5` you must know whether name1 is a verb, in
+which case verb2 is executed monadically and the result is `name1(verb2(5))`,
+or name1 is a noun, in which case verb2 is dyadic and the result is `(name1
+verb2 5)`.
+
+J uses the names x, y, u, v, m, and n to represent arguments to verbs and other
+entities.  You should avoid using these names for other purposes.
+
+Convention: pass `''` to a monad that doesn't need any argument.
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
 - The J programming language ~ <https://www.jsoftware.com/>
 - Learning J ~ <https://www.jsoftware.com/help/learning/contents.htm>
+- Preliminaries ~ <https://code.jsoftware.com/wiki/Help/JforC/Preliminaries>
 - Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
 - Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
