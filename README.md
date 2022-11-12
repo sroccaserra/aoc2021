@@ -693,7 +693,8 @@ References:
 - NuVoc 🤯 ~ <https://code.jsoftware.com/wiki/NuVoc>
 - Hook ~ <https://code.jsoftware.com/wiki/Vocabulary/hook>
 - When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
-- `:` ~ https://code.jsoftware.com/wiki/Vocabulary/com>
+- `:` ~ <https://code.jsoftware.com/wiki/Vocabulary/com>
+- Gerunds ~ <https://www.jsoftware.com/help/learning/14.htm>
 
 Tools:
 
