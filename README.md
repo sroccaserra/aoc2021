@@ -684,6 +684,7 @@ References:
 - Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
 - NuVoc 🤯 ~ <https://code.jsoftware.com/wiki/NuVoc>
+- Hook ~ <https://code.jsoftware.com/wiki/Vocabulary/hook>
 - Currying ~ <https://rosettacode.org/wiki/Currying#J>
 - When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
 - Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
