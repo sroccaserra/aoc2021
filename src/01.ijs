@@ -11,5 +11,6 @@ readfile =. 1!:1
 parse_subfn =: ".
 numbers =. getParsedLines ''
 
-load 'plot'
-plot numbers
+solve1 =: +/&(}:<}.)
+
+echo solve1 numbers

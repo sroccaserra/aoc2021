@@ -668,19 +668,30 @@ entities.  You should avoid using these names for other purposes.
 
 Convention: pass `''` to a monad that doesn't need any argument.
 
+You can ask the interpreter how it splits a line into words by using monad `;:`
+: `;: '2 + 1 2 3'`
+
+For any verb, including user-written verbs, you can ask the interpreter the
+rank by typing verbname b. 0 : `#: b. 0`
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
 - The J programming language ~ <https://www.jsoftware.com/>
 - Learning J ~ <https://www.jsoftware.com/help/learning/contents.htm>
 - Preliminaries ~ <https://code.jsoftware.com/wiki/Help/JforC/Preliminaries>
+- Loopless Code ~ <https://code.jsoftware.com/wiki/Help/JforC/Loopless_Code_I:_Verbs_Have_Rank>
 - Primer contents ~ <https://www.jsoftware.com/help/primer/contents.htm>
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
-- Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
-- To install 'plot' ~ <https://stackoverflow.com/questions/23746407/j-languages-load-command>
 - NuVoc 🤯 ~ <https://code.jsoftware.com/wiki/NuVoc>
 - Currying ~ <https://rosettacode.org/wiki/Currying#J>
 - When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
+- Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
+- To install 'plot' ~ <https://stackoverflow.com/questions/23746407/j-languages-load-command>
+
+Solutions:
+
+- <https://github.com/jitwit/aoc/tree/a/J/21>
 
 ## How to run
 
