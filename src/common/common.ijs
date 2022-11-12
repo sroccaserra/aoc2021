@@ -1,10 +1,7 @@
 NB. The value `input` should be defined before calling this function. E.g. pass
 NB. "input =: 'src/01.in'" to the program.
 
-NB. The value `parse_subfn` should be defined before calling this function.
-
-getParsedLines =: monad define
+getParsedLines_z_ =. adverb define
 readfile =. 1!:1
-> parse_subfn each cutopen .toJ readfile < input
+> u each cutopen .toJ readfile < input
 )
-
