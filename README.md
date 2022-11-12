@@ -674,6 +674,13 @@ You can ask the interpreter how it splits a line into words by using monad `;:`
 For any verb, including user-written verbs, you can ask the interpreter the
 rank by typing verbname b. 0 : `#: b. 0`
 
+Plotting values:
+
+```ijs
+load 'plot'
+plot numbers
+```
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
@@ -685,10 +692,17 @@ References:
 - Files ~ <https://www.jsoftware.com/help/primer/files.htm>
 - NuVoc 🤯 ~ <https://code.jsoftware.com/wiki/NuVoc>
 - Hook ~ <https://code.jsoftware.com/wiki/Vocabulary/hook>
-- Currying ~ <https://rosettacode.org/wiki/Currying#J>
 - When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
+
+Tools:
+
 - Addons Installation ~ <https://code.jsoftware.com/wiki/Addons/Installation>
 - To install 'plot' ~ <https://stackoverflow.com/questions/23746407/j-languages-load-command>
+
+Articles:
+
+- Beyond Functional Programming: Manipulate Functions with the J Language ~ <https://www.adamtornhill.com/articles/jlang/beyondfunctional.html>
+- Currying ~ <https://rosettacode.org/wiki/Currying#J>
 
 Solutions:
 
