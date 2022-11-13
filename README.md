@@ -4,11 +4,11 @@ In this repository, I solved all 25 days for Advent of Code 2021, using mostly
 Python and Haskell. This was both fun and really hard for me at the end. I had
 to take a small break on day 24. I got back on time for day 25 and I'm really
 proud of that. But there is more: then, for what it's worth, I solved the first
-two days in 18 different languages. And took some notes along the way.
+two days in 19 different languages. And took some notes along the way.
 
 Contents:
 
-- [#two-problems-18-languages](#two-problems-18-languages)
+- [#two-problems-19-languages](#two-problems-19-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -36,9 +36,9 @@ See also:
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
 
-## Two problems, 18 languages
+## Two problems, 19 languages
 
-For what it's worth, I solved the first two days in 18 different languages:
+For what it's worth, I solved the first two days in 19 different languages:
 
 - C++
 - Common Lisp
@@ -680,6 +680,9 @@ Plotting values:
 load 'plot'
 plot numbers
 ```
+
+`x f&g y` ↔ `(g x) f (g y)`. For example, `x %&! y` is the quotient of the
+'factorials' of `x` and `y`.
 
 References:
 
