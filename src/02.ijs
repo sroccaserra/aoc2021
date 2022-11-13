@@ -1,27 +1,19 @@
 load 'src/common/common.ijs'
 
-solve =. verb define
-'hpos depth1 depth2 aim' =. 0 0 0 0
-for_command. y do.
-    'direction value' =. command
-    select. direction
-    case. 'forward' do.
-        hpos =. hpos + value
-        depth2 =. depth2 + aim * value
-    case. 'up' do.
-        depth1 =. depth1 - value
-        aim =. aim - value
-    case. 'down' do.
-        depth1 =. depth1 + value
-        aim =. aim + value
-    end.
+solve =. monad : '0 0 0 0 results F.. applycommand y'
+
+applycommand =: dyad define
+'hpos depth1 depth2 aim' =. y
+'direction value' =. x
+select. direction
+case. 'forward' do. (hpos + value) 0 } (depth2 + aim * value) 2 } y
+case. 'up'      do. (aim - value) 3 } (depth1 - value) 1 } y
+case. 'down'    do. (aim + value) 3 } (depth1 + value) 1 } y
 end.
-(hpos * depth1) , (hpos * depth2)
 )
 
-parse =. ({. , ".&.>@:}.) & ;:
+results =: (0&{ * 1&{) , (0&{ * 2&{)
 
+parse =. ({. , ".&.>@:}.) & ;:
 commands =. > parse each getinputlines ''
-'result1 result2' =. solve commands
-echo result1
-echo result2
+echo 2 1 $ solve commands
