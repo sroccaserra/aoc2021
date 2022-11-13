@@ -695,6 +695,9 @@ References:
 - When programs are data ~ <https://code.jsoftware.com/wiki/Help/JforC/When_Programs_Are_Data>
 - `:` ~ <https://code.jsoftware.com/wiki/Vocabulary/com>
 - Gerunds ~ <https://www.jsoftware.com/help/learning/14.htm>
+- Compositions (Based on Conjunctions) ~ <https://www.jsoftware.com/help/dictionary/samp13.htm>
+- Compositions (Based on Hooks and Forks) ~ <https://www.jsoftware.com/help/dictionary/samp14.htm>
+- RefCard ~ <https://code.jsoftware.com/wiki/File:J602_RefCard_color_letter_current.pdf>
 
 Tools:
 
@@ -709,6 +712,7 @@ Articles:
 Solutions:
 
 - <https://github.com/jitwit/aoc/tree/a/J/21>
+- <https://github.com/adamtornhill/apl-challenge-2014-in-J>
 
 ## How to run
 
