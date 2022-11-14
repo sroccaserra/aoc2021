@@ -14,6 +14,6 @@ end.
 
 results =: (0&{ * 1&{) , (0&{ * 2&{)
 
-parse =. ({. , ".&.>@:}.) & ;:
+parse =. ({. , [: ".&.> }.) & ;:
 commands =. > parse each getinputlines ''
 echo 2 1 $ solve commands

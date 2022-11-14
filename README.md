@@ -684,6 +684,17 @@ plot numbers
 `x f&g y` ↔ `(g x) f (g y)`. For example, `x %&! y` is the quotient of the
 'factorials' of `x` and `y`.
 
+Verb trains as tacit functions: read them from the right, three at a time.
+Three verbs form a fork and become a single verb. Then repeat: read from the
+right, three at a time (Sierpinsky triangle?)
+
+`2:` is a verb that always returns 2. `2: 4` returns 2. Usefull to introduce
+constants in verb trains: `(#-2:)` is a fork that returns the length of a list
+minus 2. Read it as `(# - 2:)`.
+
+`":` as a monad (Format) can turn a number into a string. `datatype 2` returns
+`integer`, `datatype ": 2` returns `integral`.
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
@@ -701,6 +712,10 @@ References:
 - Gerunds ~ <https://www.jsoftware.com/help/learning/14.htm>
 - Compositions (Based on Conjunctions) ~ <https://www.jsoftware.com/help/dictionary/samp13.htm>
 - Compositions (Based on Hooks and Forks) ~ <https://www.jsoftware.com/help/dictionary/samp14.htm>
+- Trains ~ <https://www.jsoftware.com/help/dictionary/dictf.htm>
+- Reading Tacit Verbs ~ <https://code.jsoftware.com/wiki/Guides/Reading_Tacit_Verbs>
+- Cap ~ <https://www.jsoftware.com/help/dictionary/d502.htm>
+- Cap ~ <https://code.jsoftware.com/wiki/Vocabulary/squarelfco>
 - RefCard ~ <https://code.jsoftware.com/wiki/File:J602_RefCard_color_letter_current.pdf>
 
 Tools:
@@ -712,6 +727,7 @@ Articles:
 
 - Beyond Functional Programming: Manipulate Functions with the J Language ~ <https://www.adamtornhill.com/articles/jlang/beyondfunctional.html>
 - Currying ~ <https://rosettacode.org/wiki/Currying#J>
+- "The J Programming Language" by Tracy Harms (2013) ~ <https://www.youtube.com/watch?v=RWYkx6-L04Q>
 
 Solutions:
 
