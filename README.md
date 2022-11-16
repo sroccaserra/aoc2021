@@ -695,6 +695,12 @@ minus 2. Read it as `(# - 2:)`.
 `":` as a monad (Format) can turn a number into a string. `datatype 2` returns
 `integer`, `datatype ": 2` returns `integral`.
 
+The fork `] f g` would be the S combinator. In J notation and rules, `(] f g)
+y` is `y f (g y)`. The S combinator (with more math-like notation) is defined
+as: `S x y z -> x z (y z)`. There would also be a similarity with the `<*>`
+operator in Haskell, as S is `(<*>)` for the `((->) r)` Applicative instance (I
+don't really know, to be explored and confirmed).
+
 References:
 
 - J (programming language) ~ <https://en.wikipedia.org/wiki/J_(programming_language)>
@@ -716,6 +722,7 @@ References:
 - Reading Tacit Verbs ~ <https://code.jsoftware.com/wiki/Guides/Reading_Tacit_Verbs>
 - Cap ~ <https://www.jsoftware.com/help/dictionary/d502.htm>
 - Cap ~ <https://code.jsoftware.com/wiki/Vocabulary/squarelfco>
+- Searching and Matching Items: Fast List Operations (FLOs) ~ <https://code.jsoftware.com/wiki/Vocabulary/SpecialCombinations#FLOs>
 - RefCard ~ <https://code.jsoftware.com/wiki/File:J602_RefCard_color_letter_current.pdf>
 
 Tools:
@@ -728,6 +735,7 @@ Articles:
 - Beyond Functional Programming: Manipulate Functions with the J Language ~ <https://www.adamtornhill.com/articles/jlang/beyondfunctional.html>
 - Currying ~ <https://rosettacode.org/wiki/Currying#J>
 - "The J Programming Language" by Tracy Harms (2013) ~ <https://www.youtube.com/watch?v=RWYkx6-L04Q>
+- The S and K Combinators ~ <https://wiki.c2.com/?EssAndKayCombinators>
 
 Solutions:
 
