@@ -27,6 +27,7 @@ Contents:
 - [#common-lisp](#common-lisp)
 - [#erlang](#erlang)
 - [#j](#j)
+- [#apl](#apl)
 - [#how-to-run](#how-to-run)
 
 See also:
@@ -695,11 +696,16 @@ minus 2. Read it as `(# - 2:)`.
 `":` as a monad (Format) can turn a number into a string. `datatype 2` returns
 `integer`, `datatype ": 2` returns `integral`.
 
-The fork `] f g` would be the S combinator. In J notation and rules, `(] f g)
-y` is `y f (g y)`. The S combinator (with more math-like notation) is defined
-as: `S x y z -> x z (y z)`. There would also be a similarity with the `<*>`
-operator in Haskell, as S is `(<*>)` for the `((->) r)` Applicative instance (I
-don't really know, to be explored and confirmed).
+The fork where the first function is the identity, `] f g` would be the S
+combinator. In J notation and rules, `(] f g) y` is `y f (g y)`. The S
+combinator (with more math-like notation) is defined as: `S x y z -> x z (y
+z)`. There would also be a similarity with the `<*>` operator in Haskell, as S
+is `(<*>)` for the `((->) r)` Applicative instance (I don't really know, to be
+explored and confirmed).
+
+The fork is the S' combinator, or the starling', or the phoenix bird from
+Haskell's Data.Aviary.Birds package. It is also the liftM2 function from the
+Control.Monad package!
 
 References:
 
@@ -736,11 +742,28 @@ Articles:
 - Currying ~ <https://rosettacode.org/wiki/Currying#J>
 - "The J Programming Language" by Tracy Harms (2013) ~ <https://www.youtube.com/watch?v=RWYkx6-L04Q>
 - The S and K Combinators ~ <https://wiki.c2.com/?EssAndKayCombinators>
+- 1 Problem, 16 Programming Languages ~ <https://www.youtube.com/watch?v=UVUjnzpQKUo>
 
 Solutions:
 
 - <https://github.com/jitwit/aoc/tree/a/J/21>
 - <https://github.com/adamtornhill/apl-challenge-2014-in-J>
+
+### APL
+
+When running a program from `dyalogscript` (Dyalog APL), to access the `]box on` and `]rows on` options you can (have to?) call this line (first line in example below):
+
+```apl
+(⎕NS⍬).(_←enableSALT⊣⎕CY'salt')
+]box on -style=max
+]rows on
+```
+
+- Learn APL ~ <https://xpqz.github.io/learnapl/intro.html>
+- APL Wiki ~ <https://aplwiki.com/wiki/Main_Page>
+- Function Composition ~ <https://aplwiki.com/wiki/Function_composition>
+- APLcart ~ <https://aplcart.info/>
+- A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
 
 ## How to run
 
@@ -875,6 +898,11 @@ To run J solutions:
 
 ```
 ijconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
+```
+
+To run the APL solution:
+```
+$ dyalogscript src/01.apl
 ```
 
 ## How it started
