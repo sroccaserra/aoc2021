@@ -751,7 +751,9 @@ Solutions:
 
 ### APL
 
-When running a program from `dyalogscript` (Dyalog APL), to access the `]box on` and `]rows on` options you can (have to?) call this line (first line in example below):
+When running a program from `dyalogscript` (Dyalog APL), to access the `]box
+on` and `]rows on` options you can (have to?) call this line (first line in
+example below):
 
 ```apl
 (⎕NS⍬).(_←enableSALT⊣⎕CY'salt')
@@ -759,9 +761,35 @@ When running a program from `dyalogscript` (Dyalog APL), to access the `]box on`
 ]rows on
 ```
 
+Nested APLs such as APL2 allow any array to be used as an element, including
+scalar numbers or characters (written with quotes) as well as larger arrays. In
+order to include a stranded array inside another array it must be
+parenthesized. [...] Flat APLs impose the rule that all elements of arrays have
+the same type, such as all character or all numeric. [...], and it has been
+maintained in newer languages such as SHARP APL and J.
+
+Although Reduce is `foldr1` in nature, one can use it like `foldr`, where a
+designated starting value is modified by the rest of the values in sequence. In
+this case, the start value (enclosed if not a simple scalar) is attached to the
+right end of the vector of "modifiers", and then the entire vector is reduced.
+
+```apl
+     (⍉∘⌽↓)/2 1 2 1,⊂5 6⍴⍳30  ⍝ Trim a matrix from all four sides, by rotating the matrix after each trim
+┌─────┐
+│ 9 10│
+│15 16│
+│21 22│
+└─────┘
+```
+
+In general, Reduce reduces one chosen axis (either implied by using the
+last-axis form `f/` or first-axis `f⌿`, or explicitly by using function axis
+`f/[x])` by evaluating each vector along the chosen axis into a scalar.
+
 - Learn APL ~ <https://xpqz.github.io/learnapl/intro.html>
 - APL Wiki ~ <https://aplwiki.com/wiki/Main_Page>
 - Function Composition ~ <https://aplwiki.com/wiki/Function_composition>
+- Reduce ~ <https://aplwiki.com/wiki/Reduce>
 - APLcart ~ <https://aplcart.info/>
 - A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
 
