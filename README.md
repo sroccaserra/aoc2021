@@ -786,10 +786,23 @@ In general, Reduce reduces one chosen axis (either implied by using the
 last-axis form `f/` or first-axis `f⌿`, or explicitly by using function axis
 `f/[x])` by evaluating each vector along the chosen axis into a scalar.
 
+Rank: an array may have 0 or more axes or dimensions. The number of axes of an
+array is known as its rank.  Dyalog APL supports arrays with a maximum of 15
+axes.
+
+Depth: if one or more items of an array is not a simple scalar (i.e. is another
+array, or a `⎕OR`), the array is called a nested array. A nested array may
+contain items which are themselves nested arrays.  The degree of nesting of an
+array is called its depth.
+
+References:
+
 - Learn APL ~ <https://xpqz.github.io/learnapl/intro.html>
 - APL Wiki ~ <https://aplwiki.com/wiki/Main_Page>
 - Function Composition ~ <https://aplwiki.com/wiki/Function_composition>
 - Reduce ~ <https://aplwiki.com/wiki/Reduce>
+- Array Model ~ <https://www.aplwiki.com/wiki/Array_model>
+- Arrays ~ <https://help.dyalog.com/latest/index.htm#Language/Introduction/Variables/Arrays.htm>
 - APLcart ~ <https://aplcart.info/>
 - A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
 
