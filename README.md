@@ -36,6 +36,7 @@ See also:
 - <https://github.com/sroccaserra/aoc2018#learnings>
 - <https://github.com/sroccaserra/aoc2019#learnings>
 - <https://github.com/sroccaserra/aoc2020#learnings>
+- <https://github.com/sroccaserra/aoc2022>
 
 ## Two problems, 19 languages
 
@@ -803,8 +804,15 @@ References:
 - Reduce ~ <https://aplwiki.com/wiki/Reduce>
 - Array Model ~ <https://www.aplwiki.com/wiki/Array_model>
 - Arrays ~ <https://help.dyalog.com/latest/index.htm#Language/Introduction/Variables/Arrays.htm>
+- Simple Examples ~ <https://aplwiki.com/wiki/Simple_examples>
 - APLcart ~ <https://aplcart.info/>
+- Mastering Dyalog APL ~ <https://mastering.dyalog.com/README.html>
 - A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
+- APL a Day ~ <https://www.sacrideo.us/tag/apl-a-day/>
+
+Solutions:
+
+- <https://aplwiki.com/wiki/Advent_of_Code>
 
 ## How to run
 
