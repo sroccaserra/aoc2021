@@ -807,7 +807,8 @@ References:
 - Simple Examples ~ <https://aplwiki.com/wiki/Simple_examples>
 - APLcart ~ <https://aplcart.info/>
 - Mastering Dyalog APL ~ <https://mastering.dyalog.com/README.html>
-- A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
+- A Tour (de Force) of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
+- A Tour (de Force) of APL in 16 Expressions ~ <https://www.jsoftware.com/papers/tour_Bangalore/>
 - APL a Day ~ <https://www.sacrideo.us/tag/apl-a-day/>
 - Parsing content from files with `⎕CSV` ~ <https://www.youtube.com/watch?v=AHoiROI15BA>
 
