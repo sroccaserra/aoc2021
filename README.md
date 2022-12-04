@@ -809,10 +809,13 @@ References:
 - Mastering Dyalog APL ~ <https://mastering.dyalog.com/README.html>
 - A Tour de Force of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
 - APL a Day ~ <https://www.sacrideo.us/tag/apl-a-day/>
+- Parsing content from files with `⎕CSV` ~ <https://www.youtube.com/watch?v=AHoiROI15BA>
 
 Solutions:
 
 - <https://aplwiki.com/wiki/Advent_of_Code>
+- <https://github.com/codereport/Advent-of-Code-2022>
+- <https://www.youtube.com/watch?v=p0bg5M_R2aQ>
 
 ## How to run
 
