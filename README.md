@@ -796,6 +796,11 @@ array, or a `⎕OR`), the array is called a nested array. A nested array may
 contain items which are themselves nested arrays.  The degree of nesting of an
 array is called its depth.
 
+A train such as `= / +` could be interpreted either as the two-train `(=/) +`,
+Equals reduction atop Plus, or as a three train Equals Compress Plus.  Dialects
+choose the first interpretation. To force the fork interpretation, we can add
+right atop: `=⊢⍤/+`. See the reference about function-operator overloading.
+
 References:
 
 - Learn APL ~ <https://xpqz.github.io/learnapl/intro.html>
@@ -805,6 +810,7 @@ References:
 - Array Model ~ <https://www.aplwiki.com/wiki/Array_model>
 - Arrays ~ <https://help.dyalog.com/latest/index.htm#Language/Introduction/Variables/Arrays.htm>
 - Simple Examples ~ <https://aplwiki.com/wiki/Simple_examples>
+- Function-Operator Overloading ~ <https://aplwiki.com/wiki/Function-operator_overloading#Mitigation>
 - APLcart ~ <https://aplcart.info/>
 - Mastering Dyalog APL ~ <https://mastering.dyalog.com/README.html>
 - A Tour (de Force) of APL in 16 Expressions ~ <https://www.youtube.com/watch?v=e0rywC7-i0U>
