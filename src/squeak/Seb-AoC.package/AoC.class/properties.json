@@ -1,0 +1,14 @@
+{
+	"category" : "Seb-AoC",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "AoC",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
