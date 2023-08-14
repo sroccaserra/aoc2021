@@ -4,11 +4,19 @@ In this repository, I solved all 25 days for Advent of Code 2021, using mostly
 Python and Haskell. This was both fun and really hard for me at the end. I had
 to take a small break on day 24. I got back on time for day 25 and I'm really
 proud of that. But there is more: then, for what it's worth, I solved the first
-two days in 19 different languages. And took some notes along the way.
+two days in 20 different languages. And took some notes along the way.
+
+See also:
+
+- <https://github.com/sroccaserra/aoc2015#learnings>
+- <https://github.com/sroccaserra/aoc2018#learnings>
+- <https://github.com/sroccaserra/aoc2019#learnings>
+- <https://github.com/sroccaserra/aoc2020#learnings>
+- <https://github.com/sroccaserra/aoc2022#learnings>
 
 Contents:
 
-- [#two-problems-19-languages](#two-problems-19-languages)
+- [#two-problems-20-languages](#two-problems-20-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -30,18 +38,11 @@ Contents:
 - [#apl](#apl)
 - [#how-to-run](#how-to-run)
 
-See also:
+## Two problems, 20 languages
 
-- <https://github.com/sroccaserra/aoc2015#learnings>
-- <https://github.com/sroccaserra/aoc2018#learnings>
-- <https://github.com/sroccaserra/aoc2019#learnings>
-- <https://github.com/sroccaserra/aoc2020#learnings>
-- <https://github.com/sroccaserra/aoc2022#learnings>
+For what it's worth, I solved the first two days in 20 different languages:
 
-## Two problems, 19 languages
-
-For what it's worth, I solved the first two days in 19 different languages:
-
+- APL
 - C++
 - Common Lisp
 - Elixir
