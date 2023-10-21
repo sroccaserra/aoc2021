@@ -1,8 +1,7 @@
-ns ← •ParseFloat¨ •FLines "01.in"
-
 Solve1 ← +´·<˝˘2⊸↕
 Solve2 ←  Solve1·+˝˘3⊸↕
 
+ns ← •ParseFloat¨•FLines•wdpath∾"/"∾⊑•args
 •Show (Solve1⋈Solve2) ns
 
 ##
