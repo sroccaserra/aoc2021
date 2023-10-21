@@ -43,6 +43,7 @@ Contents:
 For what it's worth, I solved the first two days in 20 different languages:
 
 - APL
+- BQN
 - C++
 - Common Lisp
 - Elixir
@@ -963,6 +964,11 @@ ijconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
 To run the APL solution:
 ```
 $ dyalogscript src/01.apl
+```
+
+To run BQN solutions:
+```
+$ bqn src/01.{bqn,in}
 ```
 
 ## How it started
