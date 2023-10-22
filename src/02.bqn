@@ -14,10 +14,13 @@ ToVec ← {
 Apply ← {
   command𝕊h‿a‿d:
   u‿v ← ToVec command
-  (h+u)‿(a+v)‿(d+a×u)
+  h‿a‿d + u‿v‿(a×u)
 }
 
-Solve ← { ×´¨(0‿1⊸⊏⋈0‿2⊸⊏)0‿0‿0 Apply´⌽ 𝕩 }
+Solve ← {
+  h‿a‿d ← 0‿0‿0 Apply´⌽ 𝕩
+  (h×a)‿(h×d)
+}
 
 commands ← Parse¨•FLines•wdpath∾"/"∾⊑•args
 •Show Solve commands
