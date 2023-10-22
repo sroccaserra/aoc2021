@@ -19,8 +19,8 @@ Apply ← {
 
 Solve ← { ×´¨(0‿1⊸⊏⋈0‿2⊸⊏)0‿0‿0 Apply´⌽ 𝕩 }
 
-cs ← Parse¨•FLines•wdpath∾"/"∾⊑•args
-•Show Solve cs
+commands ← Parse¨•FLines•wdpath∾"/"∾⊑•args
+•Show Solve commands
 
 ##
 # Tests
