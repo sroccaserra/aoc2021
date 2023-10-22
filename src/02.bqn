@@ -13,8 +13,8 @@ ToVec ← {
 
 Apply ← {
   command𝕊h‿a‿d:
-  f‿v ← ToVec command
-  (h+f)‿(a+v)‿(d+a×f)
+  u‿v ← ToVec command
+  (h+u)‿(a+v)‿(d+a×u)
 }
 
 Solve ← { ×´¨(0‿1⊸⊏⋈0‿2⊸⊏)0‿0‿0 Apply´⌽ 𝕩 }
