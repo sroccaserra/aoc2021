@@ -2,8 +2,8 @@ Parse ← ¯2⊸↓⋈•ParseFloat∘(¯1⊸↑)
 Match ← {𝕏𝕨}´
 
 ToVec ← {
-  c‿n:
-  Match c‿{
+  s‿n:
+  Match s‿{
     "forward": n‿0;
     "up": 0‿(-n);
     "down": 0‿n;
