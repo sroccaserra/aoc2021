@@ -806,6 +806,7 @@ right atop: `=⊢⍤/+`. See the reference about function-operator overloading.
 References:
 
 - Learn APL ~ <https://xpqz.github.io/learnapl/intro.html>
+- Trainspotting ~ <https://xpqz.github.io/learnapl/tacit.html>
 - APL Wiki ~ <https://aplwiki.com/wiki/Main_Page>
 - Function Composition ~ <https://aplwiki.com/wiki/Function_composition>
 - Reduce ~ <https://aplwiki.com/wiki/Reduce>

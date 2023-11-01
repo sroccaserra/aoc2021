@@ -19,7 +19,7 @@ lines ← ⊃ ⎕NGET'src/02.in'1
 
 print ← { ⎕ ← disp ⍵ }
 ⍝ Assert
-A ← { 0∊⍵:(⍕ ⍺) ⎕SIGNAL 8 ⋄ shy←0 }
+A ← { 0∊⍵:(⍕ ⍺) ⎕SIGNAL 8 ⋄ 1:shy←0 }
 ⍝ Assert Equals
 E ← ⊢A≡
 
@@ -49,5 +49,5 @@ Words ← ' '∘(≠⊆⊢)
 Parse ← (1∘↑,(⍎2∘⊃)) Words
 'forward' 5 E Parse 'forward 5'
 
-Solve1 ← { ×/ +⌿ ↑⍎¨ ⍵ }
+Solve1 ← ×/(+⌿∘↑⍎¨)
 150 E Solve1 lines
