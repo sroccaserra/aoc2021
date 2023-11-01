@@ -16,7 +16,7 @@ See also:
 
 Contents:
 
-- [#two-problems-20-languages](#two-problems-20-languages)
+- [#two-problems-21-languages](#two-problems-21-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -38,9 +38,9 @@ Contents:
 - [#apl](#apl)
 - [#how-to-run](#how-to-run)
 
-## Two problems, 20 languages
+## Two problems, 21 languages
 
-For what it's worth, I solved the first two days in 20 different languages:
+For what it's worth, I solved the first two days in 21 different languages:
 
 - APL
 - BQN
@@ -961,7 +961,7 @@ To run J solutions:
 ijconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
 ```
 
-To run the APL solution:
+To run the APL solutions:
 ```
 $ dyalogscript src/01.apl
 ```
