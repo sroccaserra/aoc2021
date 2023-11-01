@@ -1,20 +1,9 @@
 Parse ← ¯2⊸↓⋈•ParseFloat∘(¯1⊸↑)
-Match ← {𝕏𝕨}´
-
-ToVec ← {
-  s‿n:
-  Match s‿{
-    "forward": n‿0;
-    "up": 0‿(-n);
-    "down": 0‿n;
-    𝕩: 𝕩!0
-  }
-}
 
 Apply ← {
-  command𝕊h‿a‿d:
-  u‿v ← ToVec command
-  h‿a‿d + u‿v‿(a×u)
+ "forward"‿n𝕊h‿a‿d: h‿a‿d+n‿0‿(a×n);
+ "up"‿n𝕊𝕩: 𝕩+0‿(-n)‿0;
+ "down"‿n𝕊𝕩: 𝕩+0‿n‿0
 }
 
 Solve ← {
@@ -30,9 +19,6 @@ commands ← Parse¨•FLines•wdpath∾"/"∾⊑•args
 
 # Parsing
 "forward"‿5 (⊢!≡) Parse "forward 5"
-5‿0 (⊢!≡) ToVec "forward"‿5
-0‿(-3) (⊢!≡) ToVec "up"‿3
-0‿2 (⊢!≡) ToVec "down"‿2
 # Applying
 5‿0‿0 (⊢!≡) "forward"‿5 Apply 0‿0‿0
 5‿5‿0 (⊢!≡) "down"‿5 Apply 5‿0‿0
