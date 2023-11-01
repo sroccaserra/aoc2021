@@ -1,14 +1,14 @@
 'display' 'disp'⎕CY'dfns'
 
 forward ← ,∘0
-up ← 0∘,-
+up ← 0,-
 down ← 0∘,
 
-Acc ← { h a d ← ⍵ ⋄ u v ← ⍺ ⋄ (h+u) (a+v) (d + a×u) }
+Acc ← { _ a _ ← ⍵ ⋄ u v ← ⍺ ⋄ ⍵ + u v (a×u) }
 
 Solve ← {
-  a b c ← ↑(Acc/⌽(⊆0 0 0)∘, ⍎¨ ⍵)
-  (a×b) (a×c)
+  hPos d1 d2 ← ↑(Acc/⌽(⊆0 0 0)∘, ⍎¨ ⍵)
+  (hPos×d1) (hPos×d2)
 }
 
 lines ← ⊃ ⎕NGET'src/02.in'1
@@ -17,9 +17,9 @@ lines ← ⊃ ⎕NGET'src/02.in'1
 ⍝⍝
 ⍝ Tools
 
-print ← {⎕ ← disp ⍵}
+print ← { ⎕ ← disp ⍵ }
 ⍝ Assert
-A ← {0∊⍵:(⍕ ⍺) ⎕SIGNAL 8 ⋄ shy←0}
+A ← { 0∊⍵:(⍕ ⍺) ⎕SIGNAL 8 ⋄ shy←0 }
 ⍝ Assert Equals
 E ← ⊢A≡
 
