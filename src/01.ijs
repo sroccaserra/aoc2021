@@ -10,6 +10,5 @@ echo solve2 numbers
 NB. Tests
 3 : 0''
   ns =. 199 200 208 210 200 207 240 269 260 263
-  assert. 7 -: solve1 ns
-  assert. 5 -: solve2 ns
+  assert. 7 5 -: (solve1,solve2) ns
 )
