@@ -648,10 +648,17 @@ References:
 
 ### J
 
+Notes for self, how I installed J on Linux:
+
+- Download version J9.4 from <https://code.jsoftware.com/wiki/System/Installation/J9.4/Zips>
+- Store it in ~/Applications/j9.4
+- Execute recommanded steps for Linux
+- Link ~/Applications/j9.4/bin/jconsole to ~/bin/jconsole
+
 How I installed the 'plot' addon:
 
 ```ijs
-$ sudo ijconsole  # sudo is required if j is installed to /usr
+$ sudo jconsole  # sudo is required if j is installed to /usr
    getscripts_j_ 'plot'  NB. Gives the category/module corresponding to 'plot'
    load 'pacman'  NB. Probably not required
    install 'graphics/plot'
@@ -959,7 +966,7 @@ $ escript src/01.{erl,in}
 To run J solutions:
 
 ```
-ijconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
+jconsole -js "input=:'src/01.in'" "load 'src/01.ijs'" "exit''"
 ```
 
 To run the APL solutions:
