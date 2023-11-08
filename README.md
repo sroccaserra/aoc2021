@@ -979,6 +979,11 @@ To run BQN solutions:
 $ bqn src/01.{bqn,in}
 ```
 
+To run Uiua solutions:
+```
+$ uiua run src/01.ua
+```
+
 ## How it started
 
 ```shell
