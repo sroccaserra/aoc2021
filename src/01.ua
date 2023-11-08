@@ -1,6 +1,4 @@
-EOL ← "\r\n"
-Split ← |2 ⊜□¬∊,
-Lines ← |1 Split EOL
+Lines ← &i "common/common.ua" "Lines"
 
 Input ← Lines &fras "src/01.in"
 
