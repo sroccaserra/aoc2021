@@ -1,3 +1,3 @@
 EOL ← "\r\n"
 Split ← |2 ⊜□¬∊,
-Lines ← |1 Split EOL
+SplitLines ← |1 Split EOL
