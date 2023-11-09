@@ -4,7 +4,7 @@ In this repository, I solved all 25 days for Advent of Code 2021, using mostly
 Python and Haskell. This was both fun and really hard for me at the end. I had
 to take a small break on day 24. I got back on time for day 25 and I'm really
 proud of that. But there is more: then, for what it's worth, I solved the first
-two days in 20 different languages. And took some notes along the way.
+two days in 22 different languages. And took some notes along the way.
 
 See also:
 
@@ -16,7 +16,7 @@ See also:
 
 Contents:
 
-- [#two-problems-21-languages](#two-problems-21-languages)
+- [#two-problems-22-languages](#two-problems-22-languages)
 - [#algorithms](#algorithms)
 - [#linux](#linux)
 - [#scheme](#scheme)
@@ -36,11 +36,12 @@ Contents:
 - [#erlang](#erlang)
 - [#j](#j)
 - [#apl](#apl)
+- [#uiua](#uiua)
 - [#how-to-run](#how-to-run)
 
-## Two problems, 21 languages
+## Two problems, 22 languages
 
-For what it's worth, I solved the first two days in 21 different languages:
+For what it's worth, I solved the first two days in 22 different languages:
 
 - APL
 - BQN
@@ -61,6 +62,7 @@ For what it's worth, I solved the first two days in 21 different languages:
 - Ruby
 - Rust
 - Scheme (Lisp)
+- Uiua
 - Uxntal
 - x86-64 Assembly (with some low level Linux IO syscalls)
 
@@ -834,6 +836,14 @@ Solutions:
 - <https://github.com/codereport/Advent-of-Code-2022>
 - <https://www.youtube.com/watch?v=p0bg5M_R2aQ>
 
+### Uiua
+
+- Use `/∘` to put all array elements on the stack
+
+References:
+
+- <https://www.uiua.org>
+
 ## How to run
 
 To run Python solutions:
@@ -979,7 +989,7 @@ To run BQN solutions:
 $ bqn src/01.{bqn,in}
 ```
 
-To run Uiua solutions (written for Uiua 0.1.0):
+To run Uiua solutions (written for Uiua 0.2.0):
 ```
 $ uiua run src/01.ua
 ```
