@@ -8,7 +8,7 @@ Acc ← |2 +⊂∶⊙∶×⊙(⊢,)⊏1.
 Solve ← (|1.2
   ⊞(SelectValues∩⊔) {"forward" "down" "up"} □
   ⍉⊟∶-/∘
-  ∧1_1Acc0_0_0
+  ∧≃≃Acc0_0_0
   ∩(/×⊏)0_2,0_1
 )
 
@@ -40,9 +40,7 @@ SelectValues "forward" TestCommands
 
 ⍤∶≍,150_900 ⊂∶ Solve TestCommands
 
-##
 # Not used, but I learned something
-
 +⊂∶⊙∶40 5_5_0 8_0
 ⍤∶≍,+⊃⋅∘⟜(⊂∶)40 5_5_0 8_0
 ---
