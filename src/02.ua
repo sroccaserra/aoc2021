@@ -34,8 +34,15 @@ SelectValues "forward" TestCommands
 
 ⍤∶≍,5_0_0 Acc0_0_0 5_0
 ⍤∶≍,5_5_0 Acc5_0_0 0_5
+⍤∶≍,13_5_40 Acc5_5_0 8_0
 
 ⍤∶≍,15_10_60 ∧1_1Acc0_0_0 [5_0 0_5 8_0 0_¯3 0_8 2_0]
 
 ⍤∶≍,150_900 ⊂∶ Solve TestCommands
+
+##
+# Not used, but I learned something
+
++⊂∶⊙∶40 5_5_0 8_0
+⍤∶≍,+⊃⋅∘⟜(⊂∶)40 5_5_0 8_0
 ---
