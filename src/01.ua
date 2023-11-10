@@ -1,10 +1,9 @@
 SplitLines ← &i "common/common.ua" "SplitLines"
 
-Numbers ← ⊐≡parse SplitLines &fras "src/01.in"
-
 SolveOne ← /+≡/>◫2
 SolveTwo ← SolveOne≡/+◫3
 
+Numbers ← ⊐≡parse SplitLines &fras"src/01.in"
 ∩&s ⊃SolveOne SolveTwo Numbers
 
 ---

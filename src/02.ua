@@ -6,14 +6,14 @@ SelectValues ← |2 ×⌕□∶⊙∶≡⊢∶≡(⊔⊏1).
 Acc ← |2 +⊂∶⊙∶×⊙(⊢,)⊏1.
 
 Solve ← (|1.2
-  ⊞(SelectValues ∶∩⊔) {"forward" "down" "up"} □
+  ⊞(SelectValues∶∩⊔) {"forward" "down" "up"} □
   ⍉⊟∶-/∘
   ∧1_1Acc 0_0_0
   /×⊏0_1.
   /×⊏0_2∶
 )
 
-Commands ← ∵Parse SplitLines &fras "src/02.in"
+Commands ← ∵Parse SplitLines &fras"src/02.in"
 Solve Commands
 
 ---
