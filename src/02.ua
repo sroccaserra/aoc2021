@@ -43,4 +43,15 @@ SelectValues "forward" TestCommands
 # Not used, but I learned something
 +⊂∶⊙∶40 5_5_0 8_0
 ⍤∶≍,+⊃⋅∘⟜(⊂∶)40 5_5_0 8_0
+
+# More mathy solution, from https://github.com/dzaima/aoc/blob/master/2021/BQN/2.bqn
+⊃≡⊢≡(parse⊢⇌⊔) TestLines
+Firsts ←
+Values ←
+f ← =@f Firsts
+d ← + =@d Firsts ¯=@u Firsts
+Aims ← \+× d Values
+Horiz ← /+× f Values
+⍤.=150 ×Horiz⊢⇌Aims
+⍤.=900 ×Horiz/+×Values×f Aims
 ---
