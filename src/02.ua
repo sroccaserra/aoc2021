@@ -54,4 +54,9 @@ Aims ← \+× d Values
 Horiz ← /+× f Values
 ⍤.=150 ×Horiz⊢⇌Aims
 ⍤.=900 ×Horiz/+×Values×f Aims
+
+# Parse with primitives only
+PrimitiveParse ← {⊃(▽≥@a.)(-@0⊢⇌)}⊔
+∵PrimitiveParse TestLines
+⍤∶≍,[{"forward" 5} {"down" 5} {"forward" 8} {"up" 3} {"down" 8} {"forward" 2}]
 ---
