@@ -49,7 +49,7 @@ SelectValues "forward" TestCommands
 Firsts ←
 Values ←
 f ← =@f Firsts
-d ← + =@d Firsts ¯=@u Firsts
+d ← /-⊞="ud" Firsts
 Aims ← \+× d Values
 Horiz ← /+× f Values
 ⍤.=150 ×Horiz⊢⇌Aims
