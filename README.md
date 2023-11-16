@@ -994,6 +994,11 @@ To run Uiua solutions (written for Uiua 0.2.0):
 $ uiua run src/01.ua
 ```
 
+To run C# solutions (`dotnet tool install -g dotnet-script`):
+```
+$ dotnet-script src/01.cs
+```
+
 ## How it started
 
 ```shell
