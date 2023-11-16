@@ -844,6 +844,12 @@ References:
 
 - <https://www.uiua.org>
 
+### C#
+
+Solutions:
+
+- <https://github.com/encse/adventofcode/tree/master/2021>
+
 ## How to run
 
 To run Python solutions:
