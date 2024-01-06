@@ -1,3 +1,9 @@
+Note: deprecated.
+
+See instead:
+
+- <https://github.com/sroccaserra/advent-of-code>
+
 # aoc2021
 
 In this repository, I solved all 25 days for Advent of Code 2021, using mostly
